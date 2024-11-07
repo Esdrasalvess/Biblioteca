@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
 @RequestMapping("livros")
 @SecurityRequirement(name = "bearer-key")
 public class LivroController {
