@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca - Banco de dados e Desenvolvimento Web</title>
+    <link href="Styles.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="Imagens/icon.png" type="image/x-icon">
+</head>
+
+<body>
+    
+
+
+<header>
+    <img src="Imagens/consultaerase.png" alt="teste" class="diminuiiii" style="position: absolute">
+    <h1>Biblioteca</h1> 
+     <p>Banco de dados e Desenvolvimento Web</p>
+
+     
+ </header>
+ <nav>
+     <a href="index.html">Página Inicial</a>
+     <a href="cadastro.html">Cadastro</a>
+     <a href="consulta_funcionarios.html">Funcionário</a>
+     <a href="consulta_livro.html">Livros</a>
+ </nav>
+
+
+    <main>
+
+        
+
+        <div class="funcao" id="consultar_livro">
+    
+            <h2>Consultar Livro</h2>
+
+            <div class="checkboxes">
+                <h2>Filtre os dados</h2>
+                <div class="checkbox_janela">
+                    <input type="checkbox">Título
+                    <input type="checkbox">Autor 
+                    <input type="checkbox">Editora
+                    <input type="checkbox">Gênero
+                    <input type="checkbox">Ano
+                    <input type="checkbox">Leitor
+                </div>
+        </div>
+        
+        <input type="text" placeholder="Consulta" class="input_consulta">
+
+        <br>
+
+        <button type="submit" class="enviar">Enviar</button>
+
+        
+            <table>
+                <tr> 
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Editora</th>
+                    <th>Gênero</th>
+                    <th>Ano</th>
+                </tr>
+                <tr>
+                    <td>Senhor dos Anéis</td>
+                    <td>J.R.R. Tolkien</td>
+                    <td>Los Hermanos</td>
+                    <td>Créu</td>
+                    <td>200 a.C.</td>
+                </tr>
+            </table>
+
+            
+        </div>
+        
+    </main>
+
+    <footer>
+        <p>Site Desenvolvido como <strong>Projeto Avaliativo</strong> para Disciplinas de <strong>Banco de Dados</strong> e <strong>Desenvolvimento Web</strong> - FAINOR 2024</p>
+    </footer>
+    
+    
+</body>
+</html>
