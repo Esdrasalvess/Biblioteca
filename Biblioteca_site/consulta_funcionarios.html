@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca - Banco de dados e Desenvolvimento Web</title>
-    <link href="Styles.css" rel="stylesheet"/>
-    <link rel="shortcut icon" href="Imagens/icon.png" type="image/x-icon">
+    
+    <script src="Js/Head.js"></script>
+    <script src="Js/Header_nav.js"></script>
 </head>
 
 <body>
@@ -18,44 +16,142 @@
          
      </header>
      <nav>
-         <a href="index.html">Página Inicial</a>
-         <a href="cadastro.html">Cadastro</a>
-         <a href="consulta_funcionarios.html">Funcionário</a>
-         <a href="consulta_livro.html">Livros</a>
-     </nav>
+        <a href="index.html">Página Inicial</a>
+        <a href="cadastro_funcionario.html">Cadastro Funcionário</a>
+        <a href="cadastro_livro.html">Cadastro Livros</a>
+        <a href="emprestimo.html">Realizar Emprestimos</a>
+        <a href="consulta_funcionarios.html">Funcionário</a>
+        <a href="consulta_livro.html">Livros</a>
+        <a href="relatorio_emprestimo.html">Relatório Empréstimos</a>
+    </nav>
 
 
     <main>
 
         <div class="funcao" id="consultar_funcionario">
             <h2>Consultar Funcionário</h2>
+
             <div class="checkboxes">
-                <h2>Filtre os dados</h2>
-                <div class="checkbox_janela">
-                <input type="checkbox">Nome
-                <input type="checkbox">Data de nascimento
-                <input type="checkbox">Cpf
-                <input type="checkbox">Endereço
+                <div class="titulo_checkboxes">Filtro</div>
+                <strong>
+                <label for="consulta/selecionar_nome">  <input id="consulta/selecionar_nome" type="checkbox"> Nome </label>
+                <label for="consulta/selecionar_data_de_nascimento">  <input id="consulta/selecionar_data_de_nascimento" type="checkbox"> Data de nascimento </label>
+                <label for="consulta/selecionar_cpf">  <input id="consulta/selecionar_cpf" type="checkbox"> Cpf </label>
+                <label for="consulta/selecionar_endereco">  <input id="consulta/selecionar_endereco" type="checkbox"> Endereço </label>
+                
+            </strong>
+
+
             </div>
-        </div>
-
-            <input type="text" placeholder="Consulta">
-            <select>
-                <option>Nome </option>
-                <option>Data de nascimento</option>
-                <option>Cpf </option>
-                <option>Endereço </option>
-                <option>Endereço </option>
-            </select>
-            <br>
-            <button type="submit" class="enviar">Enviar</button>
-
+    
             <table>
                 <tr> 
                     <th>Nome</th>
                     <th>Data de Nascimento</th>
                     <th>Cpf</th>
                     <th>Endereço</th>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
+                </tr>
+                <tr>
+                    <td>Lafael</td>
+                    <td>04/11/2003</td>
+                    <td>000.000.000-00</td>
+                    <td>Rua dos hermanos, 0800</td>
                 </tr>
                 <tr>
                     <td>Lafael</td>
