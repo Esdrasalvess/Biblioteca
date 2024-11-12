@@ -1,34 +1,43 @@
 package com.Biblioteca.biblioteca.Livro;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Table(name = "livros")
-@Entity(name = "Livro")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class Livro {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class LivroDto {
     private Long id;
-
     private String titulo;
     private String autor;
-    private Integer anoPublicacao;
+    private int anoPublicacao;
     private String isbn;
-
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
     private StatusLivro status;
 
-    public void atualizarStatus(StatusLivro novoStatus) {
-        this.status = novoStatus;
+    public LivroDto(Long id, String titulo, String autor, int anoPublicacao, String isbn, StatusLivro status) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anoPublicacao = anoPublicacao;
+        this.isbn = isbn;
+        this.status = status;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public int getAnoPublicacao() {
+        return anoPublicacao;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public StatusLivro getStatus() {
+        return status;
+    }
 }
