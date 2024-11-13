@@ -1,6 +1,12 @@
 package com.Biblioteca.biblioteca.Livro;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Livro {
+    @Id
     private Long id;
     private String titulo;
     private String autor;
@@ -15,6 +21,10 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
         this.CodigoLivro = CodigoLivro;
         this.status = status;
+    }
+
+    public Livro() {
+
     }
 
     public Long getId() {
