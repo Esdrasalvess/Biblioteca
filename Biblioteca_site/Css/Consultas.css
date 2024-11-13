@@ -93,7 +93,7 @@ font-weight: bold;
 }
 
 /*Empréstimo*/
-.emprestimo input[type="text"]{
+.emprestimo input[type="text"], .emprestimo input[type="number"]{
     width: 300px;  
     height: 20px; 
     padding: 10px; 
@@ -147,12 +147,11 @@ font-weight: bold;
 
 
 .testizindoscria{
-    
-    margin: auto;
-
-    display: flex;
+    justify-content: center;
+    display: inline;
     flex-wrap: wrap;
-
+margin-left: 70%;
+margin-top: 10px;
     width: 400px;
     height: 40px;
 }
@@ -166,7 +165,11 @@ font-weight: bold;
 }
 
 .testizindoscria button {
+    justify-content: center;
     margin-top: 1px;
     margin-left: 100px;
+    align-items: center;
     
 }
+
+

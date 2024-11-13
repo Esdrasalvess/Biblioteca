@@ -1,8 +1,20 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'MyFont';
+    src: url('myfont.woff2') format('woff2');
+    font-display: swap;
+  }
+  
 *{
     margin: 0px;
     padding: 0px;
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('myfont.woff2') format('woff2');
+  font-display: swap;
 }
 
 
@@ -10,6 +22,7 @@ header{
     background-image: linear-gradient(to bottom, #792205, #5e1b04 90%);
     height: 130px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.226);
+
 }
 
 header > h1 {
@@ -103,8 +116,9 @@ main > h1 {
     border-radius: 5px;
 
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.479);
-
 }
+
+
 
 .funcao h2 {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.267);
