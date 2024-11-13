@@ -25,198 +25,81 @@
          <a href="consulta_livro.html">Livros</a>
          <a href="relatorio_emprestimo.html">Relatório Empréstimos</a>
      </nav>
-        <img src="Imagens/funcionarioerase.png" alt="teste" class="diminuiiii" style="position: absolute; margin-top: -150px;">
-      
-
-
+        
     <main>
-
         <div class="funcao" id="consultar" style="height: 630px;">
             <h2>Consultar Funcionário</h2>
         
-            <div class="checkboxes">
-                <div class="titulo_checkboxes"><strong>Filtro de pesquisa</strong></div>
-                <strong>
-                    <label for="consulta/funcionario/selecionar_nome">
-                        <input id="consulta/funcionario/selecionar_nome" type="checkbox"> Nome
-                    </label>
+            <form id="formConsultaFuncionario">
+                <div class="checkboxes">
+                    <div class="titulo_checkboxes"><strong>Filtro de pesquisa</strong></div>
+                    <strong>
+                        <label for="consulta/funcionario/selecionar_nome">
+                            <input id="consulta/funcionario/selecionar_nome" type="checkbox"> Nome
+                        </label>
 
-                    <label for="consulta/funcionario/selecionar_cargo">
-                        <input id="consulta/funcionario/selecionar_cargo" type="checkbox"> Cargo
-                    </label>
+                        <label for="consulta/funcionario/selecionar_cargo">
+                            <input id="consulta/funcionario/selecionar_cargo" type="checkbox"> Cargo
+                        </label>
 
-                    <label for="consulta/funcionario/selecionar_codigo">
-                        <input id="consulta/funcionario/selecionar_codigo" type="checkbox"> Código
-                    </label>
+                        <label for="consulta/funcionario/selecionar_codigo">
+                            <input id="consulta/funcionario/selecionar_codigo" type="checkbox"> Código
+                        </label>
+                    </strong>
+                </div>
 
-                   
-                </strong>
-            </div>
+                <div class="checkboxes">
+                    <div class="titulo_checkboxes"><strong>Filtro de visibilidade</strong></div>
+                    <strong>
+                        <label for="consulta/funcionario/visibilidade_nome">
+                            <input id="consulta/funcionario/visibilidade_nome" type="checkbox"> Nome
+                        </label>
 
-            <div class="checkboxes">
-                
-                <div class="titulo_checkboxes"><strong>Filtro de visibilidade</strong></div>
-                <strong>
-                    <label for="consulta/funcionario/visibilidade_nome">
-                        <input id="consulta/funcionario/visibilidade_nome" type="checkbox"> Nome
-                    </label>
+                        <label for="consulta/funcionario/visibilidade_cargo">
+                            <input id="consulta/funcionario/visibilidade_cargo" type="checkbox"> Cargo
+                        </label>
 
-                    <label for="consulta/funcionario/visibilidade_cargo">
-                        <input id="consulta/funcionario/visibilidade_cargo" type="checkbox"> Cargo
-                    </label>
+                        <label for="consulta/funcionario/visibilidade_codigo">
+                            <input id="consulta/funcionario/visibilidade_codigo" type="checkbox"> Código
+                        </label>
+                    </strong>
+                </div>
 
-                    <label for="consulta/funcionario/visibilidade_codigo">
-                        <input id="consulta/funcionario/visibilidade_codigo" type="checkbox"> Código
-                    </label>
+                <div class="escrever_consulta" style="margin-left: 260px">
+                    <div id="campo_funcionario_nome" class="campo_pesquisa" style="display: none;">
+                        <input type="text" id="pesquisa_funcionario_nome" placeholder="Pesquisar por Nome">
+                    </div>
+                    <div id="campo_funcionario_cargo" class="campo_pesquisa" style="display: none;">
+                        <input type="text" id="pesquisa_funcionario_cargo" placeholder="Pesquisar por Cargo">
+                    </div>
+                    <div id="campo_funcionario_codigo" class="campo_pesquisa" style="display: none;">
+                        <input type="text" id="pesquisa_funcionario_codigo" placeholder="Pesquisar por Código">
+                    </div>
+                </div>
 
-                </strong>
-            </div>
-           
-
-            <div class="escrever_consulta" style="margin-left: 260px">
-                  <div id="campo_funcionario_nome" class="campo_pesquisa" style="display: none;">
-                <input type="text" id="pesquisa_funcionario_nome" placeholder="Pesquisar por Nome">
-                     </div>
-                     <div id="campo_funcionario_cargo" class="campo_pesquisa" style="display: none;">
-                            <input type="date" id="pesquisa_funcionario_cargo">
-                       </div>
+                <div class="testizindoscria" style="display: block; margin-left: 460px;">
+                    <button type="submit" class="consulta">Consultar</button>
+                </div>
+            </form>
     
-                       <div id="campo_funcionario_codigo" class="campo_pesquisa" style="display: none;">
-                         <input type="text" id="pesquisa_funcionario_codigo" placeholder="Pesquisar por Codigo">
-                  </div>
-                  <div class="testizindoscria" style="display: block; margin-left: 460px;">
-                    <button class="consulta">Consultar</button>
-                         </div>
-        </div>
-    
-
-       
-    
-            <table>
-                <tr> 
-                    <th>Nome</th>
-                    <th>Data de Nascimento</th>
-                    <th>Cpf</th>
-                    <th>Endereço</th>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
-                <tr>
-                    <td>Lafael</td>
-                    <td>04/11/2003</td>
-                    <td>000.000.000-00</td>
-                    <td>Rua dos hermanos, 0800</td>
-                </tr>
+            <table id="resultadoConsulta">
+                <thead>
+                    <tr> 
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>Código</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
             </table>
         </div>
-
-       
-        
     </main>
 
     <footer>
         <p>Site Desenvolvido como <strong>Projeto Avaliativo</strong> para Disciplinas de <strong>Banco de Dados</strong> e <strong>Desenvolvimento Web</strong> - FAINOR 2024</p>
     </footer>
-<script src="Js/Consulta_funcionario.js"></script>
+
+    <script src="Js/Consulta_funcionario.js"></script>
 </body>
 </html>

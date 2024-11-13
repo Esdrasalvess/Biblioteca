@@ -1,11 +1,9 @@
 package com.meiobyte.biblioteca_v2.model;
 
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data //ma das mais úteis e populares annotations do Lombok. Ela é usada para gerar automaticamente os métodos getters, setters, equals(), hashCode() e toString()
+@Data
 @Entity
 public class Autor {
 

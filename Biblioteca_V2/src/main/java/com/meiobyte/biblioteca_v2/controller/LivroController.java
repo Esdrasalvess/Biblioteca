@@ -1,11 +1,14 @@
 package com.meiobyte.biblioteca_v2.controller;
 
+import com.meiobyte.biblioteca_v2.model.Autor;
 import com.meiobyte.biblioteca_v2.model.Livro;
 import com.meiobyte.biblioteca_v2.service.LivroService;
+import com.meiobyte.biblioteca_v2.service.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/livros")
@@ -13,6 +16,9 @@ public class LivroController {
 
     @Autowired
     private LivroService livroService;
+
+    @Autowired
+    private AutorService autorService;  // Service para buscar o autor
 
     @GetMapping
     public List<Livro> listarTodos() {
@@ -26,7 +32,14 @@ public class LivroController {
 
     @PostMapping
     public Livro criar(@RequestBody Livro livro) {
-        return livroService.salvar(livro);
+        Optional<Autor> autor = autorService.buscarPorId(livro.getAutor().getId_autor());
+
+        if (autor.isPresent()) {
+            livro.setAutor(autor.get());
+            return livroService.salvar(livro);
+        } else {
+            throw new RuntimeException("Autor não encontrado");
+        }
     }
 
     @PutMapping("/{id}")

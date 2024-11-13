@@ -37,13 +37,13 @@
                 <div class="janela_cadastro">
                     <h3>Cadastro de Funcionário</h3>
                     <br>
-                    <input type="text" placeholder="Nome" maxlength="100">
-                    <input type="text" placeholder="Cargo" maxlength="100">
-                    <input type="text" placeholder="Codigo" maxlength="3" oninput="permitirApenasNumeros(this)">
+                    <input type="text" placeholder="ID" maxlength="3" oninput="permitirApenasNumeros(this)">
+                    <input type="text" id="nome" placeholder="Nome" maxlength="100">
+                    <input type="text" id="cargo" placeholder="Cargo" maxlength="100">
                     <br>
                    
                     <br>
-                    <button type="submit" class="enviar">Enviar</button>
+                    <button type="button" onclick="cadastrarFuncionario()" class="enviar">Enviar</button>
                     </div>
                 
             </div>   

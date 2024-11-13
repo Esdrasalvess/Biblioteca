@@ -3,16 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
     function toggleCampo(id, checkboxId) {
         const campo = document.getElementById(id);
         const checkbox = document.getElementById(checkboxId);
-        
-       
-        if (checkbox.checked) {
-            campo.style.display = 'inline';
-        } else {
-            campo.style.display = 'none';
-        }
+        campo.style.display = checkbox.checked ? 'inline' : 'none';
     }
 
-    // Adiciona ouvintes de evento para os checkboxes de filtro de pesquisa
     document.getElementById("consulta/funcionario/selecionar_nome").addEventListener("change", function() {
         toggleCampo('campo_funcionario_nome', 'consulta/funcionario/selecionar_nome');
     });
@@ -25,10 +18,33 @@ document.addEventListener("DOMContentLoaded", function() {
         toggleCampo('campo_funcionario_codigo', 'consulta/funcionario/selecionar_codigo');
     });
 
+    document.getElementById("formConsultaFuncionario").addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    // Adiciona ouvintes de evento para os checkboxes de filtro de visibilidade (caso queira controlar a visibilidade também)
-    document.getElementById("consulta/livro/selecionar_titulo").addEventListener("change", function() {
-        toggleCampo('campo_livro_titulo', 'consulta/livro/selecionar_titulo');
-    });
+        const nome = document.getElementById("pesquisa_funcionario_nome").value;
+        const cargo = document.getElementById("pesquisa_funcionario_cargo").value;
+        const codigo = document.getElementById("pesquisa_funcionario_codigo").value;
 
+        const params = new URLSearchParams();
+        if (nome) params.append("nome", nome);
+        if (cargo) params.append("cargo", cargo);
+        if (codigo) params.append("codigo", codigo);
+
+        fetch(`/api/funcionarios?${params.toString()}`)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector("#resultadoConsulta tbody");
+                tbody.innerHTML = ''; 
+                data.forEach(funcionario => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${funcionario.nome}</td>
+                        <td>${funcionario.cargo}</td>
+                        <td>${funcionario.codigo}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error("Erro ao consultar funcionários:", error));
     });
+});

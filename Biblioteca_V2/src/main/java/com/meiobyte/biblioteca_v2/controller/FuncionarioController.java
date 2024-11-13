@@ -30,6 +30,7 @@ public class FuncionarioController {
         return funcionarioService.salvar(funcionario);
     }
 
+
     @PutMapping("/{id}")
     public Funcionario atualizar(@PathVariable Integer id, @RequestBody Funcionario funcionario) {
         funcionario.setId(id);
