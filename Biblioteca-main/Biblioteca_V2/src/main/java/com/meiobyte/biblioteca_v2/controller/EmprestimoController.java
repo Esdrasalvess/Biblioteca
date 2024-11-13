@@ -25,12 +25,12 @@ public class EmprestimoController {
 
      @GetMapping("/leitor/{id}")
     public Emprestimo buscarPorLeitor(@PathVariable Integer id) {
-        return emprestimoService.buscarPorLeitor(id).orElse(null);
+        return (Emprestimo) emprestimoService.buscarPorLeitor(id);
     }
 
     @GetMapping("/funcionario/{id}")
     public Emprestimo buscarPorFuncionario(@PathVariable Integer id) {
-        return emprestimoService.buscarPorFuncionario(id).orElse(null);
+        return (Emprestimo) emprestimoService.buscarPorFuncionario(id);
     }
 
     @GetMapping("/data")
