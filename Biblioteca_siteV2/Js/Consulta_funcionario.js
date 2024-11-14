@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
 document.getElementById("formConsultaFuncionario").addEventListener("submit", async function(event) {
     event.preventDefault();
 
@@ -36,28 +35,33 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         filtros.cargo = document.getElementById("pesquisa_funcionario_cargo").value;
     }
     if (document.getElementById("consulta/funcionario/selecionar_id").checked) {
-        filtros.id_funcionario = document.getElementById("pesquisa_funcionario_id").value; 
+        filtros.id_funcionario = document.getElementById("pesquisa_funcionario_id").value;
     }
 
     console.log(filtros);
+
+    // Construindo a URL com parâmetros de filtro
+    const url = new URL("http://localhost:8080/api/funcionarios");
+    if (filtros.nome) url.searchParams.append("nome", filtros.nome);
+    if (filtros.cargo) url.searchParams.append("cargo", filtros.cargo);
+    if (filtros.id_funcionario) url.searchParams.append("id", filtros.id_funcionario);
+
     try {
-        const response = await fetch("http://localhost:8080/api/funcionarios", {
-            method: "POST",
+        const response = await fetch(url, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify(filtros)
+            }
         });
 
-        
         if (!response.ok) throw new Error("Erro ao consultar funcionários");
 
         const funcionarios = await response.json();
-        
+
         // Exibir os dados na tabela
         const tbody = document.querySelector("#resultadoConsulta tbody");
         tbody.innerHTML = ""; // Limpa os dados anteriores
-        
+
         funcionarios.forEach(funcionario => {
             const tr = document.createElement("tr");
 
@@ -74,7 +78,7 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
             }
             if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
                 const tdId = document.createElement("td");
-                tdId.textContent = funcionario.id_funcionario || "N/A";  // Acesso ao 'id_funcionario'
+                tdId.textContent = funcionario.id_funcionario || "N/A";
                 tr.appendChild(tdId);
             }
 

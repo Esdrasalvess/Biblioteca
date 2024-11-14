@@ -38,6 +38,7 @@
             <h2>Consultar Livro</h2>
             <p style="margin: 10px; text-align: center; font-weight: bold;;">Caso nenhum filtro seja selecionado, todos os livros serão exibidos.</p>
         
+            <!--Filtros de pesquisa-->
             <div class="checkboxes" style="width: 550px;">
                 <div class="titulo_checkboxes"><strong>Filtro de pesquisa</strong></div>
                 <strong>
@@ -59,30 +60,32 @@
                     </label>
                 </strong>
             </div>
+
+            <!--Filtros de visibilidade-->
             <div class="checkboxes" style="width: 550px;">
                 <div class="titulo_checkboxes"><strong>Filtro de visibilidade</strong></div>
                 <strong>
                   
                     <label for="consulta/livro/visibilidade_titulo">
-                        <input id="consulta/livro/visibilidade_titulo" type="checkbox"> Titulo
+                        <input id="consulta/livro/visibilidade_titulo" type="checkbox" checked> Titulo
                     </label>
                     <label for="consulta/livro/visibilidade_autor">
-                        <input id="consulta/livro/visibilidade_autor" type="checkbox"> Autor
+                        <input id="consulta/livro/visibilidade_autor" type="checkbox" checked> Autor
                     </label>
                     </label>
                     <label for="consulta/livro/visibilidade_ano">
-                        <input id="consulta/livro/visibilidade_ano" type="checkbox"> Ano
+                        <input id="consulta/livro/visibilidade_ano" type="checkbox" checked> Ano
                     </label>
                     <label for="consulta/livro/visibilidade_codigo">
-                        <input id="consulta/livro/visibilidade_codigo" type="checkbox"> Codigo
+                        <input id="consulta/livro/visibilidade_codigo" type="checkbox" checked> Codigo
                     </label>
                     <label for="consulta/livro/visibilidade_disponivel">
-                        <input id="consulta/livro/visibilidade_disponivel" type="checkbox"> Disponível
+                        <input id="consulta/livro/visibilidade_disponivel" type="checkbox" checked> Disponível
                     </label>
                    
                 </strong>
             </div>
-           
+           <!--Campos de Pesquisa-->
             <div class="escrever_consulta" style="margin-left: 50px">
                      <div id="campo_livro_titulo" class="campo_pesquisa" style="display: none;">
                         <input type="text" id="pesquisa_livro_titulo" placeholder="Pesquisar por Titulo">

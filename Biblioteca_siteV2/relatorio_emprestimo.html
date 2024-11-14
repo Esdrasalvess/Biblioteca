@@ -34,6 +34,7 @@
             <h2>Consultar Empréstimos</h2>
             <p style="margin: 10px; text-align: center; font-weight: bold;;">Caso nenhum filtro seja selecionado, todos os livros serão exibidos.</p>
             
+            <!--Filtro de Pesquisa-->
                 <div class="checkboxes" style="width: 950px;">
                     <div class="titulo_checkboxes"><strong>Filtro de pesquisa</strong></div>
                     <strong>
@@ -49,43 +50,40 @@
                         <label for="consulta/emprestimo/selecionar_data">
                             <input id="consulta/emprestimo/selecionar_data" type="checkbox"> Data
                         </label>
-    
-            
                         <label for="consulta/emprestimo/selecionar_codigo">
                             <input id="consulta/emprestimo/selecionar_codigo" type="checkbox"> Codigo
                         </label>
-                       
-                        
                     </strong>
                 </div>
     
+                <!--Filtro de Visibilidade-->
                 <div class="checkboxes" style="width: 950px;">
                     
                     <div class="titulo_checkboxes"><strong>Filtro de visibilidade</strong></div>
                     <strong>
                         <label for="consulta/emprestimo/visibilidade_leitor">
-                            <input id="consulta/emprestimo/visibilidade_leitor" type="checkbox"> Leitor
+                            <input id="consulta/emprestimo/visibilidade_leitor" type="checkbox" checked> Leitor
                         </label>
                         <label for="consulta/emprestimo/visibilidade_funcionario_responsavel">
-                            <input id="consulta/emprestimo/visibilidade_funcionario_responsavel" type="checkbox"> Funcionário resp.
+                            <input id="consulta/emprestimo/visibilidade_funcionario_responsavel" type="checkbox" checked> Funcionário resp.
                         </label>
                         <label for="consulta/emprestimo/visibilidade_livro">
-                            <input id="consulta/emprestimo/visibilidade_livro" type="checkbox"> Livro
+                            <input id="consulta/emprestimo/visibilidade_livro" type="checkbox" checked> Livro
                         </label>
                         <label for="consulta/emprestimo/visibilidade_data">
-                            <input id="consulta/emprestimo/visibilidade_data" type="checkbox"> Data do empréstimo
+                            <input id="consulta/emprestimo/visibilidade_data" type="checkbox" checked> Data do empréstimo
                         </label>
                         <label for="consulta/emprestimo/visibilidade_data_final">
-                            <input id="consulta/emprestimo/visibilidade_data_final" type="checkbox"> Data de devolução
+                            <input id="consulta/emprestimo/visibilidade_data_final" type="checkbox" checked> Data de devolução
                         </label>
                         <label for="consulta/emprestimo/visibilidade_codigo">
-                            <input id="consulta/emprestimo/visibilidade_codigo" type="checkbox"> Código
+                            <input id="consulta/emprestimo/visibilidade_codigo" type="checkbox" checked> Código
                         </label>
     
                     </strong>
                 </div>
                
-    
+    <!--Campos de Pesquisa-->
                 <div class="escrever_consulta" style="margin-left: 10px">
                     <div id="campo_emprestimo_leitor" class="campo_pesquisa" style="display: none;">
                         <input type="text" id="pesquisa_emprestimo_leitor" placeholder="Pesquisar por Leitor" style="width: 180px;">
