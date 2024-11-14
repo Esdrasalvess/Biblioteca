@@ -23,19 +23,19 @@ public class EmprestimoService {
     }
 
     public List<Emprestimo> buscarPorLeitor(Integer leitorId) {
-        return emprestimoRepository.buscarPorLeitor(leitorId);  // Método para encontrar empréstimos pelo ID do leitor
+        return emprestimoRepository.buscarPorLeitor(leitorId); 
     }
 
     public List<Emprestimo> buscarPorFuncionario(Integer leitorId) {
-        return emprestimoRepository.buscarPorFuncionario(leitorId);  // Método para encontrar empréstimos pelo ID do leitor
+        return emprestimoRepository.buscarPorFuncionario(leitorId);  
     }
 
     public List<Emprestimo> buscarPorData(String dataInicial, String dataFinal) {
-        return emprestimoRepository.buscarPorData(dataInicial, dataFinal);  // Método para buscar por intervalo de datas
+        return emprestimoRepository.buscarPorData(dataInicial, dataFinal);  
     }
 
     public List<Emprestimo> buscarNaoEmprestado() {
-        return emprestimoRepository.buscarNaoEmprestado("NAO_EMPRESTADO");  // Método para buscar empréstimos com status "NAO_EMPRESTADO"
+        return emprestimoRepository.buscarNaoEmprestado("NAO_EMPRESTADO"); 
     }
 
     public Emprestimo salvar(Emprestimo emprestimo) {
