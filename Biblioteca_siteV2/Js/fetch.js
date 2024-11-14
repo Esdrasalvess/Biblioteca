@@ -30,4 +30,6 @@ function enviarDados() {
         console.log('Dados enviados com sucesso:', data);  // Mostra a resposta no console
     })
     .catch(error => {
-        console.error('Erro ao enviar dados:', error);  // Mostra o erro no c
+        console.error('Erro ao enviar dados:', error);  // Mostra o erro no console
+    });
+}
