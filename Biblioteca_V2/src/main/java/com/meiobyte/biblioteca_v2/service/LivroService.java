@@ -33,4 +33,7 @@ public class LivroService {
     public void deletar(Integer id) {
         livroRepository.deleteById(id);
     }
+    public List<Livro> buscarPorAutor(Integer autorId) {
+        return livroRepository.findByAutorId(autorId);
+    }
 }

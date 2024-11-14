@@ -1,52 +1,58 @@
-document.addEventListener("DOMContentLoaded", function() {
-    
-    function toggleCampo(id, checkboxId) {
-        const campo = document.getElementById(id);
-        const checkbox = document.getElementById(checkboxId);
-        campo.style.display = checkbox.checked ? 'inline' : 'none';
+document.addEventListener("DOMContentLoaded", function () {
+    const formConsultaFuncionario = document.getElementById("formConsultaFuncionario");
+
+    // Mostrar campos de pesquisa com base no checkbox selecionado
+    formConsultaFuncionario.addEventListener("change", function () {
+        const nomeCheckbox = document.getElementById("consulta/funcionario/selecionar_nome");
+        const cargoCheckbox = document.getElementById("consulta/funcionario/selecionar_cargo");
+        const idCheckbox = document.getElementById("consulta/funcionario/selecionar_id");
+
+        document.getElementById("campo_funcionario_nome").style.display = nomeCheckbox.checked ? "block" : "none";
+        document.getElementById("campo_funcionario_cargo").style.display = cargoCheckbox.checked ? "block" : "none";
+        document.getElementById("campo_funcionario_id").style.display = idCheckbox.checked ? "block" : "none";
+    });
+
+    // Função para renderizar resultados na tabela
+    function renderizarResultados(resultados) {
+        const tbody = document.querySelector("#resultadoConsulta tbody");
+        tbody.innerHTML = ""; // Limpar resultados anteriores
+
+        resultados.forEach(funcionario => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${funcionario.nome}</td>
+                <td>${funcionario.cargo}</td>
+                <td>${funcionario.codigo}</td>
+            `;
+            tbody.appendChild(row);
+        });
     }
 
-    document.getElementById("consulta/funcionario/selecionar_nome").addEventListener("change", function() {
-        toggleCampo('campo_funcionario_nome', 'consulta/funcionario/selecionar_nome');
-    });
-
-    document.getElementById("consulta/funcionario/selecionar_cargo").addEventListener("change", function() {
-        toggleCampo('campo_funcionario_cargo', 'consulta/funcionario/selecionar_cargo');
-    });
-
-    document.getElementById("consulta/funcionario/selecionar_id").addEventListener("change", function() {
-        toggleCampo('campo_funcionario_id', 'consulta/funcionario/selecionar_id');
-    });
-
-
-
-    document.getElementById("formConsultaFuncionario").addEventListener("submit", function(event) {
+    // Enviar consulta ao backend e renderizar resultados
+    formConsultaFuncionario.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        const nome = document.getElementById("pesquisa_funcionario_nome").value;
-        const cargo = document.getElementById("pesquisa_funcionario_cargo").value;
-        const codigo = document.getElementById("pesquisa_funcionario_codigo").value;
+        // Coletar filtros selecionados e valores
+        const filtros = {
+            nome: document.getElementById("consulta/funcionario/selecionar_nome").checked ? document.getElementById("pesquisa_funcionario_nome").value : null,
+            cargo: document.getElementById("consulta/funcionario/selecionar_cargo").checked ? document.getElementById("pesquisa_funcionario_cargo").value : null,
+            id: document.getElementById("consulta/funcionario/selecionar_id").checked ? document.getElementById("pesquisa_funcionario_id").value : null
+        };
 
-        const params = new URLSearchParams();
-        if (nome) params.append("nome", nome);
-        if (cargo) params.append("cargo", cargo);
-        if (codigo) params.append("codigo", codigo);
+        // Simulação de chamada de API
+        const resultadosSimulados = [
+            { nome: "João Silva", cargo: "Bibliotecário", codigo: "123" },
+            { nome: "Maria Souza", cargo: "Auxiliar", codigo: "456" }
+        ];
 
-        fetch(`/api/funcionarios?${params.toString()}`)
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.querySelector("#resultadoConsulta tbody");
-                tbody.innerHTML = ''; 
-                data.forEach(funcionario => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${funcionario.nome}</td>
-                        <td>${funcionario.cargo}</td>
-                        <td>${funcionario.codigo}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            })
-            .catch(error => console.error("Erro ao consultar funcionários:", error));
+        // Filtrar resultados simulados com base nos filtros aplicados
+        const resultadosFiltrados = resultadosSimulados.filter(funcionario => {
+            return (!filtros.nome || funcionario.nome.includes(filtros.nome)) &&
+                   (!filtros.cargo || funcionario.cargo.includes(filtros.cargo)) &&
+                   (!filtros.id || funcionario.codigo.includes(filtros.id));
+        });
+
+        // Renderizar na tabela
+        renderizarResultados(resultadosFiltrados);
     });
 });

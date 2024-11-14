@@ -23,6 +23,26 @@ public class EmprestimoController {
         return emprestimoService.buscarPorId(id).orElse(null);
     }
 
+     @GetMapping("/leitor/{id}")
+    public Emprestimo buscarPorLeitor(@PathVariable Integer id) {
+        return (Emprestimo) emprestimoService.buscarPorLeitor(id);
+    }
+
+    @GetMapping("/funcionario/{id}")
+    public Emprestimo buscarPorFuncionario(@PathVariable Integer id) {
+        return (Emprestimo) emprestimoService.buscarPorFuncionario(id);
+    }
+
+    @GetMapping("/data")
+    public List<Emprestimo> buscarPorData(@RequestParam String dataInicial, @RequestParam String dataFinal) {
+        return emprestimoService.buscarPorData(dataInicial, dataFinal);  
+    }
+
+    @GetMapping("/nao-emprestado")
+    public List<Emprestimo> buscarNaoEmprestado() {
+        return emprestimoService.buscarNaoEmprestado();
+    }
+
     @PostMapping
     public Emprestimo criar(@RequestBody Emprestimo emprestimo) {
         return emprestimoService.salvar(emprestimo);

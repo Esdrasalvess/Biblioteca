@@ -24,4 +24,12 @@ public class Livro {
     public void setId(Integer id_livro) {
         this.id_livro = id_livro;
     }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
 }

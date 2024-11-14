@@ -22,6 +22,22 @@ public class EmprestimoService {
         return emprestimoRepository.findById(id);
     }
 
+    public List<Emprestimo> buscarPorLeitor(Integer leitorId) {
+        return emprestimoRepository.buscarPorLeitor(leitorId); 
+    }
+
+    public List<Emprestimo> buscarPorFuncionario(Integer leitorId) {
+        return emprestimoRepository.buscarPorFuncionario(leitorId);  
+    }
+
+    public List<Emprestimo> buscarPorData(String dataInicial, String dataFinal) {
+        return emprestimoRepository.buscarPorData(dataInicial, dataFinal);  
+    }
+
+    public List<Emprestimo> buscarNaoEmprestado() {
+        return emprestimoRepository.buscarNaoEmprestado("NAO_EMPRESTADO"); 
+    }
+
     public Emprestimo salvar(Emprestimo emprestimo) {
         return emprestimoRepository.save(emprestimo);
     }
