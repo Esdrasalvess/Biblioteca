@@ -34,12 +34,12 @@
 
                     
 
-                    <input type="text" placeholder="Título do Livro" style="margin-left: 40px;">
+                    <input type="text" id="autor "placeholder="Autor" style="margin-left: 40px;">
                     <input type="date" id="ano" placeholder="Ano de Publicação" style="margin-left: 40px;">
                     <input type="text" id="codigo" placeholder="Código" maxlength="3" oninput="permitirApenasNumeros(this)">
 
 
-                    <button type="submit" class="enviar" onclick="cadastrarLivro()">Enviar</button>
+                    <button type="submit" class="enviar" onclick="enviardados()">Enviar</button>
                 </div>
             </div>   
         </div>
@@ -51,5 +51,6 @@
     
     <script src="Js/Cadastro_livro.js"></script>
     <script src="Js/Teste.js"></script>
+    <script src="Js/fetch.js"></script>
 </body>
 </html>
