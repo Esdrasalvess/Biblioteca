@@ -32,6 +32,8 @@
                 Caso nenhum filtro seja selecionado, todos os funcionários serão exibidos.
             </p>
             <form id="formConsultaFuncionario">
+
+
                 <!-- Filtros de Pesquisa -->
                 <div class="checkboxes" style="width: 500px;">
                     <div class="titulo_checkboxes"><strong>Filtro de pesquisa</strong></div>
@@ -47,6 +49,8 @@
                         </label>
                     </strong>
                 </div>
+
+                
                 <!-- Filtros de Visibilidade -->
                 <div class="checkboxes">
                     <div class="titulo_checkboxes"><strong>Filtro de visibilidade</strong></div>
@@ -62,8 +66,9 @@
                         </label>
                     </strong>
                 </div>
+
                 <!-- Campos de Pesquisa -->
-                <div class="escrever_consulta" style="margin-left: 260px">
+                <div class="escrever_consulta" style="margin-left: 260px; margin-right:200px">
                     <div id="campo_funcionario_nome" class="campo_pesquisa" style="display: none;">
                         <input type="text" id="pesquisa_funcionario_nome" placeholder="Pesquisar por Nome">
                     </div>
@@ -74,6 +79,8 @@
                         <input type="text" id="pesquisa_funcionario_id" placeholder="Pesquisar por ID">
                     </div>
                 </div>
+
+
                 <!-- Botão de Consulta -->
                 <div class="testizindoscria" style="display: block; margin-left: 730px;">
                     <button type="submit" class="consulta">Consultar</button>
@@ -89,6 +96,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <!-- Resultados da consulta aparecerão aqui -->
                 </tbody>
             </table>

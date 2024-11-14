@@ -1,5 +1,6 @@
 function permitirApenasNumeros(input) {
     input.value = input.value.replace(/\D/g, '');
+    
 }
 function cadastrarLivro() {
     // Captura os valores dos campos
