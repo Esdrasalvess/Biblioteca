@@ -14,9 +14,11 @@ document.addEventListener("DOMContentLoaded", function() {
         toggleCampo('campo_funcionario_cargo', 'consulta/funcionario/selecionar_cargo');
     });
 
-    document.getElementById("consulta/funcionario/selecionar_codigo").addEventListener("change", function() {
-        toggleCampo('campo_funcionario_codigo', 'consulta/funcionario/selecionar_codigo');
+    document.getElementById("consulta/funcionario/selecionar_id").addEventListener("change", function() {
+        toggleCampo('campo_funcionario_id', 'consulta/funcionario/selecionar_id');
     });
+
+
 
     document.getElementById("formConsultaFuncionario").addEventListener("submit", function(event) {
         event.preventDefault();

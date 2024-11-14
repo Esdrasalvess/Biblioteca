@@ -92,6 +92,11 @@ font-weight: bold;
     font-size: 20px;
 }
 
+.qtd_livro_autor{
+    display: block;
+    margin: 3px;
+    margin-left: 150px;
+}
 .consulta {
     display: block;
 
@@ -152,4 +157,7 @@ margin-top: 10px;
     
 }
 
+#consultar table {
+    margin: auto;
+}
 
