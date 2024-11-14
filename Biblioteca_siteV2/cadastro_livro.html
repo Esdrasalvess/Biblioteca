@@ -31,15 +31,12 @@
                 <div class="janela_cadastro">
                     <h3>Cadastro de Livro</h3>
                     <input type="text" id="titulo" placeholder="Título" maxlength="100">
-
-                    
-
-                    <input type="text" placeholder="Título do Livro" style="margin-left: 40px;">
+                    <input type="text" placeholder="Autor" style="margin-left: 40px;">
                     <input type="date" id="ano" placeholder="Ano de Publicação" style="margin-left: 40px;">
                     <input type="text" id="codigo" placeholder="Código" maxlength="3" oninput="permitirApenasNumeros(this)">
 
 
-                    <button type="submit" class="enviar" onclick="cadastrarLivro()">Enviar</button>
+                    <button type="submit" class="enviar" onclick="enviarDados()">Enviar</button>
                 </div>
             </div>   
         </div>
@@ -50,6 +47,7 @@
     </footer>
     
     <script src="Js/Cadastro_livro.js"></script>
-    <script src="Js/Teste.js"></script>
+    <script src="JS/fetch.js"></script>
+    <script src="JS/Cadastro_livro.js"></script>
 </body>
 </html>
