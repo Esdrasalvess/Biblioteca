@@ -32,4 +32,5 @@ public class Emprestimo {
     public void setId(Integer id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
     }
+
 }

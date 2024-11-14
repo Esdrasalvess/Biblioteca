@@ -1,32 +1,68 @@
-document.addEventListener("DOMContentLoaded", function() {
-    
-    function toggleCampo(id, checkboxId) {
-        const campo = document.getElementById(id);
-        const checkbox = document.getElementById(checkboxId);
-        
-       
-        if (checkbox.checked) {
-            campo.style.display = 'inline';
-        } else {
-            campo.style.display = 'none';
-        }
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    // Filtros e visibilidade
+    const checkboxFiltroNome = document.getElementById('consulta/autor/selecionar_nome');
+    const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/selecionar_nacionalidade');
+    const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
+    const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
 
-document.getElementById("consulta/autor/selecionar_nome").addEventListener("change", function() {
-    toggleCampo('campo_autor_nome', 'consulta/autor/selecionar_nome');
-});
+    const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
+    const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
+    const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
 
-document.getElementById("consulta/autor/selecionar_nacionalidade").addEventListener("change", function() {
-    toggleCampo('campo_autor_nacionalidade', 'consulta/autor/selecionar_nacionalidade');
-});
+    const campoNome = document.getElementById('campo_autor_nome');
+    const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
+    const campoId = document.getElementById('campo_autor_id');
+    const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
 
-document.getElementById("consulta/autor/selecionar_id").addEventListener("change", function() {
-    toggleCampo('campo_autor_id', 'consulta/autor/selecionar_id');
-});
+    // Mostrar/ocultar campos de entrada com base nos filtros selecionados
+    checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'block' : 'none');
+    checkboxFiltroNacionalidade.addEventListener('change', () => campoNacionalidade.style.display = checkboxFiltroNacionalidade.checked ? 'block' : 'none');
+    checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkboxFiltroId.checked ? 'block' : 'none');
+    checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'block' : 'none');
 
-document.getElementById("consulta/autor/selecionar_qtd_livros").addEventListener("change", function() {
-    toggleCampo('campo_autor_qtd_livros', 'consulta/autor/selecionar_qtd_livros');
-});
+    // Formulário de consulta
+    document.getElementById('formConsultaAutor').addEventListener('submit', function (event) {
+        event.preventDefault();
 
+        // Captura os valores de pesquisa
+        const nome = checkboxFiltroNome.checked ? document.getElementById('pesquisa_autor_nome').value : '';
+        const nacionalidade = checkboxFiltroNacionalidade.checked ? document.getElementById('pesquisa_autor_nacionalidade').value : '';
+        const id = checkboxFiltroId.checked ? document.getElementById('pesquisa_autor_id').value : '';
+        const qtdLivros = checkboxFiltroQtdLivros.checked ? document.getElementById('pesquisa_autor_qtd_livros').value : '';
 
+        // Realiza a consulta na API, incluindo os filtros como parâmetros de consulta
+        const url = `URL_DA_API_DE_AUTORES?nome=${nome}&nacionalidade=${nacionalidade}&id=${id}&qtdLivros=${qtdLivros}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('resultadoConsulta').querySelector('tbody');
+                tbody.innerHTML = ''; // Limpa os resultados anteriores
+
+                data.forEach(autor => {
+                    const row = document.createElement('tr');
+
+                    // Verifica as opções de visibilidade antes de adicionar as colunas
+                    if (checkboxVisibilidadeId.checked) {
+                        const idCell = document.createElement('td');
+                        idCell.textContent = autor.id_autor;
+                        row.appendChild(idCell);
+                    }
+
+                    if (checkboxVisibilidadeNome.checked) {
+                        const nomeCell = document.createElement('td');
+                        nomeCell.textContent = autor.nome;
+                        row.appendChild(nomeCell);
+                    }
+
+                    if (checkboxVisibilidadeNacionalidade.checked) {
+                        const nacionalidadeCell = document.createElement('td');
+                        nacionalidadeCell.textContent = autor.nacionalidade;
+                        row.appendChild(nacionalidadeCell);
+                    }
+
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Erro ao buscar dados dos autores:', error));
+    });
 });

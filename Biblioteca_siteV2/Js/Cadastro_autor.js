@@ -4,14 +4,12 @@ function cadastrarAutor() {
     const id = document.querySelector('input[placeholder="ID"]').value;
     const nome = document.getElementById("nome").value;
     const nacionalidade = document.getElementById("cargo").value; // "cargo" é a nacionalidade aqui
-
     // Cria o objeto com os dados do autor
     const autor = {
         id: id,
         nome: nome,
         nacionalidade: nacionalidade
     };
-
     // Envia os dados para o backend via POST
     fetch("http://localhost:8080/api/autores", {
         method: "POST",
@@ -36,7 +34,6 @@ function cadastrarAutor() {
         alert("Erro ao cadastrar autor.");
     });
 }
-
 // Função para permitir apenas números no campo de ID
 function permitirApenasNumeros(input) {
     input.value = input.value.replace(/[^0-9]/g, ''); // Remove tudo que não for número
