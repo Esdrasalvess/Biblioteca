@@ -59,7 +59,7 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         const funcionarios = await response.json();
 
         // Exibir os dados na tabela
-        const tbody = document.querySelector("#resultadoConsulta tbody");
+        const tbody = document.querySelector("#resultadoConsultaFuncionario tbody");
         tbody.innerHTML = ""; // Limpa os dados anteriores
 
         funcionarios.forEach(funcionario => {

@@ -54,12 +54,12 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
             }
         });
 
-        if (!response.ok) throw new Error("Erro ao consultar funcionários");
+        if (!response.ok) throw new Error("Erro ao consultar autores1");
 
         const funcionarios = await response.json();
 
         // Exibir os dados na tabela
-        const tbody = document.querySelector("#resultadoConsulta tbody");
+        const tbody = document.querySelector("#resultadoConsultaAutor tbody");
         tbody.innerHTML = ""; // Limpa os dados anteriores
 
         funcionarios.forEach(funcionario => {
@@ -71,9 +71,9 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
                 tdNome.textContent = autor.nome || "N/A";
                 tr.appendChild(tdNome);
             }
-            if (document.getElementById("consulta/autor/visibilidade_cargo").checked) {
+            if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
                 const tdCargo = document.createElement("td");
-                tdCargo.textContent = autor.cargo || "N/A";
+                tdCargo.textContent = autor.nacionalidade || "N/A";
                 tr.appendChild(tdCargo);
             }
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
@@ -85,7 +85,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
             tbody.appendChild(tr);
         });
     } catch (error) {
-        console.error("Erro ao buscar funcionários:", error);
-        alert("Ocorreu um erro ao buscar os dados dos funcionários.");
+        console.error("Erro ao buscar autores:", error);
+        alert("Ocorreu um erro ao buscar os dados dos autoress.");
     }
 });
