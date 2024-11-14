@@ -9,15 +9,16 @@ import java.util.List;
 
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Integer> {
 
-    @Query("SELECT * FROM Emprestimo WHERE id_leitor = :leitorId;")
+    @Query("SELECT e FROM Emprestimo e WHERE e.leitor.id = :leitorId")
     List<Emprestimo> buscarPorLeitor(@Param("leitorId") Integer leitorId);
 
-    @Query("SELECT * FROM Emprestimo WHERE id_funcionario = :funcionarioId;")
+    @Query("SELECT e FROM Emprestimo e WHERE e.funcionario.id = :funcionarioId")
     List<Emprestimo> buscarPorFuncionario(@Param("funcionarioId") Integer funcionarioId);
 
-    @Query("SELECT * FROM Emprestimo WHERE data_emprestimo BETWEEN :dataInicial AND :dataFinal;")
+    @Query("SELECT e FROM Emprestimo e WHERE e.dataEmprestimo BETWEEN :dataInicial AND :dataFinal")
     List<Emprestimo> buscarPorData(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal);
 
-    @Query("SELECT * FROM Emprestimo WHERE status = :status;")
+    @Query("SELECT e FROM Emprestimo e WHERE e.status = :status")
     List<Emprestimo> buscarNaoEmprestado(@Param("status") String status);
+
 }

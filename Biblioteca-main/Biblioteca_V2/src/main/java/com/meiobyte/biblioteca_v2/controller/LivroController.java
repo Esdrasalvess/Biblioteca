@@ -18,7 +18,7 @@ public class LivroController {
     private LivroService livroService;
 
     @Autowired
-    private AutorService autorService;  // Service para buscar o autor
+    private AutorService autorService;
 
     @GetMapping
     public List<Livro> listarTodos() {
@@ -31,8 +31,8 @@ public class LivroController {
     }
 
     @GetMapping("/autor/{id}")
-    public Livro buscarPorId(@PathVariable Integer id) {
-        return livroService.buscarPorAutor(id).orElse(null);
+    public List<Livro> buscarPorAutor(@PathVariable Integer id) {
+        return livroService.buscarPorAutor(id);  // Retorna a lista diretamente
     }
 
     @PostMapping
