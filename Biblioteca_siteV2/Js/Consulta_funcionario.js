@@ -1,68 +1,60 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.getElementById("formConsultaFuncionario").addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-    //Variáveis funcionário 
-    const checkboxFiltroNome = document.getElementById('consulta/funcionario/selecionar_nome');
-    const checkboxFiltroCargo = document.getElementById('consulta/funcionario/selecionar_cargo');
-    const checkboxFiltroId = document.getElementById('consulta/funcionario/selecionar_id');
+    // Definindo filtros de pesquisa conforme os checkboxes selecionados
+    const filtros = {};
+    if (document.getElementById("consulta/funcionario/selecionar_nome").checked) {
+        filtros.nome = document.getElementById("pesquisa_funcionario_nome").value;
+    }
+    if (document.getElementById("consulta/funcionario/selecionar_cargo").checked) {
+        filtros.cargo = document.getElementById("pesquisa_funcionario_cargo").value;
+    }
+    if (document.getElementById("consulta/funcionario/selecionar_id").checked) {
+        filtros.id_funcionario = document.getElementById("pesquisa_funcionario_id").value; 
+    }
 
-    const checkboxVisibilidadeNome = document.getElementById('consulta/funcionario/visibilidade_nome');
-    const checkboxVisibilidadeCargo = document.getElementById('consulta/funcionario/visibilidade_cargo');
-    const checkboxVisibilidadeId = document.getElementById('consulta/funcionario/visibilidade_id');
+    try {
+        const response = await fetch("http://localhost:8080/api/funcionarios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(filtros)
+        });
 
-   
-    const campoNome = document.getElementById('campo_funcionario_nome');
-    const campoCargo = document.getElementById('campo_funcionario_cargo');
-    const campoId = document.getElementById('campo_funcionario_id');
+        
+        if (!response.ok) throw new Error("Erro ao consultar funcionários");
 
+        const funcionarios = await response.json();
+        
+        // Exibir os dados na tabela
+        const tbody = document.querySelector("#resultadoConsulta tbody");
+        tbody.innerHTML = ""; // Limpa os dados anteriores
+        
+        funcionarios.forEach(funcionario => {
+            const tr = document.createElement("tr");
 
-    //Display caixas de texto ao clicar checkbox - Funcionário
-    checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
-    checkboxFiltroCargo.addEventListener('change', () => campoCargo.style.display = checkboxFiltroCargo.checked ? 'inline' : 'none');
-    checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkboxFiltroId.checked ? 'inline' : 'none');
-    
-    // Formulário de consulta
-    document.getElementById('formConsultaAutor').addEventListener('submit', function (event) {
-        event.preventDefault();
+            // Visibilidade das colunas
+            if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
+                const tdNome = document.createElement("td");
+                tdNome.textContent = funcionario.nome || "N/A";
+                tr.appendChild(tdNome);
+            }
+            if (document.getElementById("consulta/funcionario/visibilidade_cargo").checked) {
+                const tdCargo = document.createElement("td");
+                tdCargo.textContent = funcionario.cargo || "N/A";
+                tr.appendChild(tdCargo);
+            }
+            if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
+                const tdId = document.createElement("td");
+                tdId.textContent = funcionario.id_funcionario || "N/A";  // Acesso ao 'id_funcionario'
+                tr.appendChild(tdId);
+            }
 
-        // Captura os valores de pesquisa
-        const nome = checkboxFiltroNome.checked ? document.getElementById('pesquisa_funcionario_nome').value : '';
-        const cargo = checkboxFiltroCargo.checked ? document.getElementById('pesquisa_funcionario_cargo').value : '';
-        const id = checkboxFiltroId.checked ? document.getElementById('pesquisa_funcionario_id').value : '';
-      
-
-        // Realiza a consulta na API, incluindo os filtros como parâmetros de consulta
-        const url = `URL_DA_API_DE_AUTORES?nome=${nome}&cargo=${cargo}&id=${id}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('resultadoConsulta').querySelector('tbody');
-                tbody.innerHTML = ''; // Limpa os resultados anteriores
-
-                data.forEach(funcionario => {
-                    const row = document.createElement('tr');
-
-                    // Verifica as opções de visibilidade antes de adicionar as colunas
-                    if (checkboxVisibilidadeId.checked) {
-                        const idCell = document.createElement('td');
-                        idCell.textContent = funcionario.id_funcionario;
-                        row.appendChild(idCell);
-                    }
-
-                    if (checkboxVisibilidadeNome.checked) {
-                        const nomeCell = document.createElement('td');
-                        nomeCell.textContent = funcionario.nome;
-                        row.appendChild(nomeCell);
-                    }
-
-                    if (checkboxVisibilidadeCargo.checked) {
-                        const cargoCell = document.createElement('td');
-                        cargoCell.textContent = funcionario.cargo;
-                        row.appendChild(cargoCell);
-                    }
-
-                    tbody.appendChild(row);
-                });
-            })
-            .catch(error => console.error('Erro ao buscar dados dos funcionarios:', error));
-    });
+            tbody.appendChild(tr);
+        });
+    } catch (error) {
+        console.error("Erro ao buscar funcionários:", error);
+        alert("Ocorreu um erro ao buscar os dados dos funcionários.");
+    }
 });
