@@ -41,7 +41,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
     console.log(filtros);
 
     // Construindo a URL com parâmetros de filtro
-    const url = new URL("http://localhost:8080/api/funcionarios");
+    const url = new URL("http://localhost:8080/api/autor");
     if (filtros.nome) url.searchParams.append("nome", filtros.nome);
     if (filtros.nacionalidade) url.searchParams.append("nacionalidade", filtros.nacionalidade);
     if (filtros.id_autor) url.searchParams.append("id", filtros.id_autor);
@@ -56,13 +56,13 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
 
         if (!response.ok) throw new Error("Erro ao consultar autores1");
 
-        const funcionarios = await response.json();
+        const autores = await response.json();
 
         // Exibir os dados na tabela
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
         tbody.innerHTML = ""; // Limpa os dados anteriores
 
-        funcionarios.forEach(funcionario => {
+        autores.forEach(autor => {
             const tr = document.createElement("tr");
 
             // Visibilidade das colunas
@@ -72,9 +72,9 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
                 tr.appendChild(tdNome);
             }
             if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
-                const tdCargo = document.createElement("td");
-                tdCargo.textContent = autor.nacionalidade || "N/A";
-                tr.appendChild(tdCargo);
+                const tdNacionalidade = document.createElement("td");
+                tdNacionalidade.textContent = autor.nacionalidade || "N/A";
+                tr.appendChild(tdNacionalidade);
             }
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
                 const tdId = document.createElement("td");
