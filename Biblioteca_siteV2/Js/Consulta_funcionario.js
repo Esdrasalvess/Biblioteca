@@ -1,8 +1,34 @@
+document.addEventListener('DOMContentLoaded', function () {
+    // Filtros e visibilidade
+    const checkboxFiltroNome = document.getElementById('consulta/funcionario/selecionar_nome');
+    const checkboxFiltroCargo= document.getElementById('consulta/funcionario/selecionar_cargo');
+    const checkboxFiltroId = document.getElementById('consulta/funcionario/selecionar_id');
+  
+
+    const checkboxVisibilidadeNome = document.getElementById('consulta/funcionario/visibilidade_nome');
+    const checkboxVisibilidadeCargo = document.getElementById('consulta/funcionario/visibilidade_cargo');
+    const checkboxVisibilidadeId = document.getElementById('consulta/funcionario/visibilidade_id');
+
+    const campoNome = document.getElementById('campo_funcionario_nome');
+    const campoCargo = document.getElementById('campo_funcionario_cargo');
+    const campoId = document.getElementById('campo_funcionario_id');
+   
+
+    // Mostrar/ocultar campos de entrada com base nos filtros selecionados
+    checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
+    checkboxFiltroCargo.addEventListener('change', () => campoCargo.style.display = checkboxFiltroCargo.checked ? 'inline' : 'none');
+    checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkboxFiltroId.checked ? 'inline' : 'none');
+   
+});
+
+
+
 document.getElementById("formConsultaFuncionario").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     // Definindo filtros de pesquisa conforme os checkboxes selecionados
     const filtros = {};
+
     if (document.getElementById("consulta/funcionario/selecionar_nome").checked) {
         filtros.nome = document.getElementById("pesquisa_funcionario_nome").value;
     }
@@ -13,6 +39,7 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         filtros.id_funcionario = document.getElementById("pesquisa_funcionario_id").value; 
     }
 
+    console.log(filtros);
     try {
         const response = await fetch("http://localhost:8080/api/funcionarios", {
             method: "POST",
