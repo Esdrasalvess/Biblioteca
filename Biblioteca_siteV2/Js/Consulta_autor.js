@@ -32,7 +32,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
         filtros.nome = document.getElementById("pesquisa_autor_nome").value;
     }
     if (document.getElementById("consulta/autor/selecionar_nacionalidade").checked) {
-        filtros.cargo = document.getElementById("pesquisa_autor_nacionalidade").value;
+        filtros.nacionalidade = document.getElementById("pesquisa_autor_nacionalidade").value;
     }
     if (document.getElementById("consulta/autor/selecionar_id").checked) {
         filtros.id_autor = document.getElementById("pesquisa_autor_id").value;
@@ -86,6 +86,6 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
         });
     } catch (error) {
         console.error("Erro ao buscar autores:", error);
-        alert("Ocorreu um erro ao buscar os dados dos autoress.");
+        alert("Ocorreu um erro ao buscar os dados dos autores.");
     }
 });
