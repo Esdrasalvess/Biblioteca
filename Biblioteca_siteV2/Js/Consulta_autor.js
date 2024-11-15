@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
     const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
 
-    const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
-    const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
-    const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
-
     const campoNome = document.getElementById('campo_autor_nome');
     const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
     const campoId = document.getElementById('campo_autor_id');
@@ -19,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroNacionalidade.addEventListener('change', () => campoNacionalidade.style.display = checkboxFiltroNacionalidade.checked ? 'inline' : 'none');
     checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkboxFiltroId.checked ? 'inline' : 'none');
     checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'inline' : 'none');
-
 });
 
 document.getElementById("formConsultaAutor").addEventListener("submit", async function(event) {
@@ -35,12 +30,12 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
         filtros.nacionalidade = document.getElementById("pesquisa_autor_nacionalidade").value;
     }
     if (document.getElementById("consulta/autor/selecionar_id").checked) {
-        filtros.id_autor = document.getElementById("pesquisa_autor_id").value;
+        const id = document.getElementById("pesquisa_autor_id").value;
+        if (!isNaN(id)) filtros.id_autor = id;
     }
 
     console.log(filtros);
 
-    // Construindo a URL com parâmetros de filtro
     const url = new URL("http://localhost:8080/api/autor");
     if (filtros.nome) url.searchParams.append("nome", filtros.nome);
     if (filtros.nacionalidade) url.searchParams.append("nacionalidade", filtros.nacionalidade);
@@ -54,18 +49,20 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
             }
         });
 
-        if (!response.ok) throw new Error("Erro ao consultar autores1");
+        if (!response.ok) throw new Error("Erro ao consultar autores.");
 
         const autores = await response.json();
-
-        // Exibir os dados na tabela
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
-        tbody.innerHTML = ""; // Limpa os dados anteriores
+        tbody.innerHTML = "";
+
+        if (autores.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='3'>Nenhum autor encontrado.</td></tr>";
+            return;
+        }
 
         autores.forEach(autor => {
             const tr = document.createElement("tr");
 
-            // Visibilidade das colunas
             if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
                 const tdNome = document.createElement("td");
                 tdNome.textContent = autor.nome || "N/A";
@@ -86,6 +83,6 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
         });
     } catch (error) {
         console.error("Erro ao buscar autores:", error);
-        alert("Ocorreu um erro ao buscar os dados dos autores.");
+        alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
