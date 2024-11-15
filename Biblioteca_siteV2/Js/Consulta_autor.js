@@ -36,7 +36,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
 
     console.log(filtros);
 
-    const url = new URL("http://localhost:8080/api/autor");
+    const url = new URL("http://localhost:8080/api/autores");
     if (filtros.nome) url.searchParams.append("nome", filtros.nome);
     if (filtros.nacionalidade) url.searchParams.append("nacionalidade", filtros.nacionalidade);
     if (filtros.id_autor) url.searchParams.append("id", filtros.id_autor);
