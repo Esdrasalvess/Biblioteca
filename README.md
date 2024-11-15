@@ -1,15 +1,11 @@
 # Sistema de Gerenciamento de Biblioteca
 
-**Faculdade Independente do Nordeste**  
-**Bacharelado em Engenharia da Computação**
 
 **Autores:**
 - Esdrás Alves dos Santos
 - Matheus Souza Ramos
 - Maria Letícia Almeida Gonçalves
 - Rafael Almeida Santos
-
-**Vitória da Conquista - BA, 2024**
 
 ---
 
