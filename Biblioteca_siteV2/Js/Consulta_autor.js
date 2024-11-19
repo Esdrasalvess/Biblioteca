@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'inline' : 'none');
 });
 
-
 document.getElementById("formConsultaAutor").addEventListener("submit", async function(event) {
     event.preventDefault();
 
@@ -57,33 +56,40 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
         tbody.innerHTML = "";
 
         if (autores.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='3'>Nenhum autor encontrado.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='4'>Nenhum autor encontrado.</td></tr>";
             return;
         }
 
         autores.forEach(autor => {
             const tr = document.createElement("tr");
-            const th = document.createElement("th");
 
+            // Adiciona o título e valor do nome, se visível
             if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
                 const thNome = document.createElement("th");
                 const tdNome = document.createElement("td");
                 thNome.textContent = "Nome";
                 tdNome.textContent = autor.nome || "N/A";
+                tr.appendChild(thNome);
                 tr.appendChild(tdNome);
-                th.appendChild(thNome);
             }
+
+            // Adiciona o título e valor da nacionalidade, se visível
             if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
-                const tdNacionalidade = document.createElement("td");
                 const thNacionalidade = document.createElement("th");
-                tdNacionalidade.textContent = autor.id_autor || "N/A";
+                const tdNacionalidade = document.createElement("td");
                 thNacionalidade.textContent = "Nacionalidade";
+                tdNacionalidade.textContent = autor.nacionalidade || "N/A";
+                tr.appendChild(thNacionalidade);
                 tr.appendChild(tdNacionalidade);
-                th.appendChild(thNacionalidade);
             }
+
+            // Adiciona o título e valor do id, se visível
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
+                const thId = document.createElement("th");
                 const tdId = document.createElement("td");
-                tdId.textContent = autor.nacionalidade || "N/A";
+                thId.textContent = "ID";
+                tdId.textContent = autor.id_autor || "N/A";
+                tr.appendChild(thId);
                 tr.appendChild(tdId);
             }
 
