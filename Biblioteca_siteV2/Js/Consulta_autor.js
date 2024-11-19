@@ -1,33 +1,3 @@
-const checkboxFiltroNome = document.getElementById('consulta/autor/selecionar_nome');
-const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/selecionar_nacionalidade');
-const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
-const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
-
-const campoNome = document.getElementById('campo_autor_nome');
-const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
-const campoId = document.getElementById('campo_autor_id');
-const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Mostrar/ocultar campos de entrada com base nos filtros selecionados
-    checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
-    checkboxFiltroNacionalidade.addEventListener('change', () => campoNacionalidade.style.display = checkboxFiltroNacionalidade.checked ? 'inline' : 'none');
-    checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkboxFiltroId.checked ? 'inline' : 'none');
-    checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'inline' : 'none');
-});
-
-const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
-const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
-const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
-const checkboxVisibilidadeQtdLivros = document.getElementById('consulta/autor/visibilidade_qtd_livros');
-
-const pesquisaNome = document.getElementById('pesquisa_autor_nome');
-const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
-const pesquisaId = document.getElementById('pesquisa_autor_id');
-const pesquisaQtdLivros = document.getElementById('pesquisa_autor_qtd_livros');
-
-const FormConsulta = document.getElementById("formConsultaAutor");
-
 FormConsulta.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -43,7 +13,9 @@ FormConsulta.addEventListener("submit", async function (event) {
     }
     if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
-        if (!isNaN(id)) filtros.id_autor = id;
+        if (!isNaN(id) && id !== "") { // Verifique se o ID é um número válido
+            filtros.id_autor = id; // Passa o filtro de ID
+        }
     }
     if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
@@ -91,11 +63,6 @@ FormConsulta.addEventListener("submit", async function (event) {
             thId.textContent = "ID";
             headerRow.appendChild(thId);
         }
-        if (checkboxVisibilidadeQtdLivros.checked) {
-            const thQtdLivros = document.createElement("th");
-            thQtdLivros.textContent = "Quantidade de Livros";
-            headerRow.appendChild(thQtdLivros);
-        }
 
         if (autores.length === 0) {
             tbody.innerHTML = "<tr><td colspan='4'>Nenhum autor encontrado.</td></tr>";
@@ -120,11 +87,6 @@ FormConsulta.addEventListener("submit", async function (event) {
                 const tdId = document.createElement("td");
                 tdId.textContent = autor.id_autor || "N/A";
                 tr.appendChild(tdId);
-            }
-            if (checkboxVisibilidadeQtdLivros.checked) {
-                const tdQtdLivros = document.createElement("td");
-                tdQtdLivros.textContent = autor.qtd_livros || "N/A";
-                tr.appendChild(tdQtdLivros);
             }
 
             tbody.appendChild(tr);
