@@ -1,7 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
-
-    // Filtros e visibilidade
-    const checkboxFiltroNome = document.getElementById('consulta/funcionario/selecionar_nome');
+const checkboxFiltroNome = document.getElementById('consulta/funcionario/selecionar_nome');
     const checkboxFiltroCargo= document.getElementById('consulta/funcionario/selecionar_cargo');
     const checkboxFiltroId = document.getElementById('consulta/funcionario/selecionar_id');
   
@@ -17,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const pesquisaNome = document.getElementById('pesquisa_funcionario_nome');
     const pesquisaCargo = document.getElementById('pesquisa_funcionario_cargo');
     const pesquisaId = document.getElementById('pesquisa_funcionario_id');
+
+
+document.addEventListener('DOMContentLoaded', function () {
 
     // Mostrar/ocultar campos de entrada com base nos filtros selecionados
     checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
