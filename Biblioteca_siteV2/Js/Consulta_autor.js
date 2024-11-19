@@ -72,7 +72,12 @@ FormConsulta.addEventListener("submit", async function (event) {
 
         if (!response.ok) throw new Error("Erro ao consultar autores.");
 
-        const autores = await response.json();
+        // Verifica a resposta da API antes de tentar iterar
+        const data = await response.json();
+
+        // Aqui verificamos se a resposta é um array
+        const autores = Array.isArray(data) ? data : data.autores || []; // Se for um objeto com a propriedade autores, usamos ela, senão um array vazio
+
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
         const thead = document.querySelector("#resultadoConsultaAutor thead");
         tbody.innerHTML = ""; // Limpa os dados anteriores
@@ -129,5 +134,3 @@ FormConsulta.addEventListener("submit", async function (event) {
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
-
-
