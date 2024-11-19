@@ -33,9 +33,8 @@ FormConsulta.addEventListener("submit", async function (event) {
 
     // Inicializando os filtros e o endpoint base
     const filtros = {};
-    let endpoint = "http://localhost:8080/api/autores";
+    let endpoint = "http://localhost:8080/api/autores"; // Base URL para todos os casos
 
-    // Verifica qual filtro está ativo e monta o endpoint correspondente
     if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
         filtros.nome = pesquisaNome.value.trim();
         endpoint += "/buscar"; // Endpoint para busca por nome
@@ -45,22 +44,25 @@ FormConsulta.addEventListener("submit", async function (event) {
     } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
         if (!isNaN(id)) { // Verifica se o ID é válido
-            filtros.id_autor = id;
-            endpoint += "/";
+            // Para busca por ID, o ID vai diretamente na URL, sem necessidade de adicionar "/"
+            endpoint = `http://localhost:8080/api/autores/${id}`; // URL para buscar por ID específico
         }
     } else if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
         endpoint += "/buscarPorQtdLivros"; // Endpoint para busca por quantidade de livros
     }
-
-   
-    // Adiciona os filtros como parâmetros da URL
-    const url = new URL(endpoint);
-    Object.entries(filtros).forEach(([key, value]) => {
-        url.searchParams.append(key, value);
-    });
-
-    console.log("URL gerada:", url.toString()); // Verifica a URL final
+    
+    // Adiciona filtros como parâmetros de query, se houver
+    if (Object.keys(filtros).length > 0) {
+        const url = new URL(endpoint); // Cria a URL base
+        Object.entries(filtros).forEach(([key, value]) => {
+            url.searchParams.append(key, value); // Adiciona os filtros como parâmetros de consulta
+        });
+        endpoint = url.toString(); // Atualiza o endpoint com os parâmetros
+    }
+    
+    console.log(endpoint); // Para depuração, verifique a URL gerada
+    
 
     try {
         const response = await fetch(url, {
