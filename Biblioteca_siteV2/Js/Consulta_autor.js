@@ -70,12 +70,12 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
             }
             if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
                 const tdNacionalidade = document.createElement("td");
-                tdNacionalidade.textContent = autor.nacionalidade || "N/A";
+                tdNacionalidade.textContent = autor.id_autor || "N/A";
                 tr.appendChild(tdNacionalidade);
             }
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
                 const tdId = document.createElement("td");
-                tdId.textContent = autor.id_autor || "N/A";
+                tdId.textContent = autor.nacionalidade || "N/A";
                 tr.appendChild(tdId);
             }
 
