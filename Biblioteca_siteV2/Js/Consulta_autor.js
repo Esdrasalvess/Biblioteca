@@ -31,47 +31,49 @@ const FormConsulta = document.getElementById("formConsultaAutor");
 FormConsulta.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Inicializando o objeto de filtros
+    // Inicializando os filtros e o endpoint base
     const filtros = {};
+    let endpoint = "http://localhost:8080/api/autores";
 
-    // Adiciona o filtro para cada campo de pesquisa, se o checkbox estiver marcado
+    // Verifica qual filtro está ativo e monta o endpoint correspondente
     if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
         filtros.nome = pesquisaNome.value.trim();
-    }
-    if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
+        endpoint += "/buscar"; // Endpoint para busca por nome
+    } else if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
         filtros.nacionalidade = pesquisaNacionalidade.value.trim();
-    }
-    if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
+        endpoint += "/buscarPorNacionalidade"; // Endpoint para busca por nacionalidade
+    } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
-        if (!isNaN(id) && id !== "") { // Verifique se o ID é um número válido
-            filtros.id_autor = id; // Passa o filtro de ID
+        if (!isNaN(id)) { // Verifica se o ID é válido
+            filtros.id_autor = id;
+            endpoint += "/buscarPorId"; // Endpoint para busca por ID
         }
-    }
-    if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
+    } else if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
+        endpoint += "/buscarPorQtdLivros"; // Endpoint para busca por quantidade de livros
     }
 
-    console.log(filtros); // Para depuração
+    // Caso nenhum filtro esteja ativo
+    if (Object.keys(filtros).length === 0) {
+        alert("Por favor, selecione e preencha ao menos um filtro.");
+        return;
+    }
 
-    const url = new URL("http://localhost:8080/api/autores");
+    // Adiciona os filtros como parâmetros da URL
+    const url = new URL(endpoint);
+    Object.entries(filtros).forEach(([key, value]) => {
+        url.searchParams.append(key, value);
+    });
 
-// Adiciona filtros à URL
-Object.entries(filtros).forEach(([key, value]) => {
-    url.searchParams.append(key, value);
-});
-
-console.log("URL final:", url.toString()); 
-
+    console.log("URL gerada:", url.toString()); // Verifica a URL final
 
     try {
         const response = await fetch(url, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: { "Content-Type": "application/json" }
         });
 
-        if (!response.ok) throw new Error("Erro ao consultar autores: !resposta.ok");
+        if (!response.ok) throw new Error("Erro ao consultar autores.");
 
         const autores = await response.json();
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
@@ -80,7 +82,7 @@ console.log("URL final:", url.toString());
         const headerRow = document.querySelector("#headerRowAutor");
         headerRow.innerHTML = ""; // Limpa os títulos anteriores
 
-        // Adicionando os cabeçalhos com base nos checkboxes
+        // Adicionando os cabeçalhos com base nos checkboxes de visibilidade
         if (checkboxVisibilidadeNome.checked) {
             const thNome = document.createElement("th");
             thNome.textContent = "Nome";
@@ -130,3 +132,4 @@ console.log("URL final:", url.toString());
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
+
