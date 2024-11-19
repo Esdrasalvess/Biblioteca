@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'inline' : 'none');
 });
 
+
 document.getElementById("formConsultaAutor").addEventListener("submit", async function(event) {
     event.preventDefault();
 
@@ -62,16 +63,23 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
 
         autores.forEach(autor => {
             const tr = document.createElement("tr");
+            const th = document.createElement("th");
 
             if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
+                const thNome = document.createElement("th");
                 const tdNome = document.createElement("td");
+                thNome.textContent = "Nome";
                 tdNome.textContent = autor.nome || "N/A";
                 tr.appendChild(tdNome);
+                th.appendChild(thNome);
             }
             if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
                 const tdNacionalidade = document.createElement("td");
+                const thNacionalidade = document.createElement("th");
                 tdNacionalidade.textContent = autor.id_autor || "N/A";
+                thNacionalidade.textContent = "Nacionalidade";
                 tr.appendChild(tdNacionalidade);
+                th.appendChild(thNacionalidade);
             }
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
                 const tdId = document.createElement("td");
