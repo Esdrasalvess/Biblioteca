@@ -4,11 +4,6 @@ const checkboxFiltroAno = document.getElementById('consulta/livro/selecionar_ano
 const checkboxFiltroId = document.getElementById('consulta/livro/selecionar_id');
 const checkboxFiltroDisponivel = document.getElementById('consulta/livro/selecionar_disponivel');
 
-const checkboxVisibilidadeTitulo = document.getElementById('consulta/livro/visibilidade_titulo');
-const checkboxVisibilidadeAutor = document.getElementById('consulta/livro/visibilidade_autor');
-const checkboxVisibilidadeAno = document.getElementById('consulta/livro/visibilidade_ano');
-const checkboxVisibilidadeId = document.getElementById('consulta/livro/visibilidade_id');
-const checkboxVisibilidadeDisponivel = document.getElementById('consulta/livro/visibilidade_disponivel');
 
 
 const campoTitulo = document.getElementById('campo_livro_titulo');
@@ -17,11 +12,6 @@ const campoAno = document.getElementById('campo_livro_ano');
 const campoId = document.getElementById('campo_livro_id');
 const campoDisponivel = document.getElementById('campo_livro_disponivel');
 
-const pesquisaTitulo = document.getElementById('pesquisa_livro_titulo');
-const pesquisaAutor = document.getElementById('pesquisa_livro_autor');
-const pesquisaAno = document.getElementById('pesquisa_livro_ano');
-const pesquisaId = document.getElementById('pesquisa_livro_id');
-const pesquisaDisponivel = document.getElementById('pesquisa_livro_disponivel');
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -33,9 +23,21 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroDisponivel.addEventListener('change', () => campoDisponivel.style.display = checkboxFiltroDisponivel.checked ? 'inline' : 'none');
 });
 
+const checkboxVisibilidadeTitulo = document.getElementById('consulta/livro/visibilidade_titulo');
+const checkboxVisibilidadeAutor = document.getElementById('consulta/livro/visibilidade_autor');
+const checkboxVisibilidadeAno = document.getElementById('consulta/livro/visibilidade_ano');
+const checkboxVisibilidadeId = document.getElementById('consulta/livro/visibilidade_id');
+const checkboxVisibilidadeDisponivel = document.getElementById('consulta/livro/visibilidade_disponivel');
 
 
-document.getElementById("FormConsultaLivro").addEventListener("submit", async function(event) {
+const pesquisaTitulo = document.getElementById('pesquisa_livro_titulo');
+const pesquisaAutor = document.getElementById('pesquisa_livro_autor');
+const pesquisaAno = document.getElementById('pesquisa_livro_ano');
+const pesquisaId = document.getElementById('pesquisa_livro_id');
+const pesquisaDisponivel = document.getElementById('pesquisa_livro_disponivel');
+
+const FormConsulta = document.getElementById("formConsultaLivro")
+FormConsulta.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     // Definindo filtros de pesquisa conforme os checkboxes selecionados
