@@ -1,3 +1,33 @@
+const checkboxFiltroNome = document.getElementById('consulta/autor/selecionar_nome');
+const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/selecionar_nacionalidade');
+const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
+const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
+
+const campoNome = document.getElementById('campo_autor_nome');
+const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
+const campoId = document.getElementById('campo_autor_id');
+const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Mostrar/ocultar campos de entrada com base nos filtros selecionados
+    checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
+    checkboxFiltroNacionalidade.addEventListener('change', () => campoNacionalidade.style.display = checkboxFiltroNacionalidade.checked ? 'inline' : 'none');
+    checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkboxFiltroId.checked ? 'inline' : 'none');
+    checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'inline' : 'none');
+});
+
+const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
+const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
+const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
+const checkboxVisibilidadeQtdLivros = document.getElementById('consulta/autor/visibilidade_qtd_livros');
+
+const pesquisaNome = document.getElementById('pesquisa_autor_nome');
+const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
+const pesquisaId = document.getElementById('pesquisa_autor_id');
+const pesquisaQtdLivros = document.getElementById('pesquisa_autor_qtd_livros');
+
+const FormConsulta = document.getElementById("formConsultaAutor");
+
 FormConsulta.addEventListener("submit", async function (event) {
     event.preventDefault();
 
