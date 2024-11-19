@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Integer> {
     List<Livro> findByAutorId(Integer autorId);  // Método para buscar livros pelo ID do autor
+    List<Livro> findByTituloContainingIgnoreCase(String titulo);
+    List<Livro> findByAutorNomeContainingIgnoreCase(String autorNome);
+    List<Livro> findByAnoPublicacao(Integer anoPublicacao);
 }

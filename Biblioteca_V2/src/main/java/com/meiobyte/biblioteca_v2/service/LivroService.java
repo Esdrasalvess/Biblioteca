@@ -36,4 +36,16 @@ public class LivroService {
     public List<Livro> buscarPorAutor(Integer autorId) {
         return livroRepository.findByAutorId(autorId);
     }
+
+    public List<Livro> buscarPorTitulo(String titulo) {
+        return livroRepository.findByTituloContainingIgnoreCase(titulo);
+    }
+
+    public List<Livro> buscarPorAutor(String autorNome) {
+        return livroRepository.findByAutorNomeContainingIgnoreCase(autorNome);
+    }
+
+    public List<Livro> buscarPorAno(Integer ano) {
+        return livroRepository.findByAnoPublicacao(ano);
+    }
 }

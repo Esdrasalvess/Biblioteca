@@ -34,6 +34,20 @@ public class LivroController {
     public List<Livro> buscarPorAutor(@PathVariable Integer id) {
         return livroService.buscarPorAutor(id);  // Retorna a lista diretamente
     }
+    @GetMapping("/buscarPorTitulo")
+    public List<Livro> buscarPorTitulo(@RequestParam String titulo) {
+        return livroService.buscarPorTitulo(titulo);
+    }
+
+    @GetMapping("/buscarPorAutor")
+    public List<Livro> buscarPorAutor(@RequestParam String autor) {
+        return livroService.buscarPorAutor(autor);
+    }
+
+    @GetMapping("/buscarPorAno")
+    public List<Livro> buscarPorAno(@RequestParam Integer ano) {
+        return livroService.buscarPorAno(ano);
+    }
 
     @PostMapping
     public Livro criar(@RequestBody Livro livro) {
