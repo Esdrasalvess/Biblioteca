@@ -90,7 +90,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
                 tdNome.textContent = autor.nome || "N/A";
                 tr.appendChild(tdNome);
             }
-            if (document.getElementById("consulta/autor/visibilidade_cargo").checked) {
+            if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
                 const tdNacionalidade = document.createElement("td");
                 tdNacionalidade.textContent = autor.cargo || "N/A";
                 tr.appendChild(tdNacionalidade);
@@ -105,7 +105,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
         });
         
     } catch (error) {
-        console.error("Erro ao buscar autores:", error);
+        console.error("Erro ao buscar autores:", error);    
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
