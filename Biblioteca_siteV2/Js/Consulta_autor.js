@@ -3,15 +3,10 @@ const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/sele
 const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
 const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
 
-
-
 const campoNome = document.getElementById('campo_autor_nome');
 const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
 const campoId = document.getElementById('campo_autor_id');
 const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
-
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
     // Mostrar/ocultar campos de entrada com base nos filtros selecionados
@@ -24,11 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
 const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
 const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
 const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
+const checkboxVisibilidadeQtdLivros = document.getElementById('consulta/autor/visibilidade_qtd_livros');
 
 const pesquisaNome = document.getElementById('pesquisa_autor_nome');
 const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
 const pesquisaId = document.getElementById('pesquisa_autor_id');
-
+const pesquisaQtdLivros = document.getElementById('pesquisa_autor_qtd_livros');
 
 const FormConsulta = document.getElementById("formConsultaAutor");
 
@@ -48,6 +44,9 @@ FormConsulta.addEventListener("submit", async function (event) {
     if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
         if (!isNaN(id)) filtros.id_autor = id;
+    }
+    if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
+        filtros.qtd_livros = pesquisaQtdLivros.value.trim();
     }
 
     console.log(filtros); // Para depuração
@@ -92,6 +91,11 @@ FormConsulta.addEventListener("submit", async function (event) {
             thId.textContent = "ID";
             headerRow.appendChild(thId);
         }
+        if (checkboxVisibilidadeQtdLivros.checked) {
+            const thQtdLivros = document.createElement("th");
+            thQtdLivros.textContent = "Quantidade de Livros";
+            headerRow.appendChild(thQtdLivros);
+        }
 
         if (autores.length === 0) {
             tbody.innerHTML = "<tr><td colspan='4'>Nenhum autor encontrado.</td></tr>";
@@ -117,12 +121,17 @@ FormConsulta.addEventListener("submit", async function (event) {
                 tdId.textContent = autor.id_autor || "N/A";
                 tr.appendChild(tdId);
             }
+            if (checkboxVisibilidadeQtdLivros.checked) {
+                const tdQtdLivros = document.createElement("td");
+                tdQtdLivros.textContent = autor.qtd_livros || "N/A";
+                tr.appendChild(tdQtdLivros);
+            }
 
             tbody.appendChild(tr);
         });
-        
+
     } catch (error) {
-        console.error("Erro ao buscar autores:", error);    
+        console.error("Erro ao buscar autores:", error);
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
