@@ -33,8 +33,9 @@ FormConsulta.addEventListener("submit", async function (event) {
 
     // Inicializando os filtros e o endpoint base
     const filtros = {};
-    let endpoint = "http://localhost:8080/api/autores"; // Base URL para todos os casos
+    let endpoint = "http://localhost:8080/api/autores"; // URL base
 
+    // Verifica qual filtro está ativo e monta o endpoint correspondente
     if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
         filtros.nome = pesquisaNome.value.trim();
         endpoint += "/buscar"; // Endpoint para busca por nome
@@ -44,28 +45,27 @@ FormConsulta.addEventListener("submit", async function (event) {
     } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
         if (!isNaN(id)) { // Verifica se o ID é válido
-            // Para busca por ID, o ID vai diretamente na URL, sem necessidade de adicionar "/"
-            endpoint = `http://localhost:8080/api/autores/${id}`; // URL para buscar por ID específico
+            // Para a busca por ID, substituímos o endpoint para buscar diretamente pelo ID
+            endpoint = `http://localhost:8080/api/autores/${id}`; // URL para buscar por ID
         }
     } else if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
         endpoint += "/buscarPorQtdLivros"; // Endpoint para busca por quantidade de livros
     }
-    
-    // Adiciona filtros como parâmetros de query, se houver
-    if (Object.keys(filtros).length > 0) {
-        const url = new URL(endpoint); // Cria a URL base
+
+    // Adiciona os filtros como parâmetros da URL (exceto para a busca por ID)
+    if (Object.keys(filtros).length > 0 && !endpoint.includes("/")) { // Se não estiver buscando por ID
+        const url = new URL(endpoint);
         Object.entries(filtros).forEach(([key, value]) => {
-            url.searchParams.append(key, value); // Adiciona os filtros como parâmetros de consulta
+            url.searchParams.append(key, value);
         });
-        endpoint = url.toString(); // Atualiza o endpoint com os parâmetros
+        endpoint = url.toString(); // Atualiza o endpoint com os parâmetros de consulta
     }
-    
-    console.log(endpoint); // Para depuração, verifique a URL gerada
-    
+
+    console.log("URL gerada:", endpoint); // Verifica a URL final antes de fazer a requisição
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch(endpoint, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -129,4 +129,5 @@ FormConsulta.addEventListener("submit", async function (event) {
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
+
 
