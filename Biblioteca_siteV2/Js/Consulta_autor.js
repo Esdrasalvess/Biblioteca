@@ -3,9 +3,6 @@ const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/sele
 const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
 const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
 
-const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
-const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
-const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
 
 
 const campoNome = document.getElementById('campo_autor_nome');
@@ -14,15 +11,9 @@ const campoId = document.getElementById('campo_autor_id');
 const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
 
 
-const pesquisaNome = document.getElementById('pesquisa_autor_nome');
-const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
-const pesquisaId = document.getElementById('pesquisa_autor_id');
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Filtros e visibilidade
- 
-
     // Mostrar/ocultar campos de entrada com base nos filtros selecionados
     checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
     checkboxFiltroNacionalidade.addEventListener('change', () => campoNacionalidade.style.display = checkboxFiltroNacionalidade.checked ? 'inline' : 'none');
@@ -30,7 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'inline' : 'none');
 });
 
-document.getElementById("formConsultaAutor").addEventListener("submit", async function(event) {
+const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
+const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
+const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
+
+const pesquisaNome = document.getElementById('pesquisa_autor_nome');
+const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
+const pesquisaId = document.getElementById('pesquisa_autor_id');
+
+
+const FormConsulta = document.getElementById("formConsultaAutor");
+FormConsulta.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     // Definindo filtros de pesquisa conforme os checkboxes selecionados

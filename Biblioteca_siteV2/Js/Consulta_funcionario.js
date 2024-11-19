@@ -3,17 +3,12 @@ const checkboxFiltroNome = document.getElementById('consulta/funcionario/selecio
     const checkboxFiltroId = document.getElementById('consulta/funcionario/selecionar_id');
   
 
-    const checkboxVisibilidadeNome = document.getElementById('consulta/funcionario/visibilidade_nome');
-    const checkboxVisibilidadeCargo = document.getElementById('consulta/funcionario/visibilidade_cargo');
-    const checkboxVisibilidadeId = document.getElementById('consulta/funcionario/visibilidade_id');
-
+    
     const campoNome = document.getElementById('campo_funcionario_nome');
     const campoCargo = document.getElementById('campo_funcionario_cargo');
     const campoId = document.getElementById('campo_funcionario_id');
    
-    const pesquisaNome = document.getElementById('pesquisa_funcionario_nome');
-    const pesquisaCargo = document.getElementById('pesquisa_funcionario_cargo');
-    const pesquisaId = document.getElementById('pesquisa_funcionario_id');
+   
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -25,9 +20,17 @@ document.addEventListener('DOMContentLoaded', function () {
    
 });
 
+    const checkboxVisibilidadeNome = document.getElementById('consulta/funcionario/visibilidade_nome');
+    const checkboxVisibilidadeCargo = document.getElementById('consulta/funcionario/visibilidade_cargo');
+    const checkboxVisibilidadeId = document.getElementById('consulta/funcionario/visibilidade_id');
 
+    const pesquisaNome = document.getElementById('pesquisa_funcionario_nome');
+    const pesquisaCargo = document.getElementById('pesquisa_funcionario_cargo');
+    const pesquisaId = document.getElementById('pesquisa_funcionario_id');
 
-document.getElementById("FormConsultaFuncionario").addEventListener("submit", async function(event) {
+    const FormConsulta = document.getElementById("formConsultaFuncionario");
+
+FormConsulta.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     // Definindo filtros de pesquisa conforme os checkboxes selecionados
