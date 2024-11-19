@@ -34,4 +34,12 @@ public class FuncionarioService {
     public void deletar(Integer id) {
         funcionarioRepository.deleteById(id);
     }
+
+    public List<Funcionario> buscarPorNome(String nome) {
+        return funcionarioRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    public List<Funcionario> buscarPorCargo(String cargo) {
+        return funcionarioRepository.findByCargoContainingIgnoreCase(cargo);
+    }
 }

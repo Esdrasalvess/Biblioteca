@@ -25,6 +25,16 @@ public class FuncionarioController {
         return funcionarioService.buscarPorId(id).orElse(null);
     }
 
+    @GetMapping("/buscarPorNome")
+    public List<Funcionario> buscarPorNome(@RequestParam String nome) {
+        return funcionarioService.buscarPorNome(nome);
+    }
+
+    @GetMapping("/buscarPorCargo")
+    public List<Funcionario> buscarPorCargo(@RequestParam String cargo) {
+        return funcionarioService.buscarPorCargo(cargo);
+    }
+
     @PostMapping
     public Funcionario criar(@RequestBody Funcionario funcionario) {
         return funcionarioService.salvar(funcionario);
