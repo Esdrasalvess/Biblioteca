@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
    
 });
 
-const FormConsulta = document.getElementById("FormConsultaFuncionario");
 
-FormConsulta.addEventListener("submit", async function(event) {
+
+document.getElementById("FormConsultaFuncionario").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     // Definindo filtros de pesquisa conforme os checkboxes selecionados

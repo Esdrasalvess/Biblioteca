@@ -1,24 +1,26 @@
- document.addEventListener('DOMContentLoaded', function () {
+const checkboxFiltroNome = document.getElementById('consulta/autor/selecionar_nome');
+const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/selecionar_nacionalidade');
+const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
+const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
+
+const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
+const checkboxVisibilidadeCargo = document.getElementById('consulta/autor/visibilidade_cargo');
+const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
+
+const campoNome = document.getElementById('campo_autor_nome');
+const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
+const campoId = document.getElementById('campo_autor_id');
+const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
+
+
+const pesquisaNome = document.getElementById('pesquisa_autor_nome');
+const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
+const pesquisaId = document.getElementById('pesquisa_autor_id');
+
+
+document.addEventListener('DOMContentLoaded', function () {
     // Filtros e visibilidade
-    const checkboxFiltroNome = document.getElementById('consulta/autor/selecionar_nome');
-    const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/selecionar_nacionalidade');
-    const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
-    const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
-
-    const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
-    const checkboxVisibilidadeCargo = document.getElementById('consulta/autor/visibilidade_cargo');
-    const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
-
-    const campoNome = document.getElementById('campo_autor_nome');
-    const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
-    const campoId = document.getElementById('campo_autor_id');
-    const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
-
-    
-    const pesquisaNome = document.getElementById('pesquisa_autor_nome');
-    const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
-    const pesquisaId = document.getElementById('pesquisa_autor_id');
-
+ 
 
     // Mostrar/ocultar campos de entrada com base nos filtros selecionados
     checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');

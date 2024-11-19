@@ -24,7 +24,7 @@ const pesquisaId = document.getElementById('pesquisa_livro_id');
 const pesquisaDisponivel = document.getElementById('pesquisa_livro_disponivel');
 
 document.addEventListener('DOMContentLoaded', function () {
-    
+
     // Mostrar/ocultar campos de entrada com base nos filtros selecionados
     checkboxFiltroTitulo.addEventListener('change', () => campoTitulo.style.display = checkboxFiltroTitulo.checked ? 'inline' : 'none');
     checkboxFiltroAutor.addEventListener('change', () => campoAutor.style.display = checkboxFiltroAutor.checked ? 'inline' : 'none');
@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroDisponivel.addEventListener('change', () => campoDisponivel.style.display = checkboxFiltroDisponivel.checked ? 'inline' : 'none');
 });
 
-const FormConsulta = document.getElementById("FormConsultaLivro");
 
-FormConsulta.addEventListener("submit", async function(event) {
+
+document.getElementById("FormConsultaLivro").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     // Definindo filtros de pesquisa conforme os checkboxes selecionados
