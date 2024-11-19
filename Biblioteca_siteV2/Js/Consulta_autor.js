@@ -1,59 +1,29 @@
-const checkboxFiltroNome = document.getElementById('consulta/autor/selecionar_nome');
-const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/selecionar_nacionalidade');
-const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id');
-const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
-
-
-
-const campoNome = document.getElementById('campo_autor_nome');
-const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');
-const campoId = document.getElementById('campo_autor_id');
-const campoQtdLivros = document.getElementById('campo_autor_qtd_livros');
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Mostrar/ocultar campos de entrada com base nos filtros selecionados
-    checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
-    checkboxFiltroNacionalidade.addEventListener('change', () => campoNacionalidade.style.display = checkboxFiltroNacionalidade.checked ? 'inline' : 'none');
-    checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkboxFiltroId.checked ? 'inline' : 'none');
-    checkboxFiltroQtdLivros.addEventListener('change', () => campoQtdLivros.style.display = checkboxFiltroQtdLivros.checked ? 'inline' : 'none');
-});
-
-const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
-const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
-const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
-
-const pesquisaNome = document.getElementById('pesquisa_autor_nome');
-const pesquisaNacionalidade = document.getElementById('pesquisa_autor_nacionalidade');
-const pesquisaId = document.getElementById('pesquisa_autor_id');
-
-
-const FormConsulta = document.getElementById("formConsultaAutor");
-FormConsulta.addEventListener("submit", async function(event) {
+FormConsulta.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Definindo filtros de pesquisa conforme os checkboxes selecionados
+    // Inicializando o objeto de filtros
     const filtros = {};
 
-    if (checkboxFiltroNome.checked) {
-        filtros.nome = pesquisaNome.value;
+    // Adiciona o filtro para cada campo de pesquisa, se o checkbox estiver marcado
+    if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
+        filtros.nome = pesquisaNome.value.trim();
     }
-    if (checkboxFiltroNacionalidade.checked) {
-        filtros.nacionalidade = pesquisaNacionalidade.value;
+    if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
+        filtros.nacionalidade = pesquisaNacionalidade.value.trim();
     }
-    if (checkboxFiltroId.checked) {
-        const id = pesquisaId.value;
+    if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
+        const id = pesquisaId.value.trim();
         if (!isNaN(id)) filtros.id_autor = id;
     }
 
-    console.log(filtros);
+    console.log(filtros); // Para depuração
 
     const url = new URL("http://localhost:8080/api/autores");
-    if (filtros.nome) url.searchParams.append("nome", filtros.nome);
-    if (filtros.nacionalidade) url.searchParams.append("nacionalidade", filtros.nacionalidade);
-    if (filtros.id_autor) url.searchParams.append("id", filtros.id_autor);
+
+    // Se houver filtros, adiciona à URL. Se não, não será adicionado nada, e todos os autores serão retornados.
+    Object.entries(filtros).forEach(([key, value]) => {
+        url.searchParams.append(key, value);
+    });
 
     try {
         const response = await fetch(url, {
@@ -72,7 +42,7 @@ FormConsulta.addEventListener("submit", async function(event) {
         const headerRow = document.querySelector("#headerRowAutor");
         headerRow.innerHTML = ""; // Limpa os títulos anteriores
 
-
+        // Adicionando os cabeçalhos com base nos checkboxes
         if (checkboxVisibilidadeNome.checked) {
             const thNome = document.createElement("th");
             thNome.textContent = "Nome";
@@ -94,8 +64,7 @@ FormConsulta.addEventListener("submit", async function(event) {
             return;
         }
 
-
-
+        // Adicionando os dados na tabela
         autores.forEach(autor => {
             const tr = document.createElement("tr");
 
