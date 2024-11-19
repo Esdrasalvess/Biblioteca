@@ -33,7 +33,7 @@ FormConsulta.addEventListener("submit", async function (event) {
 
     // Inicializando os filtros e o endpoint base
     const filtros = {};
-    let endpoint = "http://localhost:8080/api/autores"; // URL base
+    let endpoint = "http://localhost:8080/api/autores";
 
     // Verifica qual filtro está ativo e monta o endpoint correspondente
     if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
@@ -45,39 +45,32 @@ FormConsulta.addEventListener("submit", async function (event) {
     } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
         if (!isNaN(id)) { // Verifica se o ID é válido
-            // Para a busca por ID, substituímos o endpoint para buscar diretamente pelo ID
-            endpoint = `http://localhost:8080/api/autores/${id}`; // URL para buscar por ID
+            filtros.id_autor = id;
+            endpoint += "/";
         }
     } else if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
         endpoint += "/buscarPorQtdLivros"; // Endpoint para busca por quantidade de livros
     }
 
-    // Adiciona os filtros como parâmetros da URL (exceto para a busca por ID)
-    if (Object.keys(filtros).length > 0 && !endpoint.includes("/")) { // Se não estiver buscando por ID
-        const url = new URL(endpoint);
-        Object.entries(filtros).forEach(([key, value]) => {
-            url.searchParams.append(key, value);
-        });
-        endpoint = url.toString(); // Atualiza o endpoint com os parâmetros de consulta
-    }
+   
+    // Adiciona os filtros como parâmetros da URL
+    const url = new URL(endpoint);
+    Object.entries(filtros).forEach(([key, value]) => {
+        url.searchParams.append(key, value);
+    });
 
-    console.log("URL gerada:", endpoint); // Verifica a URL final antes de fazer a requisição
+    console.log("URL gerada:", url.toString()); // Verifica a URL final
 
     try {
-        const response = await fetch(endpoint, {
+        const response = await fetch(url, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
 
         if (!response.ok) throw new Error("Erro ao consultar autores.");
 
-        // Verifica a resposta da API antes de tentar iterar
-        const data = await response.json();
-
-        // Aqui verificamos se a resposta é um array
-        const autores = Array.isArray(data) ? data : data.autores || []; // Se for um objeto com a propriedade autores, usamos ela, senão um array vazio
-
+        const autores = await response.json();
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
         const thead = document.querySelector("#resultadoConsultaAutor thead");
         tbody.innerHTML = ""; // Limpa os dados anteriores
@@ -134,3 +127,4 @@ FormConsulta.addEventListener("submit", async function (event) {
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
+
