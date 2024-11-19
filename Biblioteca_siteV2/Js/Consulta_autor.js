@@ -52,47 +52,39 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
         if (!response.ok) throw new Error("Erro ao consultar autores: !resposta.ok");
 
         const autores = await response.json();
-        const tbody = document.querySelector("#resultadoConsultaAutor tbody");
-        tbody.innerHTML = "";
+        const tbody = document.querySelector("#resultadoConsultaAutor");
+        tbody.innerHTML = "";  // Limpa qualquer conteúdo anterior
 
         if (autores.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='4'>Nenhum autor encontrado.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='3'>Nenhum autor encontrado.</td></tr>";
             return;
         }
 
         autores.forEach(autor => {
             const tr = document.createElement("tr");
 
-            // Adiciona o título e valor do nome, se visível
+            // Adiciona o dado do nome, se visível
             if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
-                const thNome = document.createElement("th");
                 const tdNome = document.createElement("td");
-                thNome.textContent = "Nome";
                 tdNome.textContent = autor.nome || "N/A";
-                tr.appendChild(thNome);
                 tr.appendChild(tdNome);
             }
 
-            // Adiciona o título e valor da nacionalidade, se visível
+            // Adiciona o dado da nacionalidade, se visível
             if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
-                const thNacionalidade = document.createElement("th");
                 const tdNacionalidade = document.createElement("td");
-                thNacionalidade.textContent = "Nacionalidade";
                 tdNacionalidade.textContent = autor.nacionalidade || "N/A";
-                tr.appendChild(thNacionalidade);
                 tr.appendChild(tdNacionalidade);
             }
 
-            // Adiciona o título e valor do id, se visível
+            // Adiciona o dado do id, se visível
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
-                const thId = document.createElement("th");
                 const tdId = document.createElement("td");
-                thId.textContent = "ID";
                 tdId.textContent = autor.id_autor || "N/A";
-                tr.appendChild(thId);
                 tr.appendChild(tdId);
             }
 
+            // Adiciona a linha de dados ao corpo da tabela
             tbody.appendChild(tr);
         });
     } catch (error) {
