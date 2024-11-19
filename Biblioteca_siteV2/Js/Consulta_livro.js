@@ -43,15 +43,17 @@ document.getElementById("formConsultaLivro").addEventListener("submit", async fu
     if (document.getElementById("consulta/livro/selecionar_ano").checked) {
         filtros.ano = document.getElementById("pesquisa_livro_ano").value;
     }
+
     if (document.getElementById("consulta/livro/selecionar_codigo").checked) {
         filtros.id_livro = document.getElementById("pesquisa_livro_codigo").value;
     }
+    
     if (document.getElementById("consulta/livro/selecionar_disponivel").checked) {
         filtros.disponivel = document.getElementById("pesquisa_livro_disponivel").value;
     }
 
     console.log(filtros);
-    
+
     // Construindo a URL com parâmetros de filtro
     const url = new URL("http://localhost:8080/api/livros");
     if (filtros.titulo) url.searchParams.append("titulo", filtros.titulo);
