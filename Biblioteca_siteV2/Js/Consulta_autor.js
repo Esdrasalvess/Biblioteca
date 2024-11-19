@@ -92,7 +92,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
             }
             if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
                 const tdNacionalidade = document.createElement("td");
-                tdNacionalidade.textContent = autor.cargo || "N/A";
+                tdNacionalidade.textContent = autor.nacionalidade || "N/A";
                 tr.appendChild(tdNacionalidade);
             }
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
