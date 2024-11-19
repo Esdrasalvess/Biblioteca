@@ -24,21 +24,19 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
     const filtros = {};
 
     if (document.getElementById("consulta/autor/selecionar_nome").checked) {
-        filtros.nome = document.getElementById("pesquisa_autor_nome").value.trim();  // .trim() para remover espaços
+        filtros.nome = document.getElementById("pesquisa_autor_nome").value;
     }
     if (document.getElementById("consulta/autor/selecionar_nacionalidade").checked) {
-        filtros.nacionalidade = document.getElementById("pesquisa_autor_nacionalidade").value.trim();
+        filtros.nacionalidade = document.getElementById("pesquisa_autor_nacionalidade").value;
     }
     if (document.getElementById("consulta/autor/selecionar_id").checked) {
-        const id = document.getElementById("pesquisa_autor_id").value.trim();
-        if (id && !isNaN(id)) filtros.id_autor = id;  // Verifica se o id é válido
+        const id = document.getElementById("pesquisa_autor_id").value;
+        if (!isNaN(id)) filtros.id_autor = id;
     }
 
-    console.log(filtros);  // Verifique os filtros que estão sendo passados
+    console.log(filtros);
 
     const url = new URL("http://localhost:8080/api/autores");
-
-    // Adiciona os parâmetros de filtro à URL, se existirem
     if (filtros.nome) url.searchParams.append("nome", filtros.nome);
     if (filtros.nacionalidade) url.searchParams.append("nacionalidade", filtros.nacionalidade);
     if (filtros.id_autor) url.searchParams.append("id", filtros.id_autor);
