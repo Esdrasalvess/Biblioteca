@@ -55,10 +55,13 @@ FormConsulta.addEventListener("submit", async function (event) {
 
     const url = new URL("http://localhost:8080/api/autores");
 
-    // Se houver filtros, adiciona à URL. Se não, não será adicionado nada, e todos os autores serão retornados.
-    Object.entries(filtros).forEach(([key, value]) => {
-        url.searchParams.append(key, value);
-    });
+// Adiciona filtros à URL
+Object.entries(filtros).forEach(([key, value]) => {
+    url.searchParams.append(key, value);
+});
+
+console.log("URL final:", url.toString()); 
+
 
     try {
         const response = await fetch(url, {
