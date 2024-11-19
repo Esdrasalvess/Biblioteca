@@ -62,39 +62,49 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         const tbody = document.querySelector("#resultadoConsultaFuncionario tbody");
         tbody.innerHTML = ""; // Limpa os dados anteriores
 
-        
+        // Adicionando os títulos das colunas no cabeçalho
+        const headerRow = document.createElement("tr");
+        if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
+            const thNome = document.createElement("th");
+            thNome.textContent = "Nome";
+            headerRow.appendChild(thNome);
+        }
+        if (document.getElementById("consulta/funcionario/visibilidade_cargo").checked) {
+            const thCargo = document.createElement("th");
+            thCargo.textContent = "Cargo";
+            headerRow.appendChild(thCargo);
+        }
+        if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
+            const thId = document.createElement("th");
+            thId.textContent = "Id";
+            headerRow.appendChild(thId);
+        }
+        thead.innerHTML = ""; // Limpa os títulos anteriores
+        thead.appendChild(headerRow); // Adiciona os novos títulos ao cabeçalho
+
         if (funcionarios.length === 0) {
             tbody.innerHTML = "<tr><td colspan='4'>Nenhum funcionario encontrado.</td></tr>";
             return;
         }
 
+        // Adicionando os dados na tabela
         funcionarios.forEach(funcionario => {
             const tr = document.createElement("tr");
 
-            // Visibilidade das colunas
             if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
-                const thNome = document.createElement("th");
                 const tdNome = document.createElement("td");
-                thNome.textContent = "Nome";
                 tdNome.textContent = funcionario.nome || "N/A";
                 tr.appendChild(tdNome);
-                tr.appendChild(thNome);
             }
             if (document.getElementById("consulta/funcionario/visibilidade_cargo").checked) {
                 const tdCargo = document.createElement("td");
-                const thCargo = document.createElement("th");
-                thCargo.textContent = "Cargo";
                 tdCargo.textContent = funcionario.cargo || "N/A";
                 tr.appendChild(tdCargo);
-                tr.appendChild(thCargo);
             }
             if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
                 const tdId = document.createElement("td");
-                const thId = document.createElement("th");
-                thId.textContent = "Id";
                 tdId.textContent = funcionario.id_funcionario || "N/A";
                 tr.appendChild(tdId);
-                tr.appendChild(thId);
             }
 
             tbody.appendChild(tr);
