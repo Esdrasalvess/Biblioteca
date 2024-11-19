@@ -24,19 +24,21 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
     const filtros = {};
 
     if (document.getElementById("consulta/autor/selecionar_nome").checked) {
-        filtros.nome = document.getElementById("pesquisa_autor_nome").value;
+        filtros.nome = document.getElementById("pesquisa_autor_nome").value.trim();  // .trim() para remover espaços
     }
     if (document.getElementById("consulta/autor/selecionar_nacionalidade").checked) {
-        filtros.nacionalidade = document.getElementById("pesquisa_autor_nacionalidade").value;
+        filtros.nacionalidade = document.getElementById("pesquisa_autor_nacionalidade").value.trim();
     }
     if (document.getElementById("consulta/autor/selecionar_id").checked) {
-        const id = document.getElementById("pesquisa_autor_id").value;
-        if (!isNaN(id)) filtros.id_autor = id;
+        const id = document.getElementById("pesquisa_autor_id").value.trim();
+        if (id && !isNaN(id)) filtros.id_autor = id;  // Verifica se o id é válido
     }
 
-    console.log(filtros);
+    console.log(filtros);  // Verifique os filtros que estão sendo passados
 
     const url = new URL("http://localhost:8080/api/autores");
+
+    // Adiciona os parâmetros de filtro à URL, se existirem
     if (filtros.nome) url.searchParams.append("nome", filtros.nome);
     if (filtros.nacionalidade) url.searchParams.append("nacionalidade", filtros.nacionalidade);
     if (filtros.id_autor) url.searchParams.append("id", filtros.id_autor);
@@ -53,46 +55,59 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
 
         const autores = await response.json();
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
-        tbody.innerHTML = "";
+        tbody.innerHTML = "";  // Limpa qualquer conteúdo anterior
 
         if (autores.length === 0) {
             tbody.innerHTML = "<tr><td colspan='4'>Nenhum autor encontrado.</td></tr>";
             return;
         }
 
+        // Adiciona o cabeçalho da tabela com os títulos
+        const thead = document.querySelector("#resultadoConsultaAutor thead");
+        thead.innerHTML = "<tr></tr>";  // Limpa os títulos anteriores
+
+        if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
+            const thNome = document.createElement("th");
+            thNome.textContent = "Nome";
+            thead.querySelector("tr").appendChild(thNome);
+        }
+        if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
+            const thNacionalidade = document.createElement("th");
+            thNacionalidade.textContent = "Nacionalidade";
+            thead.querySelector("tr").appendChild(thNacionalidade);
+        }
+        if (document.getElementById("consulta/autor/visibilidade_id").checked) {
+            const thId = document.createElement("th");
+            thId.textContent = "ID";
+            thead.querySelector("tr").appendChild(thId);
+        }
+
+        // Agora cria as linhas de dados, abaixo dos títulos
         autores.forEach(autor => {
             const tr = document.createElement("tr");
 
-            // Adiciona o título e valor do nome, se visível
+            // Adiciona o valor do nome, se visível
             if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
-                const thNome = document.createElement("th");
                 const tdNome = document.createElement("td");
-                thNome.textContent = "Nome";
                 tdNome.textContent = autor.nome || "N/A";
-                tr.appendChild(thNome);
                 tr.appendChild(tdNome);
             }
 
-            // Adiciona o título e valor da nacionalidade, se visível
+            // Adiciona o valor da nacionalidade, se visível
             if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
-                const thNacionalidade = document.createElement("th");
                 const tdNacionalidade = document.createElement("td");
-                thNacionalidade.textContent = "Nacionalidade";
                 tdNacionalidade.textContent = autor.nacionalidade || "N/A";
-                tr.appendChild(thNacionalidade);
                 tr.appendChild(tdNacionalidade);
             }
 
-            // Adiciona o título e valor do id, se visível
+            // Adiciona o valor do id, se visível
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
-                const thId = document.createElement("th");
                 const tdId = document.createElement("td");
-                thId.textContent = "ID";
                 tdId.textContent = autor.id_autor || "N/A";
-                tr.appendChild(thId);
                 tr.appendChild(tdId);
             }
 
+            // Adiciona a linha de dados ao corpo da tabela
             tbody.appendChild(tr);
         });
     } catch (error) {

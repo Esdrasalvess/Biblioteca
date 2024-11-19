@@ -38,11 +38,8 @@ h4 {
    
 }
 
-.ziguiriu {
+.janela_cadastro {
     display: flex;
     flex-wrap: wrap;
     background-color: blue;
-    height: 200px;
-    width: 750px;
-   margin-bottom: 10px;
 }
