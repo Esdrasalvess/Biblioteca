@@ -26,6 +26,10 @@ public class AutorService {
         return autorRepository.findByNomeContainingIgnoreCase(nome);
     }
 
+    public List<Autor> buscarPorNacionalidade(String nacionalidade) {
+        return autorRepository.findByNacionalidadeContainingIgnoreCase(nacionalidade);
+    }
+
     public Autor salvar(Autor autor) {
         return autorRepository.save(autor);
     }

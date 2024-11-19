@@ -29,6 +29,11 @@ public class AutorController {
         return autorService.buscarPorNome(nome);
     }
 
+    @GetMapping("/buscarPorNacionalidade")
+    public List<Autor> buscarPorNacionalidade(@RequestParam String nacionalidade) {
+        return autorService.buscarPorNacionalidade(nacionalidade);
+    }
+
     @PostMapping
     public Autor criar(@RequestBody Autor autor) {
         return autorService.salvar(autor);
