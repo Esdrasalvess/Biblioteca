@@ -24,6 +24,11 @@ public class AutorController {
         return autorService.buscarPorId(id).orElse(null);
     }
 
+    @GetMapping("/buscar")
+    public List<Autor> buscarPorNome(@RequestParam String nome) {
+        return autorService.buscarPorNome(nome);
+    }
+
     @PostMapping
     public Autor criar(@RequestBody Autor autor) {
         return autorService.salvar(autor);

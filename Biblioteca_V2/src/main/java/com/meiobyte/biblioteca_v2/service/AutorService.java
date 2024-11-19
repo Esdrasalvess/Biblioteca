@@ -22,6 +22,10 @@ public class AutorService {
         return autorRepository.findById(id);
     }
 
+    public List<Autor> buscarPorNome(String nome) {
+        return autorRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
     public Autor salvar(Autor autor) {
         return autorRepository.save(autor);
     }
