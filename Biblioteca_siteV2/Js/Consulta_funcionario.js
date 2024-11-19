@@ -60,10 +60,12 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
 
         // Exibir os dados na tabela
         const tbody = document.querySelector("#resultadoConsultaFuncionario tbody");
+        const thead = document.querySelector("#resultadoConsultaFuncionario thead");
         tbody.innerHTML = ""; // Limpa os dados anteriores
+        const headerRow = document.querySelector("#headerRow");
+        headerRow.innerHTML = ""; // Limpa os títulos anteriores
 
-        // Adicionando os títulos das colunas no cabeçalho
-        const headerRow = document.createElement("tr");
+        // Adicionando os títulos das colunas no cabeçalho (thead)
         if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
             const thNome = document.createElement("th");
             thNome.textContent = "Nome";
@@ -76,14 +78,12 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         }
         if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
             const thId = document.createElement("th");
-            thId.textContent = "Id";
+            thId.textContent = "ID";
             headerRow.appendChild(thId);
         }
-        thead.innerHTML = ""; // Limpa os títulos anteriores
-        thead.appendChild(headerRow); // Adiciona os novos títulos ao cabeçalho
 
         if (funcionarios.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='4'>Nenhum funcionario encontrado.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='3'>Nenhum funcionário encontrado.</td></tr>";
             return;
         }
 
@@ -114,3 +114,4 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         alert("Ocorreu um erro ao buscar os dados dos funcionários.");
     }
 });
+
