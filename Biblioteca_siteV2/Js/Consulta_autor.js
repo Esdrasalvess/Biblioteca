@@ -4,8 +4,9 @@ const checkboxFiltroId = document.getElementById('consulta/autor/selecionar_id')
 const checkboxFiltroQtdLivros = document.getElementById('consulta/autor/selecionar_qtd_livros');
 
 const checkboxVisibilidadeNome = document.getElementById('consulta/autor/visibilidade_nome');
-const checkboxVisibilidadeCargo = document.getElementById('consulta/autor/visibilidade_cargo');
+const checkboxVisibilidadeNacionalidade = document.getElementById('consulta/autor/visibilidade_nacionalidade');
 const checkboxVisibilidadeId = document.getElementById('consulta/autor/visibilidade_id');
+
 
 const campoNome = document.getElementById('campo_autor_nome');
 const campoNacionalidade = document.getElementById('campo_autor_nacionalidade');

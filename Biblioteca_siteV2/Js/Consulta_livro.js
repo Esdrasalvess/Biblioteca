@@ -61,11 +61,12 @@ document.getElementById("FormConsultaLivro").addEventListener("submit", async fu
 
     // Construindo a URL com parâmetros de filtro
     const url = new URL("http://localhost:8080/api/livros");
-    if (filtros.titulo) url.searchParams.append("titulo", filtros.titulo);
-    if (filtros.autor) url.searchParams.append("autor", filtros.autor);
-    if (filtros.ano) url.searchParams.append("ano", filtros.ano);
-    if (filtros.id_livro) url.searchParams.append("id", filtros.id_livro);
-    if (filtros.disponivel) url.searchParams.append("disponivel", filtros.disponivel);
+    if (filtros.titulo?.trim()) url.searchParams.append("titulo", filtros.titulo.trim());
+if (filtros.autor?.trim()) url.searchParams.append("autor", filtros.autor.trim());
+if (filtros.ano?.trim()) url.searchParams.append("ano", filtros.ano.trim());
+if (filtros.id_livro?.trim()) url.searchParams.append("id", filtros.id_livro.trim());
+if (filtros.disponivel) url.searchParams.append("disponivel", filtros.disponivel);
+
 
     try {
         const response = await fetch(url, {
@@ -75,9 +76,10 @@ document.getElementById("FormConsultaLivro").addEventListener("submit", async fu
             }
         });
 
-        if (!response.ok) throw new Error("Erro ao consultar livros: !resposta.ok");
+        if (!response.ok) throw new Error(`Erro ao consultar livros: ${response.status} - ${response.statusText}`);
 
-        const funcionarios = await response.json();
+
+        const livros = await response.json();
 
         // Exibir os dados na tabela
         const tbody = document.querySelector("#resultadoConsultaLivro tbody");
@@ -149,7 +151,7 @@ document.getElementById("FormConsultaLivro").addEventListener("submit", async fu
             }
             if (checkboxVisibilidadeDisponivel.checked) {
                 const tdDisponivel = document.createElement("td");
-                tdDisponivel.textContent = livro.disponivel || "N/A";
+                tdDisponivel.textContent = livro.disponivel ? "Sim":"Não";
                 tr.appendChild(tdDisponivel);
             }
 
