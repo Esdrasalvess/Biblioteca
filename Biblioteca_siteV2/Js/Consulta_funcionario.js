@@ -62,7 +62,7 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         const tbody = document.querySelector("#resultadoConsultaFuncionario tbody");
         const thead = document.querySelector("#resultadoConsultaFuncionario thead");
         tbody.innerHTML = ""; // Limpa os dados anteriores
-        const headerRow = document.querySelector("#headerRow");
+        const headerRow = document.querySelector("#headerRowFuncionario");
         headerRow.innerHTML = ""; // Limpa os títulos anteriores
 
 

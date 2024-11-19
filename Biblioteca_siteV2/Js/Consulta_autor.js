@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
     // Filtros e visibilidade
     const checkboxFiltroNome = document.getElementById('consulta/autor/selecionar_nome');
     const checkboxFiltroNacionalidade = document.getElementById('consulta/autor/selecionar_nacionalidade');
@@ -53,48 +53,57 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
 
         const autores = await response.json();
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
-        tbody.innerHTML = "";
+        const thead = document.querySelector("#resultadoConsultaAutor thead");
+        tbody.innerHTML = ""; // Limpa os dados anteriores
+        const headerRow = document.querySelector("#headerRowAutor");
+        headerRow.innerHTML = ""; // Limpa os títulos anteriores
+
+
+        if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
+            const thNome = document.createElement("th");
+            thNome.textContent = "Nome";
+            headerRow.appendChild(thNome);
+        }
+        if (document.getElementById("consulta/autor/visibilidade_cargo").checked) {
+            const thNacionalidade = document.createElement("th");
+            thNacionalidade.textContent = "Nacionalidade";
+            headerRow.appendChild(thNacionalidade);
+        }
+        if (document.getElementById("consulta/autor/visibilidade_id").checked) {
+            const thId = document.createElement("th");
+            thId.textContent = "ID";
+            headerRow.appendChild(thId);
+        }
 
         if (autores.length === 0) {
             tbody.innerHTML = "<tr><td colspan='4'>Nenhum autor encontrado.</td></tr>";
             return;
         }
 
+
+
         autores.forEach(autor => {
             const tr = document.createElement("tr");
 
-            // Adiciona o título e valor do nome, se visível
             if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
-                const thNome = document.createElement("th");
                 const tdNome = document.createElement("td");
-                thNome.textContent = "Nome";
-                tdNome.textContent = autor.nome || "N/A";
-                tr.appendChild(thNome);
+                tdNome.textContent = funcionario.nome || "N/A";
                 tr.appendChild(tdNome);
             }
-
-            // Adiciona o título e valor da nacionalidade, se visível
-            if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
-                const thNacionalidade = document.createElement("th");
+            if (document.getElementById("consulta/autor/visibilidade_cargo").checked) {
                 const tdNacionalidade = document.createElement("td");
-                thNacionalidade.textContent = "Nacionalidade";
-                tdNacionalidade.textContent = autor.nacionalidade || "N/A";
-                tr.appendChild(thNacionalidade);
+                tdNacionalidade.textContent = funcionario.cargo || "N/A";
                 tr.appendChild(tdNacionalidade);
             }
-
-            // Adiciona o título e valor do id, se visível
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
-                const thId = document.createElement("th");
                 const tdId = document.createElement("td");
-                thId.textContent = "ID";
-                tdId.textContent = autor.id_autor || "N/A";
-                tr.appendChild(thId);
+                tdId.textContent = funcionario.id_funcionario || "N/A";
                 tr.appendChild(tdId);
             }
 
             tbody.appendChild(tr);
         });
+        
     } catch (error) {
         console.error("Erro ao buscar autores:", error);
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
