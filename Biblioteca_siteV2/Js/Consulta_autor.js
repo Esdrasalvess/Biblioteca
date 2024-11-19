@@ -44,6 +44,7 @@ FormConsulta.addEventListener("submit", async function (event) {
         endpoint += "/buscarPorNacionalidade"; // Endpoint para busca por nacionalidade
     } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
+        endpoint += "/";
         if (!isNaN(id)) { // Verifica se o ID é válido
             filtros.id_autor = id;
         }
