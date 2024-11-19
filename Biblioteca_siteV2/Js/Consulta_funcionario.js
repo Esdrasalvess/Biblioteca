@@ -67,19 +67,25 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
 
             // Visibilidade das colunas
             if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
+                const thNome = document.createElement("th");
                 const tdNome = document.createElement("td");
                 tdNome.textContent = funcionario.nome || "N/A";
                 tr.appendChild(tdNome);
+                tr.appendChild(thNome);
             }
             if (document.getElementById("consulta/funcionario/visibilidade_cargo").checked) {
                 const tdCargo = document.createElement("td");
+                const thCargo = document.createElement("th");
                 tdCargo.textContent = funcionario.cargo || "N/A";
                 tr.appendChild(tdCargo);
+                tr.appendChild(thCargo);
             }
             if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
                 const tdId = document.createElement("td");
+                const thId = document.createElement("th");
                 tdId.textContent = funcionario.id_funcionario || "N/A";
                 tr.appendChild(tdId);
+                tr.appendChild(thId);
             }
 
             tbody.appendChild(tr);
