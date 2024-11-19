@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    const FormConsulta = document.getElementById("FormConsultaFuncionario");
+
     // Filtros e visibilidade
     const checkboxFiltroNome = document.getElementById('consulta/funcionario/selecionar_nome');
     const checkboxFiltroCargo= document.getElementById('consulta/funcionario/selecionar_cargo');
@@ -13,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const campoCargo = document.getElementById('campo_funcionario_cargo');
     const campoId = document.getElementById('campo_funcionario_id');
    
+    const pesquisaNome = document.getElementById('pesquisa_funcionario_nome');
+    const pesquisaCargo = document.getElementById('pesquisa_funcionario_cargo');
+    const pesquisaId = document.getElementById('pesquisa_funcionario_id');
 
     // Mostrar/ocultar campos de entrada com base nos filtros selecionados
     checkboxFiltroNome.addEventListener('change', () => campoNome.style.display = checkboxFiltroNome.checked ? 'inline' : 'none');
@@ -22,20 +28,20 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-document.getElementById("formConsultaFuncionario").addEventListener("submit", async function(event) {
+FormConsulta.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     // Definindo filtros de pesquisa conforme os checkboxes selecionados
     const filtros = {};
 
-    if (document.getElementById("consulta/funcionario/selecionar_nome").checked) {
-        filtros.nome = document.getElementById("pesquisa_funcionario_nome").value;
+    if (checkboxVisibilidadeNome.checked) {
+        filtros.nome = pesquisaNome.value;
     }
-    if (document.getElementById("consulta/funcionario/selecionar_cargo").checked) {
-        filtros.cargo = document.getElementById("pesquisa_funcionario_cargo").value;
+    if (checkboxVisibilidadeCargo.checked) {
+        filtros.cargo = pesquisaCargo.value;
     }
-    if (document.getElementById("consulta/funcionario/selecionar_id").checked) {
-        filtros.id_funcionario = document.getElementById("pesquisa_funcionario_id").value;
+    if (checkboxVisibilidadeId.checked) {
+        filtros.id_funcionario = pesquisaId.value;
     }
 
     console.log(filtros);
@@ -68,17 +74,17 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
 
 
         // Adicionando os títulos das colunas no cabeçalho (thead)
-        if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
+        if (checkboxVisibilidadeNome.checked) {
             const thNome = document.createElement("th");
             thNome.textContent = "Nome";
             headerRow.appendChild(thNome);
         }
-        if (document.getElementById("consulta/funcionario/visibilidade_cargo").checked) {
+        if (checkboxVisibilidadeCargo.checked) {
             const thCargo = document.createElement("th");
             thCargo.textContent = "Cargo";
             headerRow.appendChild(thCargo);
         }
-        if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
+        if (checkboxVisibilidadeId.checked) {
             const thId = document.createElement("th");
             thId.textContent = "ID";
             headerRow.appendChild(thId);
@@ -95,17 +101,17 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         funcionarios.forEach(funcionario => {
             const tr = document.createElement("tr");
 
-            if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
+            if (checkboxVisibilidadeNome.checked) {
                 const tdNome = document.createElement("td");
                 tdNome.textContent = funcionario.nome || "N/A";
                 tr.appendChild(tdNome);
             }
-            if (document.getElementById("consulta/funcionario/visibilidade_cargo").checked) {
+            if (checkboxVisibilidadeCargo.checked) {
                 const tdCargo = document.createElement("td");
                 tdCargo.textContent = funcionario.cargo || "N/A";
                 tr.appendChild(tdCargo);
             }
-            if (document.getElementById("consulta/funcionario/visibilidade_id").checked) {
+            if (checkboxVisibilidadeId.checked) {
                 const tdId = document.createElement("td");
                 tdId.textContent = funcionario.id_funcionario || "N/A";
                 tr.appendChild(tdId);

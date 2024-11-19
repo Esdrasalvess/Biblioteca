@@ -53,8 +53,8 @@
                     <label for="consulta/livro/selecionar_ano">
                         <input id="consulta/livro/selecionar_ano" type="checkbox"> Ano
                     </label>
-                    <label for="consulta/livro/selecionar_codigo">
-                        <input id="consulta/livro/selecionar_codigo" type="checkbox"> Codigo
+                    <label for="consulta/livro/selecionar_id">
+                        <input id="consulta/livro/selecionar_id" type="checkbox"> Codigo
                     </label>
                     <label for="consulta/livro/selecionar_disponivel">
                         <input id="consulta/livro/selecionar_disponivel" type="checkbox"> Disponibilidade
@@ -78,8 +78,8 @@
                     <label for="consulta/livro/visibilidade_ano">
                         <input id="consulta/livro/visibilidade_ano" type="checkbox" checked> Ano
                     </label>
-                    <label for="consulta/livro/visibilidade_codigo">
-                        <input id="consulta/livro/visibilidade_codigo" type="checkbox" checked> Codigo
+                    <label for="consulta/livro/visibilidade_id">
+                        <input id="consulta/livro/visibilidade_id" type="checkbox" checked> Codigo
                     </label>
                     <label for="consulta/livro/visibilidade_disponivel">
                         <input id="consulta/livro/visibilidade_disponivel" type="checkbox" checked> Disponível
@@ -99,8 +99,8 @@
                       <div id="campo_livro_ano" class="campo_pesquisa" style="display: none;">
                         <input type="text" id="pesquisa_livro_ano" placeholder="Pesquisar por Ano">
                       </div>
-                      <div id="campo_livro_codigo" class="campo_pesquisa" style="display: none;">
-                        <input type="text" id="pesquisa_livro_codigo" placeholder="Pesquisar por Codigo">
+                      <div id="campo_livro_id" class="campo_pesquisa" style="display: none;">
+                        <input type="text" id="pesquisa_livro_id" placeholder="Pesquisar por id">
                       </div>
                       <div id="campo_livro_disponivel" class="campo_pesquisa" style="display: none;">
                         <select id="pesquisa_livro_disponivel">
@@ -120,22 +120,15 @@
            
            
             <br>
-            <table id="resultadoConsultaLivro">
-                <tr> 
-                    <th>Título  </th>
-                    <th>Autor </th>
-                    <th>Editora </th>
-                    <th>Gênero </th>
-                    <th>Ano  </th>
-                </tr>
-                <tr>
-                    <td>Senhor dos Anéis</td>
-                    <td>J.R.R. Tolkien</td>
-                    <td>Los Hermanos</td>
-                    <td>Créu</td>
-                    <td>200 a.C.</td>
-                </tr>
-               
+
+           <table id="resultadoConsultaLivro" style="width: 550px;">
+                <thead>
+                    <!-- Cabeçalho da tabela com títulos visíveis -->
+                    <tr id="headerRowLivro"></tr>
+                </thead>
+                <tbody>
+                    <!-- Resultados da consulta aparecerão aqui -->
+                </tbody>
             </table>
             
         </div>
