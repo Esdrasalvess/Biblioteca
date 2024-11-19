@@ -64,7 +64,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
             thNome.textContent = "Nome";
             headerRow.appendChild(thNome);
         }
-        if (document.getElementById("consulta/autor/visibilidade_cargo").checked) {
+        if (document.getElementById("consulta/autor/visibilidade_nacionalidade").checked) {
             const thNacionalidade = document.createElement("th");
             thNacionalidade.textContent = "Nacionalidade";
             headerRow.appendChild(thNacionalidade);
