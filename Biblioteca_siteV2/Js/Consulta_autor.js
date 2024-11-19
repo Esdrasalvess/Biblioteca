@@ -31,49 +31,55 @@ const FormConsulta = document.getElementById("formConsultaAutor");
 FormConsulta.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Inicializando os filtros e o endpoint base
+    // Inicializando o objeto de filtros
     const filtros = {};
-    let endpoint = "http://localhost:8080/api/autores";
 
-    // Verifica qual filtro está ativo e monta o endpoint correspondente
+    // Adiciona o filtro para cada campo de pesquisa, se o checkbox estiver marcado
     if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
         filtros.nome = pesquisaNome.value.trim();
-        endpoint += "/buscar"; // Endpoint para busca por nome
-    } else if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
+    }
+    if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
         filtros.nacionalidade = pesquisaNacionalidade.value.trim();
-        endpoint += "/buscarPorNacionalidade"; // Endpoint para busca por nacionalidade
-    } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
+    }
+    if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
-        if (!isNaN(id)) { // Verifica se o ID é válido
-            filtros.id_autor = id;
-            endpoint += "/buscarPorId"; // Endpoint para busca por ID
+        if (!isNaN(id) && id !== "") { // Verifique se o ID é um número válido
+            filtros.id_autor = id; // Passa o filtro de ID
         }
-    } else if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
+    }
+    if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
-        endpoint += "/buscarPorQtdLivros"; // Endpoint para busca por quantidade de livros
     }
 
-    // Caso nenhum filtro esteja ativo
-    if (Object.keys(filtros).length === 0) {
-        alert("Por favor, selecione e preencha ao menos um filtro.");
-        return;
+    console.log(filtros); // Para depuração
+
+    // Determina a URL com base nos filtros
+    let url = "";
+
+    if (filtros.id_autor) {
+        // Caso ID seja fornecido, o formato da URL será diferente
+        url = `http://localhost:8080/api/autores/${filtros.id_autor}`;
+    } else {
+        // Se não houver ID, aplica os filtros como parâmetros de consulta
+        url = new URL("http://localhost:8080/api/autores");
+
+        // Se houver filtros, adiciona à URL. Se não, não será adicionado nada, e todos os autores serão retornados.
+        Object.entries(filtros).forEach(([key, value]) => {
+            if (key !== "id_autor") { // O id não vai como parâmetro de consulta
+                url.searchParams.append(key, value);
+            }
+        });
     }
-
-    // Adiciona os filtros como parâmetros da URL
-    const url = new URL(endpoint);
-    Object.entries(filtros).forEach(([key, value]) => {
-        url.searchParams.append(key, value);
-    });
-
-    console.log("URL gerada:", url.toString()); // Verifica a URL final
 
     try {
         const response = await fetch(url, {
             method: "GET",
-            headers: { "Content-Type": "application/json" }
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
 
-        if (!response.ok) throw new Error("Erro ao consultar autores.");
+        if (!response.ok) throw new Error("Erro ao consultar autores: !resposta.ok");
 
         const autores = await response.json();
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
@@ -82,7 +88,7 @@ FormConsulta.addEventListener("submit", async function (event) {
         const headerRow = document.querySelector("#headerRowAutor");
         headerRow.innerHTML = ""; // Limpa os títulos anteriores
 
-        // Adicionando os cabeçalhos com base nos checkboxes de visibilidade
+        // Adicionando os cabeçalhos com base nos checkboxes
         if (checkboxVisibilidadeNome.checked) {
             const thNome = document.createElement("th");
             thNome.textContent = "Nome";
@@ -132,4 +138,3 @@ FormConsulta.addEventListener("submit", async function (event) {
         alert("Ocorreu um erro ao buscar os dados dos autores. Tente novamente.");
     }
 });
-
