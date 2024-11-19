@@ -49,7 +49,7 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
             }
         });
 
-        if (!response.ok) throw new Error("Erro ao consultar autores.");
+        if (!response.ok) throw new Error("Erro ao consultar autores: !resposta.ok");
 
         const autores = await response.json();
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");

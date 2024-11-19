@@ -54,7 +54,7 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
             }
         });
 
-        if (!response.ok) throw new Error("Erro ao consultar funcionários");
+        if (!response.ok) throw new Error("Erro ao consultar funcionários: !resposta.ok");
 
         const funcionarios = await response.json();
 

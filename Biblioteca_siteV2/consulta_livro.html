@@ -38,6 +38,8 @@
             <h2>Consultar Livro</h2>
             <p style="margin: 10px; text-align: center; font-weight: bold;;">Caso nenhum filtro seja selecionado, todos os livros serão exibidos.</p>
         
+            <form id="formConsultaLivro">
+
             <!--Filtros de pesquisa-->
             <div class="checkboxes" style="width: 550px;">
                 <div class="titulo_checkboxes"><strong>Filtro de pesquisa</strong></div>
@@ -85,6 +87,7 @@
                    
                 </strong>
             </div>
+
            <!--Campos de Pesquisa-->
             <div class="escrever_consulta" style="margin-left: 50px">
                      <div id="campo_livro_titulo" class="campo_pesquisa" style="display: none;">
@@ -105,16 +108,19 @@
                             <option>Indisponíveis</option>
                             <option>Novos</option>
                         </select>
-                        
                         </div>
+            </div>
+
                      <div class="testizindoscria" style="display: block;">
                 <button class="consulta">Consultar</button>
                      </div>
-            </div>
+
+                    </form>
+            
            
            
             <br>
-            <table>
+            <table id="resultadoConsultaLivro">
                 <tr> 
                     <th>Título  </th>
                     <th>Autor </th>
