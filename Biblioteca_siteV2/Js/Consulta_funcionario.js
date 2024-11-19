@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    const FormConsulta = document.getElementById("FormConsultaFuncionario");
-
     // Filtros e visibilidade
     const checkboxFiltroNome = document.getElementById('consulta/funcionario/selecionar_nome');
     const checkboxFiltroCargo= document.getElementById('consulta/funcionario/selecionar_cargo');
@@ -27,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
    
 });
 
+const FormConsulta = document.getElementById("FormConsultaFuncionario");
 
 FormConsulta.addEventListener("submit", async function(event) {
     event.preventDefault();

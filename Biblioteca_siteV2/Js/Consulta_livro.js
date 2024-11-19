@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    
-    const FormConsulta = document.getElementById("FormConsultaLivro");
-    
     const checkboxFiltroTitulo = document.getElementById('consulta/livro/selecionar_titulo');
     const checkboxFiltroAutor = document.getElementById('consulta/livro/selecionar_autor');
     const checkboxFiltroAno = document.getElementById('consulta/livro/selecionar_ano');
@@ -35,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroDisponivel.addEventListener('change', () => campoDisponivel.style.display = checkboxFiltroDisponivel.checked ? 'inline' : 'none');
 });
 
-
+const FormConsulta = document.getElementById("FormConsultaLivro");
 
 FormConsulta.addEventListener("submit", async function(event) {
     event.preventDefault();
