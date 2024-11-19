@@ -65,6 +65,8 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
         const headerRow = document.querySelector("#headerRow");
         headerRow.innerHTML = ""; // Limpa os títulos anteriores
 
+
+
         // Adicionando os títulos das colunas no cabeçalho (thead)
         if (document.getElementById("consulta/funcionario/visibilidade_nome").checked) {
             const thNome = document.createElement("th");
@@ -87,6 +89,8 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
             return;
         }
 
+
+        
         // Adicionando os dados na tabela
         funcionarios.forEach(funcionario => {
             const tr = document.createElement("tr");
@@ -109,6 +113,7 @@ document.getElementById("formConsultaFuncionario").addEventListener("submit", as
 
             tbody.appendChild(tr);
         });
+
     } catch (error) {
         console.error("Erro ao buscar funcionários:", error);
         alert("Ocorreu um erro ao buscar os dados dos funcionários.");
