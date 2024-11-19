@@ -87,17 +87,17 @@ document.getElementById("formConsultaAutor").addEventListener("submit", async fu
 
             if (document.getElementById("consulta/autor/visibilidade_nome").checked) {
                 const tdNome = document.createElement("td");
-                tdNome.textContent = funcionario.nome || "N/A";
+                tdNome.textContent = autor.nome || "N/A";
                 tr.appendChild(tdNome);
             }
             if (document.getElementById("consulta/autor/visibilidade_cargo").checked) {
                 const tdNacionalidade = document.createElement("td");
-                tdNacionalidade.textContent = funcionario.cargo || "N/A";
+                tdNacionalidade.textContent = autor.cargo || "N/A";
                 tr.appendChild(tdNacionalidade);
             }
             if (document.getElementById("consulta/autor/visibilidade_id").checked) {
                 const tdId = document.createElement("td");
-                tdId.textContent = funcionario.id_funcionario || "N/A";
+                tdId.textContent = autor.id_autor || "N/A";
                 tr.appendChild(tdId);
             }
 
