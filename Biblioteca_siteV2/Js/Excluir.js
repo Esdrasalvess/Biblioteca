@@ -1,46 +1,40 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Função para excluir empréstimo
-    function excluirEmprestimo() {
-        // Obtém o ID do empréstimo a ser excluído
-        const idExcluir = document.querySelector("#idExcluir").value;
+// Função para excluir um item baseado no tipo (autor, livro, funcionário, empréstimo)
+async function excluirItem(tipo) {
+    // Obter o ID inserido pelo usuário
+    const id = document.getElementById(`input${tipo.charAt(0).toUpperCase() + tipo.slice(1)}Id`).value.trim();
 
-        // Verifica se o campo de ID foi preenchido
-        if (!idExcluir) {
-            alert("Por favor, insira o ID do empréstimo a ser excluído.");
-            return;
-        }
-
-        // Configura a URL do endpoint de exclusão
-        const url = `http://localhost:8080/api/emprestimos/${idExcluir}`;
-
-        // Faz a requisição para excluir o empréstimo
-        fetch(url, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            console.log("Status da resposta:", response.status);
-            if (response.ok) {
-                alert("Empréstimo excluído com sucesso!");
-                // Limpa o campo de ID após a exclusão
-                document.querySelector("#idExcluir").value = '';
-            } else {
-                response.text().then(text => {
-                    console.error("Resposta do servidor:", text);
-                    alert("Erro ao excluir empréstimo. Status: " + response.status + " - " + text);
-                });
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao enviar requisição:", error);
-            alert("Erro ao excluir empréstimo (requisição).");
-        });
+    // Verificar se o ID é válido
+    if (!id || isNaN(id)) {
+        alert("Por favor, insira um ID válido.");
+        return;
     }
 
-    // Associa a função de exclusão ao clique do botão
-    document.querySelectorAll(".butaoExcluir").forEach(button => {
-        button.addEventListener("click", excluirEmprestimo);
-    });
-});
+    try {
+        // Construir a URL para o endpoint de exclusão
+        const endpoint = `http://localhost:8080/api/${tipo}s/${id}`; // Exemplo de endpoint
+
+        // Realizar a requisição DELETE
+        const response = await fetch(endpoint, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Verificar se a resposta foi bem-sucedida
+        if (!response.ok) {
+            throw new Error(`Erro ao excluir ${tipo}.`);
+        }
+
+        // Exibir mensagem de sucesso
+        alert(`${tipo.charAt(0).toUpperCase() + tipo.slice(1)} excluído(a) com sucesso!`);
+        
+        // Limpar o campo de ID
+        document.getElementById(`input${tipo.charAt(0).toUpperCase() + tipo.slice(1)}Id`).value = '';
+
+    } catch (error) {
+        // Exibir mensagem de erro em caso de falha
+        console.error(error);
+        alert(`Erro ao excluir ${tipo}: ${error.message}`);
+    }
+}
