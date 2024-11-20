@@ -140,7 +140,7 @@ FormConsulta.addEventListener("submit", async function (event) {
             }
             if (checkboxVisibilidadeAno.checked) {
                 const tdAno = document.createElement("td");
-                tdAno.textContent = livro.ano || "N/A";
+                tdAno.textContent = livro.anoPublicacao || "N/A";
                 tr.appendChild(tdAno);
             }
             if (checkboxVisibilidadeId.checked) {
