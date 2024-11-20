@@ -38,6 +38,11 @@ public class EmprestimoController {
         return emprestimoService.buscarPorData(dataInicial, dataFinal);  
     }
 
+    @GetMapping("/livro/{id}")
+    public List<Emprestimo> buscarPorLivro(@PathVariable Integer id) {
+        return emprestimoService.buscarPorLivro(id);
+    }
+
     @GetMapping("/nao-emprestado")
     public List<Emprestimo> buscarNaoEmprestado() {
         return emprestimoService.buscarNaoEmprestado();

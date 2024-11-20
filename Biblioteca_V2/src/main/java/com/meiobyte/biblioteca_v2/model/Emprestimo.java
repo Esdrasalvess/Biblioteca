@@ -26,11 +26,14 @@ public class Emprestimo {
     @JoinColumn(name = "id_funcionario", nullable = false)
     private Funcionario funcionario;
 
+    @ManyToOne
+    @JoinColumn(name = "id_livro", nullable = false)
+    private Livro livro; // Relacionamento com a entidade Livro
+
     @Column(name = "status")
     private String status;
 
     public void setId(Integer id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
     }
-
 }
