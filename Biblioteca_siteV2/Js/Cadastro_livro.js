@@ -55,7 +55,7 @@ function cadastrarLivro() {
         id_livro: id_livro,
         id_autor: id_autor  // Incluindo o ID do autor selecionado
     };
-
+    console.log(livro);
     // Envia a requisição para cadastrar o livro
     fetch("http://localhost:8080/api/livros", {
         method: "POST",
@@ -64,9 +64,8 @@ function cadastrarLivro() {
         },
         body: JSON.stringify(livro)
     })
-
-    console.log(livro);
     .then(response => {
+        console.log(livro);
         if (response.ok) {
             alert("Livro cadastrado com sucesso!");
             // Limpa os campos após o envio
