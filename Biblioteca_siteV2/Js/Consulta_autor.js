@@ -39,24 +39,17 @@ FormConsulta.addEventListener("submit", async function (event) {
     if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
         filtros.nome = pesquisaNome.value.trim();
         endpoint += "/buscar"; // Endpoint para busca por nome
-    }
-    if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
+    } else if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
         filtros.nacionalidade = pesquisaNacionalidade.value.trim();
         endpoint += "/buscarPorNacionalidade"; // Endpoint para busca por nacionalidade
-    }
-    if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
-        const id = pesquisaId.value.trim();
-        if (!isNaN(id)) { // Valida se o ID é numérico
-            filtros.id_autor = id;
-        }
-        endpoint = `http://localhost:8080/api/autores/${id}`; // Endpoint para busca por ID
-    }
-    if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
+    } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
+        filtros.id_autor = pesquisaId.value.trim();
+        endpoint = `http://localhost:8080/api/autores/${filtros.id_autor}`; // Endpoint para busca por ID
+    } else if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
-        endpoint = "/buscarPorQtdLivros"; // Endpoint para busca por quantidade de livros
+        endpoint += "/buscarPorQtdLivros"; // Endpoint para busca por quantidade de livros
     }
 
-   
     // Adiciona os filtros como parâmetros da URL
     const url = new URL(endpoint);
     Object.entries(filtros).forEach(([key, value]) => {
@@ -74,6 +67,10 @@ FormConsulta.addEventListener("submit", async function (event) {
         if (!response.ok) throw new Error("Erro ao consultar autores.");
 
         const autores = await response.json();
+
+        // Se o retorno for um objeto único, transforme-o em um array
+        const autoresArray = Array.isArray(autores) ? autores : [autores];
+
         const tbody = document.querySelector("#resultadoConsultaAutor tbody");
         const thead = document.querySelector("#resultadoConsultaAutor thead");
         tbody.innerHTML = ""; // Limpa os dados anteriores
@@ -97,13 +94,13 @@ FormConsulta.addEventListener("submit", async function (event) {
             headerRow.appendChild(thId);
         }
 
-        if (autores.length === 0) {
+        if (autoresArray.length === 0) {
             tbody.innerHTML = "<tr><td colspan='4'>Nenhum autor encontrado.</td></tr>";
             return;
         }
 
         // Adicionando os dados na tabela
-        autores.forEach(autor => {
+        autoresArray.forEach(autor => {
             const tr = document.createElement("tr");
 
             if (checkboxVisibilidadeNome.checked) {
