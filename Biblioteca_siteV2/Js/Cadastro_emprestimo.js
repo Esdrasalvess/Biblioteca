@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const option = document.createElement("option");
                     option.value = livro.id_livro;  // Supondo que cada autor tenha um id
                     option.textContent = livro.titulo;  // Nome do autor
-                    selectAutor.appendChild(option);
+                    selectLivro.appendChild(option);
                 });
             })
             .catch(error => {
