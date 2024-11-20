@@ -54,7 +54,7 @@ FormConsulta.addEventListener("submit", async function (event) {
         filtros.autor = pesquisaAutor.value.trim();
         endpoint += "/buscarPorAutor"; // Endpoint para busca por nacionalidade
     } else if (checkboxFiltroAno.checked && pesquisaAno.value.trim() !== "") {
-        filtros.ano = pesquisaAno.value.trim();
+        filtros.anoanoPublicacao = pesquisaAno.value.trim();
         endpoint += "/buscarPorAno"; // Endpoint para busca por ID
     } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         filtros.id_livro = pesquisaId.value.trim();
@@ -84,6 +84,7 @@ FormConsulta.addEventListener("submit", async function (event) {
 
         // Se o retorno for um objeto único, transforme-o em um array
         const livrosArray = Array.isArray(livros) ? livros : [livros];
+
 
         const tbody = document.querySelector("#resultadoConsultaLivro tbody");
         const thead = document.querySelector("#resultadoConsultaLivro thead");
@@ -134,12 +135,12 @@ FormConsulta.addEventListener("submit", async function (event) {
             }
             if (checkboxVisibilidadeAutor.checked) {
                 const tdAutor = document.createElement("td");
-                tdAutor.textContent = livro.autor || "N/A";
+                tdAutor.textContent =  livro.autor && livro.autor.nome ? livro.autor.nome : "N/A";
                 tr.appendChild(tdAutor);
             }
             if (checkboxVisibilidadeAno.checked) {
                 const tdAno = document.createElement("td");
-                tdAno.textContent = livro.ano || "N/A";
+                tdAno.textContent = livro.anoPublicacao || "N/A";
                 tr.appendChild(tdAno);
             }
             if (checkboxVisibilidadeId.checked) {
