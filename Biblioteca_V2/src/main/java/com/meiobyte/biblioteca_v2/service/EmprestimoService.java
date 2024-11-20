@@ -49,4 +49,9 @@ public class EmprestimoService {
     public void deletar(Integer id) {
         emprestimoRepository.deleteById(id);
     }
+
+    public List<Emprestimo> buscarPorLivro(Integer livroId) {
+        return emprestimoRepository.buscarPorLivro(livroId);
+    }
+
 }

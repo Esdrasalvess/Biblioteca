@@ -21,4 +21,8 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Integer>
     @Query("SELECT e FROM Emprestimo e WHERE e.status = :status")
     List<Emprestimo> buscarNaoEmprestado(@Param("status") String status);
 
+    @Query("SELECT e FROM Emprestimo e WHERE e.livro.id = :livroId")
+    List<Emprestimo> buscarPorLivro(@Param("livroId") Integer livroId);
+
+
 }
