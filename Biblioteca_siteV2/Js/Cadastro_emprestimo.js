@@ -58,9 +58,9 @@ function cadastrarEmprestimo() {
     const leitor = document.getElementById("leitor").value;
     const id_emprestimo = document.getElementById("id_emprestimo").value;
     const id_funcionario = document.getElementById("selectFuncionario").value;
-    const nome_funcionario = document.getElementById("selectFuncionario").options[document.getElementById("selectFuncionario").selectedIndex].text;
+    const nome_funcionario = document.getElementById("selectFuncionario").options[id_funcionario.selectedIndex].text;
     const id_livro = document.getElementById("selectLivro").value;
-    const nome_livro = document.getElementById("selectLivro").options[document.getElementById("selectLivro").selectedIndex].text;
+    const nome_livro = document.getElementById("selectLivro").options[id_livro.selectedIndex].text;
     const data_inicial = document.getElementById("data_inicial").value;
     const data_final = document.getElementById("data_final").value;
 
