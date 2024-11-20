@@ -57,12 +57,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function cadastrarEmprestimo() {
     const leitor = document.getElementById("leitor").value;
     const funcionario_responsavel = document.getElementById("selectFuncionario").value;
-    const livro = document.getElementById("selectLivro").value; 
-    const data_inicial = document.getElementById("selectAutor").value;
-    const data_final = document.getElementById("selectAutor").value;
+    const livro = document.getElementById("selectLivro").value;
+    const data_inicial = document.getElementById("dataEmprestimo").value;
+    const data_final = document.getElementById("dataDevolucao").value;
     const id_emprestimo = document.getElementById("id_emprestimo");
 
-    // Verifica se o autor foi selecionado
+    // Verifica se todos os campos foram preenchidos
     if (!leitor) {
         alert("Por favor, insira um leitor.");
         return;
@@ -83,46 +83,44 @@ function cadastrarEmprestimo() {
         alert("Por favor, insira a data de devolução.");
         return;
     }
-   
 
+    // Objeto do empréstimo
     const emprestimo = {
-
-            id_emprestimo: id_emprestimo,
-        dataEmprestimo: data_inicial, 
-        dataDevolucao: data_final, 
+        dataEmprestimo: data_inicial,
+        dataDevolucao: data_final,
         leitor: {
-            nome: leitor
+            id_leitor: leitor  // Usando o ID do leitor
         },
-        funcionario:{
-            nome: funcionario_responsavel
+        funcionario: {
+            id_funcionario: funcionario_responsavel  // Usando o ID do funcionário
         },
-        livro:{
-            titulo: livro
+        livro: {
+            id_livro: livro  // Usando o ID do livro
         },
         status: "EMPRESTADO"
     };
 
     console.log(emprestimo);
 
- 
+    // Envia a requisição para cadastrar o empréstimo
     fetch("http://localhost:8080/api/emprestimos", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(livro)
+        body: JSON.stringify(emprestimo)
     })
     .then(response => {
         console.log("Status da resposta:", response.status);
         if (response.ok) {
-            alert("Livro cadastrado com sucesso!");
+            alert("Empréstimo cadastrado com sucesso!");
             // Limpa os campos após o envio
-            leitor.value = '';
-            funcionario_responsavel.value = '';
-            livro.value = '';
-            data_inicial.value = '';
-            data_final.value = '';
-            id_emprestimo.value = '';
+            document.getElementById("leitor").value = '';
+            document.getElementById("selectFuncionario").value = '';
+            document.getElementById("selectLivro").value = '';
+            document.getElementById("dataEmprestimo").value = '';
+            document.getElementById("dataDevolucao").value = '';
+            document.getElementById("id_emprestimo").value = '';
         } else {
             response.text().then(text => {
                 console.log("Resposta do servidor:", text);
