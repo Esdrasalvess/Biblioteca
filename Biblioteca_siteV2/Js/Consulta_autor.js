@@ -38,11 +38,11 @@ FormConsulta.addEventListener("submit", async function (event) {
     // Verifica qual filtro está ativo e monta o endpoint correspondente
     if (checkboxFiltroNome.checked && pesquisaNome.value.trim() !== "") {
         filtros.nome = pesquisaNome.value.trim();
-        endpoint = "/buscar"; // Endpoint para busca por nome
+        endpoint += "/buscar"; // Endpoint para busca por nome
     }
     if (checkboxFiltroNacionalidade.checked && pesquisaNacionalidade.value.trim() !== "") {
         filtros.nacionalidade = pesquisaNacionalidade.value.trim();
-        endpoint = "/buscarPorNacionalidade"; // Endpoint para busca por nacionalidade
+        endpoint += "/buscarPorNacionalidade"; // Endpoint para busca por nacionalidade
     }
     if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         const id = pesquisaId.value.trim();
