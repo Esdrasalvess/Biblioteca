@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Função para carregar os autores no select
-    function carregarAutore() {
+    function carregarAutores() {
         const selectAutor = document.getElementById("selectAutor");
 
         // Faz a requisição para pegar os autores
@@ -25,14 +25,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Carregar autores quando a página for carregada
-    carregarAutore();
+    carregarAutores();
 });
 
 // Função para cadastrar o livro
 function cadastrarLivro() {
     const titulo = document.getElementById("titulo").value;
     const ano = document.getElementById("ano").value;
-    const id_livro = document.getElementById("id").value; 
+    const id_livro = document.getElementById("id").value;  
     const id_autor = document.getElementById("selectAutor").value;
     const nome_autor = document.getElementById("selectAutor").options[document.getElementById("selectAutor").selectedIndex].text;
 
