@@ -55,13 +55,13 @@ FormConsulta.addEventListener("submit", async function (event) {
         endpoint += "/buscarPorAutor"; // Endpoint para busca por nacionalidade
     } else if (checkboxFiltroAno.checked && pesquisaAno.value.trim() !== "") {
         filtros.ano = pesquisaAno.value.trim();
-        endpoint = "/buscarPorAno"; // Endpoint para busca por ID
+        endpoint += "/buscarPorAno"; // Endpoint para busca por ID
     } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         filtros.id_livro = pesquisaId.value.trim();
-        endpoint += `http://localhost:8080/api/livros/${filtros.id_livro}`; // Endpoint para busca por quantidade de livros
+        endpoint = `http://localhost:8080/api/livros/${filtros.id_livro}`; // Endpoint para busca por quantidade de livros
     } else if (checkboxFiltroDisponivel.checked && pesquisaDisponivel.value.trim() !== "") {
         filtros.disponivel = pesquisaDisponivel.value.trim();
-        endpoint += "/dpseuvejo"; // Endpoint para busca por quantidade de livros
+        endpoint = "/dpseuvejo"; // Endpoint para busca por quantidade de livros
     }
 
     // Adiciona os filtros como parâmetros da URL
