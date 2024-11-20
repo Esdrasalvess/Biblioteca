@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function cadastrarLivro() {
     const titulo = document.getElementById("titulo").value;
     const ano = document.getElementById("ano").value;
-    const id_livro = document.getElementById("id_livro").value; 
-    const autor = document.getElementById("selectAutor").value;
+    const id_livro = document.getElementById("id").value; 
+    const id_autor = document.getElementById("selectAutor").value;
     const nome_autor = document.getElementById("selectAutor").options[document.getElementById("selectAutor").selectedIndex].text;
 
     // Verifica se o autor foi selecionado
-    if (!nome_autor) {
+    if (!id_autor) {
         alert("Por favor, selecione um autor.");
         return;
     }
@@ -55,7 +55,7 @@ function cadastrarLivro() {
         anoPublicacao: ano,
         id_livro: id_livro,
         autor: {
-            autor: autor,
+            id_autor: id_autor,
             nome: nome_autor
   
         }
@@ -76,10 +76,10 @@ function cadastrarLivro() {
         if (response.ok) {
             alert("Livro cadastrado com sucesso!");
             // Limpa os campos após o envio
-           titulo.value = '';
-           ano.value = '';
-           id_livro.value = '';
-           autor.value = '';
+            document.getElementById("titulo").value = '';
+            document.getElementById("ano").value = '';
+            document.getElementById("id").value = '';
+            document.getElementById("selectAutor").value = '';
         } else {
             response.text().then(text => {
                 console.log("Resposta do servidor:", text);
