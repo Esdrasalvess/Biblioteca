@@ -82,7 +82,7 @@ try {
         headers: { "Content-Type": "application/json" }
     });
 
-    if (!response.ok) throw new Error("Erro ao consultar livros.");
+    if (!response.ok) throw new Error("Erro ao consultar empréstimos.");
 
     const emprestimos = await response.json();
 
@@ -129,37 +129,51 @@ try {
     }
 
     // Adicionando os dados na tabela
-    emprestimosArray.forEach(emprestimo => {
-        const tr = document.createElement("tr");
+emprestimosArray.forEach(emprestimo => {
+    const tr = document.createElement("tr");
 
-        if (checkboxVisibilidadeLeitor.checked) {
-            const tdLeitor = document.createElement("td");
-            tdLeitor.textContent = emprestimo.leitor || "N/A";
-            tr.appendChild(tdLeitor);
-        }
-        if (checkboxVisibilidadeFuncionarioResponsavel.checked) {
-            const tdFuncionarioResponsavel = document.createElement("td");
-            tdFuncionarioResponsavel.textContent =  emprestimo.funcionario_responsavel;
-             tr.appendChild(tdFuncionarioResponsavel);
-        }
-        if (checkboxVisibilidadeLivro.checked) {
-            const tdLivro = document.createElement("td");
-            tdLivro.textContent = emprestimo.livro || "N/A";
-            tr.appendChild(tdLivro);
-        }
-        if (checkboxVisibilidadeData.checked) {
-            const tdData = document.createElement("td");
-            tdData.textContent = emprestimo.dataEmprestimo && emprestimo.dataDevolucao || "N/A";
-            tr.appendChild(tdData);
-        }
-        if (checkboxVisibilidadeId.checked) {
-            const tdId = document.createElement("td");
-            tdId.textContent = emprestimo.id_emprestimo || "N/A";
-            tr.appendChild(tdId);
-        }
+    // Campo para o leitor
+    if (checkboxVisibilidadeLeitor.checked) {
+        const tdLeitor = document.createElement("td");
+        tdLeitor.textContent = emprestimo.leitor?.nome || "N/A"; // Acessa o nome do leitor
+        tr.appendChild(tdLeitor);
+    }
 
-        tbody.appendChild(tr);
-    });
+    // Campo para o funcionário responsável
+    if (checkboxVisibilidadeFuncionarioResponsavel.checked) {
+        const tdFuncionarioResponsavel = document.createElement("td");
+        tdFuncionarioResponsavel.textContent = emprestimo.funcionario?.nome || "N/A"; // Acessa o nome do funcionário
+        tr.appendChild(tdFuncionarioResponsavel);
+    }
+
+    // Campo para o livro
+    if (checkboxVisibilidadeLivro.checked) {
+        const tdLivro = document.createElement("td");
+        tdLivro.textContent = emprestimo.livro?.titulo || "N/A"; // Acessa o título do livro
+        tr.appendChild(tdLivro);
+    }
+
+    // Campo para as datas de empréstimo e devolução
+    if (checkboxVisibilidadeData.checked) {
+        const tdData = document.createElement("td");
+        if (emprestimo.dataEmprestimo && emprestimo.dataDevolucao) {
+            tdData.textContent = `De: ${emprestimo.dataEmprestimo} Até: ${emprestimo.dataDevolucao}`;
+        } else {
+            tdData.textContent = "N/A";
+        }
+        tr.appendChild(tdData);
+    }
+
+    // Campo para o ID do empréstimo
+    if (checkboxVisibilidadeId.checked) {
+        const tdId = document.createElement("td");
+        tdId.textContent = emprestimo.id_emprestimo || "N/A";
+        tr.appendChild(tdId);
+    }
+
+    tbody.appendChild(tr);
+});
+
 
 } catch (error) {
     console.error("Erro ao buscar empréstimos:", error);
