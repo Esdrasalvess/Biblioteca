@@ -27,7 +27,7 @@ const checkboxVisibilidadeLeitor = document.getElementById('consulta/emprestimo/
 const checkboxVisibilidadeFuncionarioResponsavel = document.getElementById('consulta/emprestimo/visibilidade_funcionario_responsavel');
 const checkboxVisibilidadeLivro = document.getElementById('consulta/emprestimo/visibilidade_livro');
 const checkboxVisibilidadeData = document.getElementById('consulta/emprestimo/visibilidade_data');
-const checkboxVisibilidadeId = document.getElementById('consulta/emprestimo/visibilidade_Id');
+const checkboxVisibilidadeId = document.getElementById('consulta/emprestimo/visibilidade_id');
 
 const pesquisaLeitor = document.getElementById('pesquisa_emprestimo_leitor');
 const pesquisaFuncionarioResponsavel = document.getElementById('pesquisa_emprestimo_funcionario_responsavel');
