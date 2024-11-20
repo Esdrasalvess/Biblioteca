@@ -26,6 +26,7 @@
         <a href="consulta_livro.html">Livros</a>
         <a href="relatorio_emprestimo.html">Relatório Empréstimos</a>
         <a href="excluir.html">Excluir</a>
+        <a href="edicao.html">Editar</a>
     </nav>
     
         <img src="Imagens/bancodadoserase.png" alt="teste" class="diminuiiii" style="position: absolute; margin-top: -150px;"  >
@@ -40,18 +41,18 @@
                         
                         <input type="text" placeholder="Leitor">
                     
-                        <select style="height: 45px; width: 325px;">
+                        <select id="selectFuncionario" style="height: 45px; width: 325px;">
                             <option value="" disabled selected>Funcionário responsável</option>
                         </select>
                         
-                        <select style="height: 45px; width: 325px;">
+                        <select id="selectLivro" style="height: 45px; width: 325px;">
                             <option value="" disabled selected>Livro</option>
                         </select>
                         
                         <input type="date" placeholder="Data do empréstimo">
                         <input type="date" placeholder="Data de devolução">
                         <input type="text" placeholder="Código">
-                        <button type="submit" class="enviar">Enviar</button>
+                        <button type="submit" class="enviar" onclick="cadastrarEmprestimo()">Enviar</button>
                     </div>
                 </div>
            
@@ -62,6 +63,6 @@
     <footer>
         <p>Site Desenvolvido como <strong>Projeto Avaliativo</strong> para Disciplinas de <strong>Banco de Dados</strong> e <strong>Desenvolvimento Web</strong> - FAINOR 2024</p>
     </footer>
-    <script src="Js/Cadastro.js"></script>
+    <script src="Js/Cadastro_emprestimo.js"></script>
 </body>
 </html>
