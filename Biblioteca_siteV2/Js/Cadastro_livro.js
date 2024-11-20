@@ -65,7 +65,7 @@ function cadastrarLivro() {
         body: JSON.stringify(livro)
     })
     .then(response => {
-        console.log(livro);
+       
         if (response.ok) {
             alert("Livro cadastrado com sucesso!");
             // Limpa os campos após o envio
