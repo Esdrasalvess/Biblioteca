@@ -28,11 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
     carregarAutores();
 });
 
+
 // Função para cadastrar o livro
 function cadastrarLivro() {
     const titulo = document.getElementById("titulo").value;
     const ano = document.getElementById("ano").value;
-    const id_livro = document.getElementById("id").value;  // Corrigido para pegar o campo correto
+    const id_livro = document.getElementById("id").value;  // Certifique-se de que o 'id' está correto
     const id_autor = document.getElementById("selectAutor").value;
 
     // Verifica se o autor foi selecionado
@@ -40,20 +41,25 @@ function cadastrarLivro() {
         alert("Por favor, selecione um autor.");
         return;
     }
+
+    // Verifica se o título foi informado
     if (!titulo) {
         alert("Por favor, insira um título.");
         return;
     }
+
+    // Verifica se o ano foi selecionado
     if (!ano) {
         alert("Por favor, selecione um ano.");
         return;
     }
 
+    // Se passou pelas verificações, construa o objeto livro
     const livro = {
         titulo: titulo,
         ano: ano,
         id_livro: id_livro,
-        id_autor: id_autor  // Incluindo o ID do autor selecionado
+        id_autor: id_autor
     };
 
     // Envia a requisição para cadastrar o livro
@@ -65,6 +71,7 @@ function cadastrarLivro() {
         body: JSON.stringify(livro)
     })
     .then(response => {
+        console.log(response);  // Log da resposta
         if (response.ok) {
             alert("Livro cadastrado com sucesso!");
             // Limpa os campos após o envio
@@ -73,7 +80,7 @@ function cadastrarLivro() {
             document.getElementById("id").value = '';
             document.getElementById("selectAutor").value = '';
         } else {
-            alert("Erro ao cadastrar livro.");
+            alert("Erro ao cadastrar livro. Status: " + response.status);
         }
     })
     .catch(error => {
@@ -81,3 +88,5 @@ function cadastrarLivro() {
         alert("Erro ao cadastrar livro.");
     });
 }
+
+
