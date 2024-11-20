@@ -57,14 +57,14 @@ document.addEventListener('DOMContentLoaded', function () {
 function cadastrarEmprestimo() {
     const leitor = document.getElementById("leitor").value;
     const funcionario_responsavel = document.getElementById("selectFuncionario").value;
-    const livro = document.getElementById("selectLivro").value;
-    const data_inicial = document.getElementById("dataEmprestimo").value;
-    const data_final = document.getElementById("dataDevolucao").value;
-    const id_emprestimo = document.getElementById("id_emprestimo");
+    const livro = document.getElementById("selectLivro").value; 
+    const data_inicial = document.getElementById("data_inicial").value;
+    const data_final = document.getElementById("data_final").value;
+    const id_emprestimo = document.getElementById("id_emprestimo").value;
 
-    // Verifica se todos os campos foram preenchidos
+    // Verifica se os campos necessários estão preenchidos
     if (!leitor) {
-        alert("Por favor, insira um leitor.");
+        alert("Por favor, insira o nome do leitor.");
         return;
     }
     if (!funcionario_responsavel) {
@@ -84,25 +84,25 @@ function cadastrarEmprestimo() {
         return;
     }
 
-    // Objeto do empréstimo
     const emprestimo = {
+        id_emprestimo: id_emprestimo,
         dataEmprestimo: data_inicial,
         dataDevolucao: data_final,
         leitor: {
-            id_leitor: leitor  // Usando o ID do leitor
+            nome: leitor
         },
         funcionario: {
-            id_funcionario: funcionario_responsavel  // Usando o ID do funcionário
+            id_funcionario: funcionario_responsavel
         },
         livro: {
-            id_livro: livro  // Usando o ID do livro
+            id_livro: livro
         },
         status: "EMPRESTADO"
     };
 
     console.log(emprestimo);
 
-    // Envia a requisição para cadastrar o empréstimo
+    // Envia os dados do empréstimo para o servidor
     fetch("http://localhost:8080/api/emprestimos", {
         method: "POST",
         headers: {
@@ -118,8 +118,8 @@ function cadastrarEmprestimo() {
             document.getElementById("leitor").value = '';
             document.getElementById("selectFuncionario").value = '';
             document.getElementById("selectLivro").value = '';
-            document.getElementById("dataEmprestimo").value = '';
-            document.getElementById("dataDevolucao").value = '';
+            document.getElementById("data_inicial").value = '';
+            document.getElementById("data_final").value = '';
             document.getElementById("id_emprestimo").value = '';
         } else {
             response.text().then(text => {
