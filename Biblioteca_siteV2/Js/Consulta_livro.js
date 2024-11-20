@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     checkboxFiltroDisponivel.addEventListener('change', () => campoDisponivel.style.display = checkboxFiltroDisponivel.checked ? 'inline' : 'none');
 });
 
+
 const checkboxVisibilidadeTitulo = document.getElementById('consulta/livro/visibilidade_titulo');
 const checkboxVisibilidadeAutor = document.getElementById('consulta/livro/visibilidade_autor');
 const checkboxVisibilidadeAno = document.getElementById('consulta/livro/visibilidade_ano');
@@ -36,66 +37,64 @@ const pesquisaAno = document.getElementById('pesquisa_livro_ano');
 const pesquisaId = document.getElementById('pesquisa_livro_id');
 const pesquisaDisponivel = document.getElementById('pesquisa_livro_disponivel');
 
-const FormConsulta = document.getElementById("formConsultaLivro")
-FormConsulta.addEventListener("submit", async function(event) {
+const FormConsulta = document.getElementById("formConsultaLivro");
+
+FormConsulta.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Definindo filtros de pesquisa conforme os checkboxes selecionados
+    // Inicializando os filtros e o endpoint base
     const filtros = {};
+    let endpoint = "http://localhost:8080/api/livros";
 
-    if (checkboxVisibilidadeTitulo.checked) {
-        filtros.titulo = pesquisaTitulo.value;
-    }
-    if (checkboxVisibilidadeAutor.checked) {
-        filtros.autor = pesquisaAutor.value;
-    }
-    if (checkboxVisibilidadeAno.checked) {
-        filtros.ano = pesquisaAno.value;
-    }
-    if (checkboxVisibilidadeId.checked) {
-        filtros.id_livro = pesquisaId.value;
-    }
-    if (checkboxVisibilidadeDisponivel.checked) {
-        filtros.disponivel = pesquisaDisponivel.value;
+    // Verifica qual filtro está ativo e monta o endpoint correspondente
+    if (checkboxFiltroTitulo.checked && pesquisaTitulo.value.trim() !== "") {
+        filtros.titulo = pesquisaTitulo.value.trim();
+        endpoint += "/buscarPorTitulo"; // Endpoint para busca por nome
+    } else if (checkboxFiltroAutor.checked && pesquisaAutor.value.trim() !== "") {
+        filtros.autor = pesquisaAutor.value.trim();
+        endpoint += "/buscarPorAutor"; // Endpoint para busca por nacionalidade
+    } else if (checkboxFiltroAno.checked && pesquisaAno.value.trim() !== "") {
+        filtros.ano = pesquisaAno.value.trim();
+        endpoint = "/buscarPorAno"; // Endpoint para busca por ID
+    } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
+        filtros.id_livro = pesquisaId.value.trim();
+        endpoint += `http://localhost:8080/api/livros/${filtros.id_livro}`; // Endpoint para busca por quantidade de livros
+    } else if (checkboxFiltroDisponivel.checked && pesquisaDisponivel.value.trim() !== "") {
+        filtros.disponivel = pesquisaDisponivel.value.trim();
+        endpoint += "/dpseuvejo"; // Endpoint para busca por quantidade de livros
     }
 
-    console.log(filtros);
+    // Adiciona os filtros como parâmetros da URL
+    const url = new URL(endpoint);
+    Object.entries(filtros).forEach(([key, value]) => {
+        url.searchParams.append(key, value);
+    });
 
-    // Construindo a URL com parâmetros de filtro
-    const url = new URL("http://localhost:8080/api/livros");
-    if (filtros.titulo?.trim()) url.searchParams.append("titulo", filtros.titulo.trim());
-if (filtros.autor?.trim()) url.searchParams.append("autor", filtros.autor.trim());
-if (filtros.ano?.trim()) url.searchParams.append("ano", filtros.ano.trim());
-if (filtros.id_livro?.trim()) url.searchParams.append("id", filtros.id_livro.trim());
-if (filtros.disponivel) url.searchParams.append("disponivel", filtros.disponivel);
-
+    console.log("URL gerada:", url.toString()); // Verifica a URL final
 
     try {
         const response = await fetch(url, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: { "Content-Type": "application/json" }
         });
 
-        if (!response.ok) throw new Error(`Erro ao consultar livros: ${response.status} - ${response.statusText}`);
-
+        if (!response.ok) throw new Error("Erro ao consultar livros.");
 
         const livros = await response.json();
 
-        // Exibir os dados na tabela
+        // Se o retorno for um objeto único, transforme-o em um array
+        const livrosArray = Array.isArray(livros) ? livros : [livros];
+
         const tbody = document.querySelector("#resultadoConsultaLivro tbody");
         const thead = document.querySelector("#resultadoConsultaLivro thead");
         tbody.innerHTML = ""; // Limpa os dados anteriores
         const headerRow = document.querySelector("#headerRowLivro");
         headerRow.innerHTML = ""; // Limpa os títulos anteriores
 
-
-
-        // Adicionando os títulos das colunas no cabeçalho (thead)
+        // Adicionando os cabeçalhos com base nos checkboxes de visibilidade
         if (checkboxVisibilidadeTitulo.checked) {
             const thTitulo = document.createElement("th");
-            thTitulo.textContent = "Titulo";
+            thTitulo.textContent = "Título";
             headerRow.appendChild(thTitulo);
         }
         if (checkboxVisibilidadeAutor.checked) {
@@ -115,19 +114,17 @@ if (filtros.disponivel) url.searchParams.append("disponivel", filtros.disponivel
         }
         if (checkboxVisibilidadeDisponivel.checked) {
             const thDisponivel = document.createElement("th");
-            thDisponivel.textContent = "Disponivel";
+            thDisponivel.textContent = "Disponível";
             headerRow.appendChild(thDisponivel);
         }
 
-        if (livros.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='3'>Nenhum livro encontrado.</td></tr>";
+        if (livrosArray.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='4'>Nenhum livro encontrado.</td></tr>";
             return;
         }
 
-
-        
         // Adicionando os dados na tabela
-        livros.forEach(livro => {
+        livrosArray.forEach(livro => {
             const tr = document.createElement("tr");
 
             if (checkboxVisibilidadeTitulo.checked) {
@@ -138,9 +135,8 @@ if (filtros.disponivel) url.searchParams.append("disponivel", filtros.disponivel
             if (checkboxVisibilidadeAutor.checked) {
                 const tdAutor = document.createElement("td");
                 tdAutor.textContent = livro.autor || "N/A";
-                tr.appendChild(tdAutor);
+                tr.appendChild(tdNAutor);
             }
-            
             if (checkboxVisibilidadeAno.checked) {
                 const tdAno = document.createElement("td");
                 tdAno.textContent = livro.ano || "N/A";
@@ -153,7 +149,7 @@ if (filtros.disponivel) url.searchParams.append("disponivel", filtros.disponivel
             }
             if (checkboxVisibilidadeDisponivel.checked) {
                 const tdDisponivel = document.createElement("td");
-                tdDisponivel.textContent = livro.disponivel ? "Sim":"Não";
+                tdDisponivel.textContent = livro.disponivel || "N/A";
                 tr.appendChild(tdDisponivel);
             }
 
@@ -162,7 +158,6 @@ if (filtros.disponivel) url.searchParams.append("disponivel", filtros.disponivel
 
     } catch (error) {
         console.error("Erro ao buscar livros:", error);
-        alert("Ocorreu um erro ao buscar os dados dos livros.");
+        alert("Ocorreu um erro ao buscar os dados dos livros. Tente novamente.");
     }
 });
-
