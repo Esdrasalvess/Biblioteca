@@ -38,7 +38,7 @@
                     <select id="selectAutor" style="height: 45px; width: 325px; margin-left: 40px;">
                         <option value="" disabled selected>Autor</option>
                     </select>
-                    <input type="date" id="ano" placeholder="Ano de Publicação" style="margin-left: 40px;">
+                    <input type="text" id="ano" placeholder="Ano de Publicação" maxlength="4" style="margin-left: 40px;" oninput="permitirApenasNumeros(this)">
                     <input type="text" id="id" placeholder="id" maxlength="3" oninput="permitirApenasNumeros(this)">
                     <button type="submit" class="enviar" onclick="cadastrarLivro()">Enviar</button>
                 </div>

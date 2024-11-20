@@ -34,6 +34,7 @@ function cadastrarLivro() {
     const ano = document.getElementById("ano").value;
     const id_livro = document.getElementById("id").value;  // Corrigido para pegar o campo correto
     const id_autor = document.getElementById("selectAutor").value;
+    const nome_autor = document.getElementById("selectAutor").options[document.getElementById("selectAutor").selectedIndex].text;
 
     // Verifica se o autor foi selecionado
     if (!id_autor) {
@@ -51,11 +52,17 @@ function cadastrarLivro() {
 
     const livro = {
         titulo: titulo,
-        ano: ano,
+        anoPublicacao: ano, // Use o campo esperado pelo backend
         id_livro: id_livro,
-        id_autor: id_autor  // Incluindo o ID do autor selecionado
+        autor: {
+            id_autor: id_autor,
+            nome: nome_autor
+            // Se o backend precisar da nacionalidade, você pode preencher isso aqui
+        }
     };
-    console.log(livro);
+
+    console.log(livro); // Verifique a estrutura do objeto para confirmar
+
     // Envia a requisição para cadastrar o livro
     fetch("http://localhost:8080/api/livros", {
         method: "POST",
@@ -65,7 +72,7 @@ function cadastrarLivro() {
         body: JSON.stringify(livro)
     })
     .then(response => {
-       
+        console.log("Status da resposta:", response.status);
         if (response.ok) {
             alert("Livro cadastrado com sucesso!");
             // Limpa os campos após o envio
@@ -74,11 +81,14 @@ function cadastrarLivro() {
             document.getElementById("id").value = '';
             document.getElementById("selectAutor").value = '';
         } else {
-            alert("Erro ao cadastrar livro.");
+            response.text().then(text => {
+                console.log("Resposta do servidor:", text);
+                alert("Erro ao cadastrar livro. Status: " + response.status + " - " + text);
+            });
         }
     })
     .catch(error => {
         console.error("Erro ao enviar requisição:", error);
-        alert("Erro ao cadastrar livro.");
+        alert("Erro ao cadastrar livro (requisição).");
     });
 }
