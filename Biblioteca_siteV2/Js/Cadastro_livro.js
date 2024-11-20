@@ -24,17 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    // Função para cadastrar o livro
-    
-
     // Carregar autores quando a página for carregada
     carregarAutores();
 });
 
+// Função para cadastrar o livro
 function cadastrarLivro() {
     const titulo = document.getElementById("titulo").value;
     const ano = document.getElementById("ano").value;
-    const id_livro = document.getElementById("id_livro").value;
+    const id_livro = document.getElementById("codigo").value;  // Corrigido para pegar o campo correto
     const id_autor = document.getElementById("selectAutor").value;
 
     // Verifica se o autor foi selecionado
@@ -72,7 +70,7 @@ function cadastrarLivro() {
             // Limpa os campos após o envio
             document.getElementById("titulo").value = '';
             document.getElementById("ano").value = '';
-            document.getElementById("id").value = '';
+            document.getElementById("codigo").value = '';
             document.getElementById("selectAutor").value = '';
         } else {
             alert("Erro ao cadastrar livro.");
