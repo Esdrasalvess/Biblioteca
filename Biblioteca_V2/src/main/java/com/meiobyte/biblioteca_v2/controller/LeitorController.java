@@ -24,6 +24,11 @@ public class LeitorController {
         return leitorService.buscarPorId(id).orElse(null);
     }
 
+    @GetMapping("/nome/{nome}")
+    public List<Leitor> buscarPorNome(@PathVariable String nome) {
+        return leitorService.buscarPorNome(nome);
+    }
+
     @PostMapping
     public Leitor criar(@RequestBody Leitor leitor) {
         return leitorService.salvar(leitor);

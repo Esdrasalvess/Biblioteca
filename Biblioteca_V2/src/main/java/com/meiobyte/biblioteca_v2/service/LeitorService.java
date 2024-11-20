@@ -35,4 +35,8 @@ public class LeitorService {
     public void deletar(Integer id) {
         leitorRepository.deleteById(id);
     }
+
+    public List<Leitor> buscarPorNome(String nome) {
+        return leitorRepository.findByNomeContainingIgnoreCase(nome);
+    }
 }
