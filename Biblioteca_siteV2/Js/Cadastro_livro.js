@@ -25,51 +25,61 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Função para cadastrar o livro
-    function cadastrarLivro() {
-        const nome = document.getElementById("titulo").value;
-        const ano = document.getElementById("ano").value;
-        const codigo = document.getElementById("id").value;
-        const autorId = document.getElementById("selectAutor").value;
-
-        // Verifica se o autor foi selecionado
-        if (!autorId) {
-            alert("Por favor, selecione um autor.");
-            return;
-        }
-
-        const livro = {
-            nome: nome,
-            ano: ano,
-            codigo: codigo,
-            autorId: autorId  // Incluindo o ID do autor selecionado
-        };
-
-        // Envia a requisição para cadastrar o livro
-        fetch("http://localhost:8080/api/livros", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(livro)
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Livro cadastrado com sucesso!");
-                // Limpa os campos após o envio
-                document.getElementById("titulo").value = '';
-                document.getElementById("ano").value = '';
-                document.getElementById("id").value = '';
-                document.getElementById("selectAutor").value = '';
-            } else {
-                alert("Erro ao cadastrar livro.");
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao enviar requisição:", error);
-            alert("Erro ao cadastrar livro.");
-        });
-    }
+    
 
     // Carregar autores quando a página for carregada
     carregarAutores();
 });
+
+function cadastrarLivro() {
+    const titulo = document.getElementById("titulo").value;
+    const ano = document.getElementById("ano").value;
+    const id_livro = document.getElementById("id_livro").value;
+    const id_autor = document.getElementById("selectAutor").value;
+
+    // Verifica se o autor foi selecionado
+    if (!id_autor) {
+        alert("Por favor, selecione um autor.");
+        return;
+    }
+    if (!titulo) {
+        alert("Por favor, insira um título.");
+        return;
+    }
+    if (!ano) {
+        alert("Por favor, selecione um ano.");
+        return;
+    }
+
+    const livro = {
+        titulo: titulo,
+        ano: ano,
+        id_livro: id_livro,
+        id_autor: id_autor  // Incluindo o ID do autor selecionado
+    };
+
+    // Envia a requisição para cadastrar o livro
+    fetch("http://localhost:8080/api/livros", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(livro)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Livro cadastrado com sucesso!");
+            // Limpa os campos após o envio
+            document.getElementById("titulo").value = '';
+            document.getElementById("ano").value = '';
+            document.getElementById("id").value = '';
+            document.getElementById("selectAutor").value = '';
+        } else {
+            alert("Erro ao cadastrar livro.");
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao enviar requisição:", error);
+        alert("Erro ao cadastrar livro.");
+    });
+}
