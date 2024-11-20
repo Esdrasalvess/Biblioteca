@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             filtros.nome = pesquisaNome.value.trim();
             endpoint += "/buscarPorNome"; // Endpoint para busca por nome
         } else if (checkboxFiltroCargo.checked && pesquisaCargo.value.trim() !== "") {
-            filtros.Cargo = pesquisaCargo.value.trim();
+            filtros.cargo = pesquisaCargo.value.trim();
             endpoint += "/buscarPorCargo"; // Endpoint para busca por nacionalidade
         } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
             filtros.id_funcionario = pesquisaId.value.trim();
@@ -99,17 +99,17 @@ document.addEventListener('DOMContentLoaded', function () {
     
                 if (checkboxVisibilidadeNome.checked) {
                     const tdNome = document.createElement("td");
-                    tdNome.textContent = funcionario.nome || "N/A";
+                    tdNome.textContent = funcionario.nome ? funcionario.nome.trim() : "N/A";
                     tr.appendChild(tdNome);
                 }
                 if (checkboxVisibilidadeCargo.checked) {
                     const tdCargo = document.createElement("td");
-                    tdCargo.textContent = funcionario.Cargo || "N/A";
+                    tdCargo.textContent = funcionario.cargo ? funcionario.cargo.trim() : "N/A";
                     tr.appendChild(tdCargo);
                 }
                 if (checkboxVisibilidadeId.checked) {
                     const tdId = document.createElement("td");
-                    tdId.textContent = funcionario.id_funcionario || "N/A";
+                    tdId.textContent = funcionario.id_funcionario ? funcionario.id_funcionario : "N/A";
                     tr.appendChild(tdId);
                 }
     
