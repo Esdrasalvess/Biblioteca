@@ -65,7 +65,7 @@ if (checkboxFiltroLeitor.checked && pesquisaLeitor.value.trim() !== "") {
 
 } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
     filtros.id_emprestimo = pesquisaId.value.trim();
-    endpoint = `http://localhost:8080/api/emprestimo/${filtros.id_emprestimo}`; 
+    endpoint = `http://localhost:8080/api/emprestimos/${filtros.id_emprestimo}`; 
 }
 
 // Adiciona os filtros como parâmetros da URL
