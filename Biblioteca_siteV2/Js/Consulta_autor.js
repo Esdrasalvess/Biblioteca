@@ -46,7 +46,7 @@ FormConsulta.addEventListener("submit", async function (event) {
         const id = pesquisaId.value.trim();
         if (!isNaN(id)) { // Verifica se o ID é válido
             filtros.id_autor = id;
-            endpoint += "/";
+            endpoint = `http://localhost:8080/api/autores/${id}`;
         }
     } else if (checkboxFiltroQtdLivros.checked && pesquisaQtdLivros.value.trim() !== "") {
         filtros.qtd_livros = pesquisaQtdLivros.value.trim();
