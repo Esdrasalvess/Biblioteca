@@ -1,40 +1,49 @@
-// Função para excluir um item baseado no tipo (autor, livro, funcionário, empréstimo)
 async function excluirItem(tipo) {
-    // Obter o ID inserido pelo usuário
-    const id = document.getElementById(`input${tipo.charAt(0).toUpperCase() + tipo.slice(1)}Id`).value.trim();
+    // Obter o ID do item com base no tipo passado
+    let inputId;
+    switch (tipo) {
+        case 'autor':
+            inputId = document.getElementById('inputAutorId');
+            break;
+        case 'funcionario':
+            inputId = document.getElementById('inputFuncionarioId');
+            break;
+        case 'livro':
+            inputId = document.getElementById('inputLivroId');
+            break;
+        case 'emprestimo':
+            inputId = document.getElementById('inputEmprestimoId');
+            break;
+        default:
+            console.error('Tipo de exclusão desconhecido');
+            return;
+    }
 
-    // Verificar se o ID é válido
-    if (!id || isNaN(id)) {
+    // Verificar se o campo de ID existe e contém um valor
+    if (!inputId || !inputId.value.trim()) {
         alert("Por favor, insira um ID válido.");
         return;
     }
 
-    try {
-        // Construir a URL para o endpoint de exclusão
-        const endpoint = `http://localhost:8080/api/${tipo}s/${id}`; // Exemplo de endpoint
+    // Obter o valor do ID inserido
+    const id = inputId.value.trim();
 
-        // Realizar a requisição DELETE
-        const response = await fetch(endpoint, {
+    try {
+        const response = await fetch(`http://localhost:8080/api/${tipo}/${id}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: { 'Content-Type': 'application/json' },
         });
 
-        // Verificar se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error(`Erro ao excluir ${tipo}.`);
         }
 
-        // Exibir mensagem de sucesso
-        alert(`${tipo.charAt(0).toUpperCase() + tipo.slice(1)} excluído(a) com sucesso!`);
+        alert(`${tipo.charAt(0).toUpperCase() + tipo.slice(1)} excluído com sucesso!`);
         
-        // Limpar o campo de ID
-        document.getElementById(`input${tipo.charAt(0).toUpperCase() + tipo.slice(1)}Id`).value = '';
-
+        // Limpar o campo de ID após a exclusão
+        inputId.value = '';
     } catch (error) {
-        // Exibir mensagem de erro em caso de falha
         console.error(error);
-        alert(`Erro ao excluir ${tipo}: ${error.message}`);
+        alert(`Erro ao excluir o ${tipo}: ${error.message}`);
     }
 }
