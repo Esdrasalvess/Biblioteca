@@ -51,6 +51,10 @@ public class LivroController {
 
     @PostMapping
     public Livro criar(@RequestBody Livro livro) {
+        if (livro.getAutor() == null || livro.getAutor().getId_autor() == null) {
+            throw new RuntimeException("Autor não informado ou inválido");
+        }
+
         Optional<Autor> autor = autorService.buscarPorId(livro.getAutor().getId_autor());
 
         if (autor.isPresent()) {
@@ -60,6 +64,7 @@ public class LivroController {
             throw new RuntimeException("Autor não encontrado");
         }
     }
+
 
     @PutMapping("/{id}")
     public Livro atualizar(@PathVariable Integer id, @RequestBody Livro livro) {
