@@ -57,63 +57,75 @@ document.addEventListener('DOMContentLoaded', function () {
 function cadastrarEmprestimo() {
     const titulo = document.getElementById("titulo").value;
     const ano = document.getElementById("ano").value;
-    const id_livro = document.getElementById("id").value; 
+    const id_livro = document.getElementById("selectLivro").value; // Select para o livro
     const id_autor = document.getElementById("selectAutor").value;
     const nome_autor = document.getElementById("selectAutor").options[document.getElementById("selectAutor").selectedIndex].text;
+    const id_leitor = document.getElementById("selectLeitor").value;  // Select para o leitor
+    const id_funcionario = document.getElementById("selectFuncionario").value;  // Select para o funcionário responsável
+    const dataEmprestimo = document.getElementById("dataEmprestimo").value;  // Campo de data de empréstimo
+    const dataDevolucao = document.getElementById("dataDevolucao").value;  // Campo de data de devolução
 
-    // Verifica se o autor foi selecionado
-    if (!id_autor) {
-        alert("Por favor, selecione um autor.");
-        return;
-    }
-    if (!titulo) {
-        alert("Por favor, insira um título.");
-        return;
-    }
-    if (!ano) {
-        alert("Por favor, selecione um ano.");
+    // Verifica se todos os campos necessários foram preenchidos
+    if (!id_autor || !titulo || !ano || !id_livro || !id_leitor || !id_funcionario || !dataEmprestimo || !dataDevolucao) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
         return;
     }
 
     const livro = {
+        id_livro: id_livro,
         titulo: titulo,
         anoPublicacao: ano,
-        id_livro: id_livro,
         autor: {
             id_autor: id_autor,
             nome: nome_autor
-  
         }
     };
 
-    console.log(livro);
+    const emprestimo = {
+        dataEmprestimo: dataEmprestimo,
+        dataDevolucao: dataDevolucao,
+        leitor: {
+            id_leitor: id_leitor
+        },
+        funcionario: {
+            id_funcionario: id_funcionario
+        },
+        livro: livro,
+        status: "EMPRESTADO"  // Status do empréstimo
+    };
 
- 
-    fetch("http://localhost:8080/api/livros", {
+    console.log(emprestimo);
+
+    // Envia a requisição para cadastrar o empréstimo
+    fetch("http://localhost:8080/api/emprestimos", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(livro)
+        body: JSON.stringify(emprestimo)
     })
     .then(response => {
         console.log("Status da resposta:", response.status);
         if (response.ok) {
-            alert("Livro cadastrado com sucesso!");
+            alert("Empréstimo cadastrado com sucesso!");
             // Limpa os campos após o envio
             document.getElementById("titulo").value = '';
             document.getElementById("ano").value = '';
-            document.getElementById("id").value = '';
+            document.getElementById("selectLivro").value = '';
             document.getElementById("selectAutor").value = '';
+            document.getElementById("selectLeitor").value = '';
+            document.getElementById("selectFuncionario").value = '';
+            document.getElementById("dataEmprestimo").value = '';
+            document.getElementById("dataDevolucao").value = '';
         } else {
             response.text().then(text => {
                 console.log("Resposta do servidor:", text);
-                alert("Erro ao cadastrar livro. Status: " + response.status + " - " + text);
+                alert("Erro ao cadastrar empréstimo. Status: " + response.status + " - " + text);
             });
         }
     })
     .catch(error => {
         console.error("Erro ao enviar requisição:", error);
-        alert("Erro ao cadastrar livro (requisição).");
+        alert("Erro ao cadastrar empréstimo (requisição).");
     });
 }
