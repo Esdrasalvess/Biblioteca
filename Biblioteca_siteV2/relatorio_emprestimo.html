@@ -34,6 +34,7 @@
             <h2>Consultar Empréstimos</h2>
             <p style="margin: 10px; text-align: center; font-weight: bold;;">Caso nenhum filtro seja selecionado, todos os livros serão exibidos.</p>
             
+            <form id="formConsultaEmprestimo">
             <!--Filtro de Pesquisa-->
                 <div class="checkboxes" style="width: 950px;">
                     <div class="titulo_checkboxes"><strong>Filtro de pesquisa</strong></div>
@@ -50,8 +51,8 @@
                         <label for="consulta/emprestimo/selecionar_data">
                             <input id="consulta/emprestimo/selecionar_data" type="checkbox"> Data
                         </label>
-                        <label for="consulta/emprestimo/selecionar_codigo">
-                            <input id="consulta/emprestimo/selecionar_codigo" type="checkbox"> Codigo
+                        <label for="consulta/emprestimo/selecionar_id">
+                            <input id="consulta/emprestimo/selecionar_id" type="checkbox"> ID
                         </label>
                     </strong>
                 </div>
@@ -76,8 +77,8 @@
                         <label for="consulta/emprestimo/visibilidade_data_final">
                             <input id="consulta/emprestimo/visibilidade_data_final" type="checkbox" checked> Data de devolução
                         </label>
-                        <label for="consulta/emprestimo/visibilidade_codigo">
-                            <input id="consulta/emprestimo/visibilidade_codigo" type="checkbox" checked> Código
+                        <label for="consulta/emprestimo/visibilidade_id">
+                            <input id="consulta/emprestimo/visibilidade_id" type="checkbox" checked> Código
                         </label>
     
                     </strong>
@@ -107,8 +108,9 @@
                             <label for="pesquisa_emprestimo_data_inicial" style="font-weight: bold;">Fim:</label>
                     <input type="date" id="pesquisa_emprestimo_data_final" placeholder="Pesquisar por Data Final">
                          </div>
-                         <div id="campo_emprestimo_codigo" class="campo_pesquisa" style="display: none;">
-                    <input type="text" id="pesquisa_emprestimo_codigo" placeholder="Pesquisar por Código">
+                         
+                         <div id="campo_emprestimo_id" class="campo_pesquisa" style="display: none;">
+                    <input type="text" id="pesquisa_emprestimo_id" placeholder="Pesquisar por Código">
                          </div>
                         
                          <div class="testizindoscria" style="display: block; margin-left: 850px;">
@@ -116,24 +118,18 @@
                         </div>
                          
             </div>
-           
+        </form>
         
-            <table style="margin-left: 200px;">
-                <tr> 
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Editora</th>
-                    <th>Gênero</th>
-                    <th>Ano</th>
-                </tr>
-                <tr>
-                    <td>Senhor dos Anéis</td>
-                    <td>J.R.R. Tolkien</td>
-                    <td>Los Hermanos</td>
-                    <td>Créu</td>
-                    <td>200 a.C.</td>
-                </tr>
-            </table>
+           <!-- Tabela de Resultados -->
+           <table id="resultadoConsultaEmprestimo" style="margin-left: 200px;">
+            <thead>
+                <!-- Cabeçalho da tabela com títulos visíveis -->
+                <tr id="headerRowEmprestimo"></tr>
+            </thead>
+            <tbody>
+                <!-- Resultados da consulta aparecerão aqui -->
+            </tbody>
+        </table>
             
         </div>
         
