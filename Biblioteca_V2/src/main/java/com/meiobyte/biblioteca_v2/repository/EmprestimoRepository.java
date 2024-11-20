@@ -25,4 +25,6 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Integer>
     List<Emprestimo> buscarPorLivro(@Param("livroId") Integer livroId);
 
 
+
+
 }

@@ -2,7 +2,6 @@ package com.meiobyte.biblioteca_v2.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDate;
 
 @Data
 @Entity
@@ -13,10 +12,10 @@ public class Emprestimo {
     private Integer id_emprestimo;
 
     @Column(nullable = false)
-    private LocalDate dataEmprestimo;
+    private String dataEmprestimo; // Alterado para String
 
     @Column
-    private LocalDate dataDevolucao;
+    private String dataDevolucao; // Alterado para String
 
     @ManyToOne
     @JoinColumn(name = "id_leitor", nullable = false)
@@ -28,7 +27,7 @@ public class Emprestimo {
 
     @ManyToOne
     @JoinColumn(name = "id_livro", nullable = false)
-    private Livro livro; // Relacionamento com a entidade Livro
+    private Livro livro;
 
     @Column(name = "status")
     private String status;
