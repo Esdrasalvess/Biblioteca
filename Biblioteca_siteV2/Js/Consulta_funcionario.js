@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             endpoint += "/buscarPorCargo"; // Endpoint para busca por nacionalidade
         } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
             filtros.id_funcionario = pesquisaId.value.trim();
-            endpoint = `http://localhost:8080/api/funcionario/${filtros.id_funcionario}`; // Endpoint para busca por ID
+            endpoint = `http://localhost:8080/api/funcionarios/${filtros.id_funcionario}`; // Endpoint para busca por ID
         } 
     
         // Adiciona os filtros como parâmetros da URL
