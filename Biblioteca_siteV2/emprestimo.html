@@ -39,7 +39,7 @@
                     <h3>Preencha as informações</h3>
                     <div class="emprestimo">
                         
-                        <input type="text" placeholder="Leitor">
+                        <input type="text" id="leitor" placeholder="Leitor">
                     
                         <select id="selectFuncionario" style="height: 45px; width: 325px;">
                             <option value="" disabled selected>Funcionário responsável</option>
@@ -49,9 +49,9 @@
                             <option value="" disabled selected>Livro</option>
                         </select>
                         
-                        <input type="date" placeholder="Data do empréstimo">
-                        <input type="date" placeholder="Data de devolução">
-                        <input type="text" placeholder="Código">
+                        <input type="date" id="data_inicial" placeholder="Data do empréstimo">
+                        <input type="date" id="data_final" placeholder="Data de devolução">
+                        <input type="text" id="id_emprestimo" placeholder="ID">
                         <button type="submit" class="enviar" onclick="cadastrarEmprestimo()">Enviar</button>
                     </div>
                 </div>
