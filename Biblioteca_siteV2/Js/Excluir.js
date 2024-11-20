@@ -2,16 +2,16 @@ async function excluirItem(tipo) {
     // Obter o ID do item com base no tipo passado
     let inputId;
     switch (tipo) {
-        case 'autor':
+        case 'autores':
             inputId = document.getElementById('inputAutorId');
             break;
-        case 'funcionario':
+        case 'funcionarios':
             inputId = document.getElementById('inputFuncionarioId');
             break;
-        case 'livro':
+        case 'livros':
             inputId = document.getElementById('inputLivroId');
             break;
-        case 'emprestimo':
+        case 'emprestimos':
             inputId = document.getElementById('inputEmprestimoId');
             break;
         default:
