@@ -25,7 +25,7 @@ async function excluirItem(tipo) {
         return;
     }
 
-    // Obter o valor do ID inserido
+  
     const id = inputId.value.trim();
 
     try {
