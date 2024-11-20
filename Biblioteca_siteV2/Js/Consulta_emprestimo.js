@@ -48,7 +48,7 @@ let endpoint = "http://localhost:8080/api/emprestimos";
 // Verifica qual filtro está ativo e monta o endpoint correspondente
 if (checkboxFiltroLeitor.checked && pesquisaLeitor.value.trim() !== "") {
     filtros.leitor = pesquisaLeitor.value.trim();
-    endpoint += "/nome/"; 
+    endpoint += "leitores/nome/"; 
 
 } else if (checkboxFiltroFuncionarioResponsavel.checked && pesquisaFuncionarioResponsavel.value.trim() !== "") {
     filtros.funcionario_responsavel = pesquisaFuncionarioResponsavel.value.trim();
