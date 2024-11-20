@@ -57,10 +57,14 @@ document.addEventListener('DOMContentLoaded', function () {
 function cadastrarEmprestimo() {
     const leitor = document.getElementById("leitor").value;
     const id_emprestimo = document.getElementById("id_emprestimo").value;
-    const id_funcionario = document.getElementById("selectFuncionario").value;
-    const nome_funcionario = document.getElementById("selectFuncionario").options[id_funcionario.selectedIndex].text;
-    const id_livro = document.getElementById("selectLivro").value;
-    const nome_livro = document.getElementById("selectLivro").options[id_livro.selectedIndex].text;
+    const selectFuncionario = document.getElementById("selectFuncionario");
+    const selectLivro = document.getElementById("selectLivro");
+
+    const id_funcionario = selectFuncionario.value;
+    const nome_funcionario = selectFuncionario.options[selectFuncionario.selectedIndex]?.text;  // Acessa o nome do funcionário selecionado
+    const id_livro = selectLivro.value;
+    const nome_livro = selectLivro.options[selectLivro.selectedIndex]?.text;  // Acessa o título do livro selecionado
+
     const data_inicial = document.getElementById("data_inicial").value;
     const data_final = document.getElementById("data_final").value;
 
@@ -133,3 +137,4 @@ function cadastrarEmprestimo() {
         alert("Erro ao cadastrar empréstimo (requisição).");
     });
 }
+

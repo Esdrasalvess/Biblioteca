@@ -1,10 +1,10 @@
 function formatDate(input) {
-    let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-    if (value.length > 2) {
-        value = value.slice(0, 2) + '/' + value.slice(2);
+    let value = input.value.replace(/\D/g, ''); 
+    if (value.length > 4) {
+        value = value.slice(0, 4) + '-' + value.slice(4); 
     }
-    if (value.length > 5) {
-        value = value.slice(0, 5) + '/' + value.slice(5);
+    if (value.length > 7) {
+        value = value.slice(0, 7) + '-' + value.slice(7); 
     }
-    input.value = value; // Atualiza o valor no campo
+    input.value = value; 
 }
