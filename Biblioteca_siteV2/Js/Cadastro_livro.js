@@ -37,7 +37,7 @@ function cadastrarLivro() {
     const nome_autor = document.getElementById("selectAutor").options[document.getElementById("selectAutor").selectedIndex].text;
 
     // Verifica se o autor foi selecionado
-    if (!autor) {
+    if (!nome_autor) {
         alert("Por favor, selecione um autor.");
         return;
     }
