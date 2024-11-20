@@ -54,7 +54,7 @@ FormConsulta.addEventListener("submit", async function (event) {
         filtros.autor = pesquisaAutor.value.trim();
         endpoint += "/buscarPorAutor"; // Endpoint para busca por nacionalidade
     } else if (checkboxFiltroAno.checked && pesquisaAno.value.trim() !== "") {
-        filtros.anoanoPublicacao = pesquisaAno.value.trim();
+        filtros.anoPublicacao = pesquisaAno.value.trim();
         endpoint += "/buscarPorAno"; // Endpoint para busca por ID
     } else if (checkboxFiltroId.checked && pesquisaId.value.trim() !== "") {
         filtros.id_livro = pesquisaId.value.trim();
