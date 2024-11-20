@@ -135,7 +135,7 @@ FormConsulta.addEventListener("submit", async function (event) {
             if (checkboxVisibilidadeAutor.checked) {
                 const tdAutor = document.createElement("td");
                 tdAutor.textContent = livro.autor || "N/A";
-                tr.appendChild(tdNAutor);
+                tr.appendChild(tdAutor);
             }
             if (checkboxVisibilidadeAno.checked) {
                 const tdAno = document.createElement("td");
