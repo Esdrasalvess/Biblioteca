@@ -24,7 +24,7 @@ checkboxFiltroId.addEventListener('change', () => campoId.style.display = checkb
 });
 
 const checkboxVisibilidadeLeitor = document.getElementById('consulta/emprestimo/visibilidade_leitor');
-const checkboxVisibilidadeFuncionarioResponsavel = document.getElementById('consulta/emprestimo/visibilidade_funcionario_responsável');
+const checkboxVisibilidadeFuncionarioResponsavel = document.getElementById('consulta/emprestimo/visibilidade_funcionario_responsavel');
 const checkboxVisibilidadeLivro = document.getElementById('consulta/emprestimo/visibilidade_livro');
 const checkboxVisibilidadeData = document.getElementById('consulta/emprestimo/visibilidade_data');
 const checkboxVisibilidadeId = document.getElementById('consulta/emprestimo/visibilidade_Id');
@@ -92,9 +92,9 @@ try {
 
     const tbody = document.querySelector("#resultadoConsultaEmprestimo tbody");
     const thead = document.querySelector("#resultadoConsultaEmprestimo thead");
-    tbody.innerHTML = ""; // Limpa os dados anteriores
+    tbody.innerHTML = ""; 
     const headerRow = document.querySelector("#headerRowEmprestimo");
-    headerRow.innerHTML = ""; // Limpa os títulos anteriores
+    headerRow.innerHTML = ""; 
 
     // Adicionando os cabeçalhos com base nos checkboxes de visibilidade
     if (checkboxVisibilidadeLeitor.checked) {
