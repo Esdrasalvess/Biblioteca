@@ -81,7 +81,7 @@ function cadastrarEmprestimo() {
         alert("Por favor, selecione o livro.");
         return;
     }
-    if (!data_inicial || !data_final) {
+    if (!data_inicial && !data_final) {
         alert("Por favor, selecione as datas de empréstimo e devolução.");
         return;
     }
@@ -116,6 +116,7 @@ function cadastrarEmprestimo() {
     })
     .then(response => {
         console.log("Status da resposta:", response.status);
+        console.log(emprestimo);
         if (response.ok) {
             alert("Empréstimo cadastrado com sucesso!");
             // Limpa os campos após o envio
@@ -126,6 +127,7 @@ function cadastrarEmprestimo() {
             document.getElementById("data_inicial").value = '';
             document.getElementById("data_final").value = '';
         } else {
+            console.log(emprestimo);
             response.text().then(text => {
                 console.log("Resposta do servidor:", text);
                 alert("Erro ao cadastrar empréstimo. Status: " + response.status + " - " + text);
