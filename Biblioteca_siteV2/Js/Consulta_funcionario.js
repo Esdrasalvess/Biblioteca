@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 headerRow.appendChild(thId);
             }
     
-            if (autoresArray.length === 0) {
+            if (funcionariosArray.length === 0) {
                 tbody.innerHTML = "<tr><td colspan='4'>Nenhum funcionario encontrado.</td></tr>";
                 return;
             }
