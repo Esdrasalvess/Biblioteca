@@ -1,4 +1,32 @@
+document.addEventListener('DOMContentLoaded', function () {
+    // Função para carregar os autores no select
+    function carregarAutores() {
+        const selectAutor = document.getElementById("selectAutor");
 
+        // Faz a requisição para pegar os autores
+        fetch("http://localhost:8080/api/autores")
+            .then(response => response.json())  // Parseia o retorno para JSON
+            .then(autores => {
+                // Limpa as opções anteriores (caso tenha sido carregado algo antes)
+                selectAutor.innerHTML = '<option value="" disabled selected>Autor</option>';
+                
+                // Preenche o select com os autores
+                autores.forEach(autor => {
+                    const option = document.createElement("option");
+                    option.value = autor.id_autor;  // Supondo que cada autor tenha um id
+                    option.textContent = autor.nome;  // Nome do autor
+                    selectAutor.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error("Erro ao carregar autores:", error);
+                alert("Erro ao carregar autores.");
+            });
+    }
+
+    // Carregar autores quando a página for carregada
+    carregarAutores();
+});
 
 // Função para cadastrar o livro
 function cadastrarLivro() {
