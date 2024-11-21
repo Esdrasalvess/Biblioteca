@@ -92,6 +92,7 @@ function cadastrarEmprestimo() {
     }
     const id_leitor = selectLeitor.value;
     const id_funcionario = selectFuncionario.value;
+    const nome_leitor = selectLeitor.option[selectLeitor.selectedIndex]?.text;
     const nome_funcionario = selectFuncionario.options[selectFuncionario.selectedIndex]?.text;
     const id_livro = selectLivro.value;
     const nome_livro = selectLivro.options[selectLivro.selectedIndex]?.text;
@@ -120,7 +121,7 @@ function cadastrarEmprestimo() {
     const emprestimo = {
         leitor: {
             id_leitor: id_leitor,
-            nome: leitor
+            nome: nome_leitor
         },
         funcionario: {
             id_funcionario: id_funcionario,
