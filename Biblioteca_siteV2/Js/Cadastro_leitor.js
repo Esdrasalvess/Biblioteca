@@ -25,7 +25,7 @@ function cadastrarLeitor() {
             alert("Leitor cadastrado com sucesso!");
             id.value = '';
             document.getElementById("nome").value = '';
-            document.getElementById("endereco").value = '';
+            document.getElementById("endereço").value = '';
             document.getElementById("telefone").value = '';
         } else {
             alert("Erro ao cadastrar leitor.");
