@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Função para cadastrar o livro
 function cadastrarEmprestimo() {
-    const leitor = document.getElementById("selectLeitor").value;
+    const selectLeitor = document.getElementById("selectLeitor");
     const id_emprestimo = document.getElementById("id_emprestimo").value;
     const selectFuncionario = document.getElementById("selectFuncionario");
     const selectLivro = document.getElementById("selectLivro");
@@ -90,7 +90,7 @@ function cadastrarEmprestimo() {
         alert("Erro: Um ou mais campos não foram carregados corretamente.");
         return;
     }
-
+    const id_leitor = selectLeitor.value;
     const id_funcionario = selectFuncionario.value;
     const nome_funcionario = selectFuncionario.options[selectFuncionario.selectedIndex]?.text;
     const id_livro = selectLivro.value;
@@ -119,6 +119,7 @@ function cadastrarEmprestimo() {
 
     const emprestimo = {
         leitor: {
+            id_leitor: id_leitor,
             nome: leitor
         },
         funcionario: {
