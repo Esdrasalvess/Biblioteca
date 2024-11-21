@@ -85,7 +85,7 @@ function cadastrarEmprestimo() {
     const selectFuncionario = document.getElementById("selectFuncionario");
     const selectLivro = document.getElementById("selectLivro");
 
-    // Verifica se os elementos existem antes de acessar suas propriedades
+    // Verifica se os selects existem antes de tentar acessar seus valores
     if (!selectFuncionario || !selectLivro) {
         alert("Erro: Um ou mais campos não foram carregados corretamente.");
         return;
