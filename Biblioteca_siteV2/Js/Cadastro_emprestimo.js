@@ -24,6 +24,30 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
+    function carregarLeitor() {
+        const selectLeitor = document.getElementById("selectLeitor");
+       
+        // Faz a requisição para pegar os autores
+        fetch("http://localhost:8080/api/leitores")
+            .then(response => response.json())  // Parseia o retorno para JSON
+            .then(leitores => {
+                // Limpa as opções anteriores (caso tenha sido carregado algo antes)
+                selectLeitor.innerHTML = '<option value="" disabled selected>Leitor</option>';
+                
+                // Preenche o select com os autores
+                leitores.forEach(leitor => {
+                    const option = document.createElement("option");
+                    option.value = leitor.id_leitor;  // Supondo que cada autor tenha um id
+                    option.textContent = leitor.nome;  // Nome do autor
+                    selectLeitor.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error("Erro ao carregar leitores:", error);
+                alert("Erro ao carregar leitores.");
+            });
+    }
+
     function carregarLivro() {
         const selectLivro = document.getElementById("selectLivro");
 
@@ -51,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Carregar autores quando a página for carregada
     carregarFuncionario();
     carregarLivro();
+    carregarLeitor();
 });
 
 // Função para cadastrar o livro

@@ -30,3 +30,4 @@ function cadastrarFuncionario() {
         alert("Erro ao cadastrar funcionário.");
     });
 }
+
