@@ -85,10 +85,16 @@ function cadastrarEmprestimo() {
     const selectFuncionario = document.getElementById("selectFuncionario");
     const selectLivro = document.getElementById("selectLivro");
 
+    // Verifica se os elementos existem antes de acessar suas propriedades
+    if (!selectFuncionario || !selectLivro) {
+        alert("Erro: Um ou mais campos não foram carregados corretamente.");
+        return;
+    }
+
     const id_funcionario = selectFuncionario.value;
-    const nome_funcionario = selectFuncionario.options[selectFuncionario.selectedIndex]?.text;  // Acessa o nome do funcionário selecionado
+    const nome_funcionario = selectFuncionario.options[selectFuncionario.selectedIndex]?.text;
     const id_livro = selectLivro.value;
-    const nome_livro = selectLivro.options[selectLivro.selectedIndex]?.text;  // Acessa o título do livro selecionado
+    const nome_livro = selectLivro.options[selectLivro.selectedIndex]?.text;
 
     const data_inicial = document.getElementById("data_inicial").value;
     const data_final = document.getElementById("data_final").value;
@@ -106,14 +112,14 @@ function cadastrarEmprestimo() {
         alert("Por favor, selecione o livro.");
         return;
     }
-    if (!data_inicial && !data_final) {
+    if (!data_inicial || !data_final) {
         alert("Por favor, selecione as datas de empréstimo e devolução.");
         return;
     }
 
     const emprestimo = {
         leitor: {
-            nome: leitor // Aqui pode ser o nome do leitor (ou um ID, dependendo da implementação)
+            nome: leitor
         },
         funcionario: {
             id_funcionario: id_funcionario,
@@ -126,12 +132,12 @@ function cadastrarEmprestimo() {
         dataEmprestimo: data_inicial,
         dataDevolucao: data_final,
         id_emprestimo: id_emprestimo,
-        status: "EMPRESTADO" // Pode adicionar status se for necessário, caso contrário, remova
+        status: "EMPRESTADO"
     };
 
     console.log(emprestimo);
 
-    // Fazendo a requisição para o backend
+    // Envia a requisição para o backend
     fetch("http://localhost:8080/api/emprestimos", {
         method: "POST",
         headers: {
@@ -140,8 +146,6 @@ function cadastrarEmprestimo() {
         body: JSON.stringify(emprestimo)
     })
     .then(response => {
-        console.log("Status da resposta:", response.status);
-        console.log(emprestimo);
         if (response.ok) {
             alert("Empréstimo cadastrado com sucesso!");
             // Limpa os campos após o envio
@@ -152,11 +156,7 @@ function cadastrarEmprestimo() {
             document.getElementById("data_inicial").value = '';
             document.getElementById("data_final").value = '';
         } else {
-            console.log(emprestimo);
-            response.text().then(text => {
-                console.log("Resposta do servidor:", text);
-                alert("Erro ao cadastrar empréstimo. Status: " + response.status + " - " + text);
-            });
+            alert("Erro ao cadastrar empréstimo.");
         }
     })
     .catch(error => {
@@ -164,4 +164,5 @@ function cadastrarEmprestimo() {
         alert("Erro ao cadastrar empréstimo (requisição).");
     });
 }
+
 
