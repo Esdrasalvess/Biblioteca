@@ -75,6 +75,7 @@ Object.entries(filtros).forEach(([key, value]) => {
 });
 
 console.log("URL gerada:", url.toString()); // Verifica a URL final
+console.log("Endpoint", endpoint);
 
 try {
     const response = await fetch(url, {
