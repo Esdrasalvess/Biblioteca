@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Função para cadastrar o livro
 function cadastrarEmprestimo() {
-    const leitor = document.getElementById("leitor").value;
+    const leitor = document.getElementById("selectLeitor").value;
     const id_emprestimo = document.getElementById("id_emprestimo").value;
     const selectFuncionario = document.getElementById("selectFuncionario");
     const selectLivro = document.getElementById("selectLivro");
