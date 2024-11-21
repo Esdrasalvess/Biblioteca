@@ -78,5 +78,5 @@ document.addEventListener('DOMContentLoaded', function () {
     // Carregar autores quando a página for carregada
     carregarFuncionario();
     carregarLivro();
-    carregarLivro();
+    carregarAutores();
 });
