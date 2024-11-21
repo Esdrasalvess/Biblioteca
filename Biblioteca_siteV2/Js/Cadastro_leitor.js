@@ -22,7 +22,7 @@ function cadastrarLeitor() {
 
     .then(response => {
         if (response.ok) {
-            alert("Funcionário cadastrado com sucesso!");
+            alert("Leitor cadastrado com sucesso!");
             id.value = '';
             document.getElementById("nome").value = '';
             document.getElementById("endereco").value = '';
