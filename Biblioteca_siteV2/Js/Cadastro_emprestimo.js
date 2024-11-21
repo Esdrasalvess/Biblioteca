@@ -100,7 +100,7 @@ function cadastrarEmprestimo() {
     const data_final = document.getElementById("data_final").value;
 
     // Verifica se todos os campos obrigatórios foram preenchidos
-    if (!leitor) {
+    if (!id_leitor) {
         alert("Por favor, insira o nome do leitor.");
         return;
     }
