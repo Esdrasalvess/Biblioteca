@@ -30,8 +30,9 @@ async function excluirItem(tipo) {
         alert("Por favor, insira um ID válido.");
         return;
     }
-    console.log(tipo);
 
+    console.log(tipo);
+    
     const id = inputId.value.trim();
 
     try {
