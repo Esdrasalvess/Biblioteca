@@ -1,1 +1,26 @@
-/home/esdras/IdeaProjects/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/BibliotecaV2Application.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/BibliotecaV2Application.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/WebConfig.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/controller/AutorController.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/controller/EmprestimoController.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/controller/FuncionarioController.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/controller/IncluiController.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/controller/LeitorController.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/controller/LivroController.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/model/Autor.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/model/Emprestimo.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/model/Funcionario.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/model/Inclui.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/model/Leitor.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/model/Livro.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/repository/AutorRepository.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/repository/EmprestimoRepository.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/repository/FuncionarioRepository.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/repository/IncluiRepository.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/repository/LeitorRepository.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/repository/LivroRepository.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/service/AutorService.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/service/EmprestimoService.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/service/FuncionarioService.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/service/IncluiService.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/service/LeitorService.java
+/home/esdras/Documentos/Fainor/6ºSemestre/Banco de dados/Bazinga/Biblioteca_V2/src/main/java/com/meiobyte/biblioteca_v2/service/LivroService.java
