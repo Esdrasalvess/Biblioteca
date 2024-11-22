@@ -40,10 +40,7 @@ async function excluirItem(tipo) {
         });
 
         if (!response.ok) {
-            // Ler a mensagem de erro do servidor
-            const errorData = await response.json();
-            console.error('Erro do servidor:', errorData);
-            throw new Error(`Erro ao excluir ${tipo}: ${response.status} - ${errorData.error || errorData.message}`);
+            throw new Error(`Erro ao excluir ${tipo}.`);
         }
 
         alert(`${tipo.charAt(0).toUpperCase() + tipo.slice(1)} excluído com sucesso!`);
@@ -55,7 +52,6 @@ async function excluirItem(tipo) {
         alert(`Erro ao excluir o ${tipo}: ${error.message}`);
     }
 }
-
 
 async function mostrarModalConfirmacao() {
     return new Promise(resolve => {
