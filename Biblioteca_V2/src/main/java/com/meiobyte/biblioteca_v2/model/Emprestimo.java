@@ -11,22 +11,22 @@ public class Emprestimo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_emprestimo;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String dataEmprestimo; // Alterado para String
 
-    @Column
+    @Column(nullable = true)
     private String dataDevolucao; // Alterado para String
 
     @ManyToOne
-    @JoinColumn(name = "id_leitor", nullable = false)
+    @JoinColumn(name = "id_leitor", nullable = true)
     private Leitor leitor;
 
     @ManyToOne
-    @JoinColumn(name = "id_funcionario", nullable = false)
+    @JoinColumn(name = "id_funcionario", nullable = true)
     private Funcionario funcionario;
 
     @ManyToOne
-    @JoinColumn(name = "id_livro", nullable = false)
+    @JoinColumn(name = "id_livro", nullable = true)
     private Livro livro;
 
     @Column(name = "status")

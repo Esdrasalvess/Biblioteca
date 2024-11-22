@@ -1,7 +1,9 @@
 package com.meiobyte.biblioteca_v2.service;
 
 import com.meiobyte.biblioteca_v2.model.Emprestimo;
+import com.meiobyte.biblioteca_v2.model.Leitor;
 import com.meiobyte.biblioteca_v2.repository.EmprestimoRepository;
+import com.meiobyte.biblioteca_v2.repository.LeitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

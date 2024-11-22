@@ -14,10 +14,10 @@ public class Leitor {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(length = 255)
+    @Column(length = 255,nullable = true)
     private String endereco;
 
-    @Column(length = 20)
+    @Column(length = 20, nullable = true)
     private String telefone;
 
     public void setId(Integer id_leitor) {
