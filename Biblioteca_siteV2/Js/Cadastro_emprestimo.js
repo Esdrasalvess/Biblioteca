@@ -86,23 +86,26 @@ function cadastrarEmprestimo() {
     const selectLivro = document.getElementById("selectLivro");
 
     // Verifica se os selects existem antes de tentar acessar seus valores
-    if (!selectFuncionario || !selectLivro) {
+    if (!selectLeitor || !selectFuncionario || !selectLivro) {
         alert("Erro: Um ou mais campos não foram carregados corretamente.");
         return;
     }
+
     const id_leitor = selectLeitor.value;
     const id_funcionario = selectFuncionario.value;
-    const nome_leitor = selectLeitor.option[selectLeitor.selectedIndex]?.text;
-    const nome_funcionario = selectFuncionario.options[selectFuncionario.selectedIndex]?.text;
     const id_livro = selectLivro.value;
-    const nome_livro = selectLivro.options[selectLivro.selectedIndex]?.text;
+
+    // Verifica se um item foi selecionado e obtém o texto (nome ou título)
+    const nome_leitor = selectLeitor.options[selectLeitor.selectedIndex]?.text || "Desconhecido";
+    const nome_funcionario = selectFuncionario.options[selectFuncionario.selectedIndex]?.text || "Desconhecido";
+    const nome_livro = selectLivro.options[selectLivro.selectedIndex]?.text || "Desconhecido";
 
     const data_inicial = document.getElementById("data_inicial").value;
     const data_final = document.getElementById("data_final").value;
 
     // Verifica se todos os campos obrigatórios foram preenchidos
     if (!id_leitor) {
-        alert("Por favor, insira o nome do leitor.");
+        alert("Por favor, selecione o leitor.");
         return;
     }
     if (!id_funcionario) {
@@ -151,7 +154,7 @@ function cadastrarEmprestimo() {
         if (response.ok) {
             alert("Empréstimo cadastrado com sucesso!");
             // Limpa os campos após o envio
-            document.getElementById("leitor").value = '';
+            document.getElementById("selectLeitor").value = '';
             document.getElementById("id_emprestimo").value = '';
             document.getElementById("selectFuncionario").value = '';
             document.getElementById("selectLivro").value = '';
@@ -166,5 +169,6 @@ function cadastrarEmprestimo() {
         alert("Erro ao cadastrar empréstimo (requisição).");
     });
 }
+
 
 
