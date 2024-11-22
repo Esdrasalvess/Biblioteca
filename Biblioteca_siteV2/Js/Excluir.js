@@ -1,38 +1,49 @@
 async function excluirItem(tipo) {
-    try {
-        // Mostrar o alerta de confirmação
-        const confirmar = await mostrarModalConfirmacao();
-        if (!confirmar) {
-            return; // Se o usuário escolher "Não", a função é encerrada
-        }
+    // Mostrar o alerta de confirmação
+    const confirmar = await mostrarModalConfirmacao();
+    if (!confirmar) {
+        return; // Se o usuário escolher "Não", a função é encerrada
+    }
 
-        // Obter o ID do item com base no tipo passado
-        const inputIdMap = {
-            'autores': 'inputAutorId',
-            'funcionarios': 'inputFuncionarioId',
-            'livros': 'inputLivroId',
-            'emprestimos': 'inputEmprestimoId'
-        };
-
-        const inputId = document.getElementById(inputIdMap[tipo]);
-
-        // Verificar se o campo de ID existe e contém um valor
-        if (!inputId || !inputId.value.trim()) {
-            alert("Por favor, insira um ID válido.");
+    // Obter o ID do item com base no tipo passado
+    let inputId;
+    switch (tipo) {
+        case 'autores':
+            inputId = document.getElementById('inputAutorId');
+            break;
+        case 'funcionarios':
+            inputId = document.getElementById('inputFuncionarioId');
+            break;
+        case 'livros':
+            inputId = document.getElementById('inputLivroId');
+            break;
+        case 'emprestimos':
+            inputId = document.getElementById('inputEmprestimoId');
+            break;
+        default:
+            console.error('Tipo de exclusão desconhecido');
             return;
-        }
+    }
 
-        const id = inputId.value.trim();
+    // Verificar se o campo de ID existe e contém um valor
+    if (!inputId || !inputId.value.trim()) {
+        alert("Por favor, insira um ID válido.");
+        return;
+    }
 
-        // Realizar a requisição DELETE
+    const id = inputId.value.trim();
+
+    try {
         const response = await fetch(`http://localhost:8080/api/${tipo}/${id}`, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
         });
 
         if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Erro ${response.status}: ${errorText}`);
+            // Ler a mensagem de erro do servidor
+            const errorData = await response.json();
+            console.error('Erro do servidor:', errorData);
+            throw new Error(`Erro ao excluir ${tipo}: ${response.status} - ${errorData.error || errorData.message}`);
         }
 
         alert(`${tipo.charAt(0).toUpperCase() + tipo.slice(1)} excluído com sucesso!`);
@@ -41,13 +52,14 @@ async function excluirItem(tipo) {
         inputId.value = '';
     } catch (error) {
         console.error(error);
-        alert(`Erro ao excluir ${tipo}: ${error.message}`);
+        alert(`Erro ao excluir o ${tipo}: ${error.message}`);
     }
 }
 
+
 async function mostrarModalConfirmacao() {
     return new Promise(resolve => {
-        // Criar modal de confirmação
+        // Exibe a caixa de diálogo personalizada
         const modal = document.createElement('div');
         modal.style.position = 'fixed';
         modal.style.top = '0';
@@ -58,7 +70,6 @@ async function mostrarModalConfirmacao() {
         modal.style.display = 'flex';
         modal.style.justifyContent = 'center';
         modal.style.alignItems = 'center';
-        modal.style.zIndex = '1000';
 
         const modalContent = document.createElement('div');
         modalContent.style.backgroundColor = 'white';
@@ -66,7 +77,6 @@ async function mostrarModalConfirmacao() {
         modalContent.style.borderRadius = '5px';
         modalContent.style.textAlign = 'center';
         modalContent.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-        modalContent.style.width = '300px';
 
         const message = document.createElement('p');
         message.textContent = 'Tem certeza que deseja excluir?';
@@ -79,28 +89,18 @@ async function mostrarModalConfirmacao() {
         btnSim.textContent = 'Sim';
         btnSim.style.margin = '0 10px';
         btnSim.style.padding = '10px 20px';
-        btnSim.style.backgroundColor = '#28a745';
-        btnSim.style.color = '#fff';
-        btnSim.style.border = 'none';
-        btnSim.style.borderRadius = '5px';
-        btnSim.style.cursor = 'pointer';
         btnSim.onclick = () => {
-            resolve(true); // Resolver a promessa com "true"
             document.body.removeChild(modal); // Remover o modal
+            resolve(true); // Resolver a promessa com "true"
         };
 
         const btnNao = document.createElement('button');
         btnNao.textContent = 'Não';
         btnNao.style.margin = '0 10px';
         btnNao.style.padding = '10px 20px';
-        btnNao.style.backgroundColor = '#dc3545';
-        btnNao.style.color = '#fff';
-        btnNao.style.border = 'none';
-        btnNao.style.borderRadius = '5px';
-        btnNao.style.cursor = 'pointer';
         btnNao.onclick = () => {
-            resolve(false); // Resolver a promessa com "false"
             document.body.removeChild(modal); // Remover o modal
+            resolve(false); // Resolver a promessa com "false"
         };
 
         buttons.appendChild(btnSim);
@@ -108,7 +108,6 @@ async function mostrarModalConfirmacao() {
         modalContent.appendChild(buttons);
         modal.appendChild(modalContent);
 
-        // Adicionar modal ao body
         document.body.appendChild(modal);
     });
 }
